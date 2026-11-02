@@ -1,0 +1,2175 @@
+{
+ "tool_version": "ndfeb-sps-physics-tool-20261023.8.1",
+ "artifact_sha256": {
+  "physics": "444139f68fedcd65ca2f32cf1b92db02028e1573b033efdc8923878ab459411c",
+  "forward": "93658fe3821d6e4d4e3d12b4eb35370da5b39fa300a2868726e5757b66c60c9d",
+  "posterior": "e0bde0c2e6565925c701c7f8ca843dd8d594775b2fe78808b315e883cc182370",
+  "tool": "60ee32689a0234986dd213bd9b887f616d3c614f8d6f94f97e8bb4bf6da53289",
+  "microstructure": "59e64be3c62447d6733098d9cf7770830187aaa04ac66818b48f40fef6200f9d",
+  "coercivity_link": "9cc3bb827c8cd51cf98782d4d17e22646d2730cdeabf4b355fb4796224255b7d",
+  "anneal": "3ddea1b5b11188f874092014c7421b78c98f2af7d0e3e9101374b676d5081fbb",
+  "anneal_posterior": "80fccba41d5ef3ae5882f149cf7a99d5ef89348f34773f1045f90c3b798e29ec"
+ },
+ "status": "conditional model calculations; no current-panel magnetic measurement exists",
+ "1_retained_pieces_same_program_as_8": {
+  "anneal_eig_designs": {
+   "target_new_750C_body_900C_2h_ge_7.2": {
+    "ranking": [
+     {
+      "name": "#1 (4.83, 750 C): before+after same piece, archimedes_saturated",
+      "mi_mechanism_nats": 0.6175491256791379,
+      "mi_se": 0.0038926248726444423,
+      "mechanism_entropy_nats": 1.1285746500113925,
+      "share_resolved": 0.5471938658846396,
+      "posterior_mechanism_by_true": {
+       "LPS": {
+        "LPS": 0.7962673208804053,
+        "CLOSED": 0.19715531974354128,
+        "CAPACITY": 0.006380958491745089,
+        "NULL": 0.00019640088430848918
+       },
+       "CLOSED": {
+        "LPS": 0.2116090716080281,
+        "CLOSED": 0.5232533215237447,
+        "CAPACITY": 0.2507115102316635,
+        "NULL": 0.014426096636563643
+       },
+       "CAPACITY": {
+        "LPS": 0.0074384791307995106,
+        "CLOSED": 0.33254951722558934,
+        "CAPACITY": 0.6591394655650492,
+        "NULL": 0.0008725380785618384
+       },
+       "NULL": {
+        "LPS": 0.014761290054144177,
+        "CLOSED": 0.6862129668379484,
+        "CAPACITY": 0.04298504420687691,
+        "NULL": 0.25604069890103043
+       }
+      },
+      "readings": {
+       "before": "archimedes_saturated",
+       "after": "archimedes_saturated"
+      },
+      "same_piece": true,
+      "target": {
+       "density_g_cm3_now": {
+        "median": 6.389839696950397,
+        "sd": 1.0415532838877624
+       },
+       "expected_posterior_sd_g_cm3": 0.40550181365527355,
+       "threshold_g_cm3": 7.2,
+       "p_above_now": 0.42125,
+       "p_above_after_q10_q50_q90": [
+        1.8198681590551887e-10,
+        0.064608911315437,
+        0.9720279438126317
+       ]
+      }
+     },
+     {
+      "name": "#4 (5.77, 800 C): before+after same piece, archimedes_saturated",
+      "mi_mechanism_nats": 0.5873702079117361,
+      "mi_se": 0.003744090887006533,
+      "mechanism_entropy_nats": 1.1285746500113925,
+      "share_resolved": 0.5204531290028593,
+      "posterior_mechanism_by_true": {
+       "LPS": {
+        "LPS": 0.7393723714308761,
+        "CLOSED": 0.24785326156001286,
+        "CAPACITY": 0.011959841208287279,
+        "NULL": 0.0008145258008237233
+       },
+       "CLOSED": {
+        "LPS": 0.2556086712348012,
+        "CLOSED": 0.5358256811924184,
+        "CAPACITY": 0.19342951540776349,
+        "NULL": 0.015136132165017012
+       },
+       "CAPACITY": {
+        "LPS": 0.021010638957146978,
+        "CLOSED": 0.2527265495602549,
+        "CAPACITY": 0.7251424495060134,
+        "NULL": 0.0011203619765847766
+       },
+       "NULL": {
+        "LPS": 0.008993715905955319,
+        "CLOSED": 0.7581906375282497,
+        "CAPACITY": 0.04157578956103075,
+        "NULL": 0.19123985700476426
+       }
+      },
+      "readings": {
+       "before": "archimedes_saturated",
+       "after": "archimedes_saturated"
+      },
+      "same_piece": true,
+      "target": {
+       "density_g_cm3_now": {
+        "median": 6.327043769177625,
+        "sd": 1.0431660922192492
+       },
+       "expected_posterior_sd_g_cm3": 0.4746871816535812,
+       "threshold_g_cm3": 7.2,
+       "p_above_now": 0.40875,
+       "p_above_after_q10_q50_q90": [
+        6.41341488459066e-05,
+        0.053640389767624794,
+        0.9176959519781979
+       ]
+      }
+     },
+     {
+      "name": "#1 (4.83, 750 C): before+after same piece, geometric",
+      "mi_mechanism_nats": 0.5548324507833902,
+      "mi_se": 0.003058199366718563,
+      "mechanism_entropy_nats": 1.1285746500113925,
+      "share_resolved": 0.49162228726100604,
+      "posterior_mechanism_by_true": {
+       "LPS": {
+        "LPS": 0.8023142721403989,
+        "CLOSED": 0.18917414983046257,
+        "CAPACITY": 0.008435387781945039,
+        "NULL": 7.619024719358427e-05
+       },
+       "CLOSED": {
+        "LPS": 0.21381105960605704,
+        "CLOSED": 0.4963135070690141,
+        "CAPACITY": 0.2713467634550422,
+        "NULL": 0.01852866986988659
+       },
+       "CAPACITY": {
+        "LPS": 0.010590079364830647,
+        "CLOSED": 0.3764226057782585,
+        "CAPACITY": 0.6091540658948607,
+        "NULL": 0.003833248962050104
+       },
+       "NULL": {
+        "LPS": 0.016724121062912302,
+        "CLOSED": 0.7487716148236919,
+        "CAPACITY": 0.09309354798946491,
+        "NULL": 0.14141071612393072
+       }
+      },
+      "readings": {
+       "before": "geometric",
+       "after": "geometric"
+      },
+      "same_piece": true,
+      "target": {
+       "density_g_cm3_now": {
+        "median": 6.353016957571264,
+        "sd": 1.0422013723511452
+       },
+       "expected_posterior_sd_g_cm3": 0.4262836586755682,
+       "threshold_g_cm3": 7.2,
+       "p_above_now": 0.4156666666666667,
+       "p_above_after_q10_q50_q90": [
+        0.0027484559110855632,
+        0.08820111410098197,
+        0.9511885942787076
+       ]
+      }
+     },
+     {
+      "name": "#1 (4.83, 750 C): before+after same piece, archimedes",
+      "mi_mechanism_nats": 0.5475937837283964,
+      "mi_se": 0.006514094460473997,
+      "mechanism_entropy_nats": 1.1285746500113925,
+      "share_resolved": 0.4852082967864542,
+      "posterior_mechanism_by_true": {
+       "LPS": {
+        "LPS": 0.7752205400147049,
+        "CLOSED": 0.18840863725509022,
+        "CAPACITY": 0.03236712886812299,
+        "NULL": 0.004003693862081975
+       },
+       "CLOSED": {
+        "LPS": 0.21776479469049032,
+        "CLOSED": 0.49247004768516306,
+        "CAPACITY": 0.2713399884606559,
+        "NULL": 0.01842516916369073
+       },
+       "CAPACITY": {
+        "LPS": 0.04422573423732898,
+        "CLOSED": 0.34639328516554224,
+        "CAPACITY": 0.6013281073045887,
+        "NULL": 0.008052873292540036
+       },
+       "NULL": {
+        "LPS": 0.113434637613639,
+        "CLOSED": 0.5306154257196055,
+        "CAPACITY": 0.24105081553340874,
+        "NULL": 0.11489912113334684
+       }
+      },
+      "readings": {
+       "before": "archimedes",
+       "after": "archimedes"
+      },
+      "same_piece": true,
+      "target": {
+       "density_g_cm3_now": {
+        "median": 6.307017735417981,
+        "sd": 1.0460427522175006
+       },
+       "expected_posterior_sd_g_cm3": 0.4932618811344854,
+       "threshold_g_cm3": 7.2,
+       "p_above_now": 0.40808333333333335,
+       "p_above_after_q10_q50_q90": [
+        3.1077257203028746e-05,
+        0.11042718106659982,
+        0.9808463258352456
+       ]
+      }
+     },
+     {
+      "name": "#4 (5.77, 800 C): before+after same piece, geometric",
+      "mi_mechanism_nats": 0.5340683361601386,
+      "mi_se": 0.0028162431657104267,
+      "mechanism_entropy_nats": 1.1285746500113925,
+      "share_resolved": 0.4732237572009503,
+      "posterior_mechanism_by_true": {
+       "LPS": {
+        "LPS": 0.7390633414572041,
+        "CLOSED": 0.23763211707591492,
+        "CAPACITY": 0.02321451583423151,
+        "NULL": 9.002563264940439e-05
+       },
+       "CLOSED": {
+        "LPS": 0.2779684266705233,
+        "CLOSED": 0.4678142576543224,
+        "CAPACITY": 0.23759994447379215,
+        "NULL": 0.016617371201362113
+       },
+       "CAPACITY": {
+        "LPS": 0.03540697863081192,
+        "CLOSED": 0.2625029033421571,
+        "CAPACITY": 0.7008796086607354,
+        "NULL": 0.0012105093662957765
+       },
+       "NULL": {
+        "LPS": 0.014148468616580857,
+        "CLOSED": 0.831647121847947,
+        "CAPACITY": 0.06228152020438081,
+        "NULL": 0.09192288933109158
+       }
+      },
+      "readings": {
+       "before": "geometric",
+       "after": "geometric"
+      },
+      "same_piece": true,
+      "target": {
+       "density_g_cm3_now": {
+        "median": 6.321448279057413,
+        "sd": 1.0442040418678262
+       },
+       "expected_posterior_sd_g_cm3": 0.5057486064025986,
+       "threshold_g_cm3": 7.2,
+       "p_above_now": 0.40908333333333335,
+       "p_above_after_q10_q50_q90": [
+        0.0036627359371693372,
+        0.072042631272243,
+        0.9019675630954539
+       ]
+      }
+     },
+     {
+      "name": "#4 (5.77, 800 C): before+after same piece, archimedes",
+      "mi_mechanism_nats": 0.4916407423251534,
+      "mi_se": 0.005427669063801705,
+      "mechanism_entropy_nats": 1.1285746500113925,
+      "share_resolved": 0.4356297940239846,
+      "posterior_mechanism_by_true": {
+       "LPS": {
+        "LPS": 0.710779364282314,
+        "CLOSED": 0.24122432343706623,
+        "CAPACITY": 0.04554504575069377,
+        "NULL": 0.002451266529925946
+       },
+       "CLOSED": {
+        "LPS": 0.2529177354480736,
+        "CLOSED": 0.4817727443632063,
+        "CAPACITY": 0.2512392651937181,
+        "NULL": 0.014070254995002052
+       },
+       "CAPACITY": {
+        "LPS": 0.06757524689532338,
+        "CLOSED": 0.3091828619317149,
+        "CAPACITY": 0.618906519332838,
+        "NULL": 0.0043353718401236
+       },
+       "NULL": {
+        "LPS": 0.10825067673396817,
+        "CLOSED": 0.6593905399179519,
+        "CAPACITY": 0.18080995212315998,
+        "NULL": 0.05154883122491986
+       }
+      },
+      "readings": {
+       "before": "archimedes",
+       "after": "archimedes"
+      },
+      "same_piece": true,
+      "target": {
+       "density_g_cm3_now": {
+        "median": 6.34253314129419,
+        "sd": 1.0499823162505497
+       },
+       "expected_posterior_sd_g_cm3": 0.5503516895968752,
+       "threshold_g_cm3": 7.2,
+       "p_above_now": 0.41583333333333333,
+       "p_above_after_q10_q50_q90": [
+        0.00015823077443721727,
+        0.21306597940035682,
+        0.9202838431086473
+       ]
+      }
+     },
+     {
+      "name": "#1 (4.83, 750 C): after only, method not stated, pairing unknown",
+      "mi_mechanism_nats": 0.3782964373022934,
+      "mi_se": 0.003775360585088668,
+      "mechanism_entropy_nats": 1.1285746500113925,
+      "share_resolved": 0.3351984180208856,
+      "posterior_mechanism_by_true": {
+       "LPS": {
+        "LPS": 0.7201954224960964,
+        "CLOSED": 0.20941851429056849,
+        "CAPACITY": 0.06632907533130024,
+        "NULL": 0.004056987882034864
+       },
+       "CLOSED": {
+        "LPS": 0.21353780660651228,
+        "CLOSED": 0.41595313666275135,
+        "CAPACITY": 0.356580489766705,
+        "NULL": 0.01392856696403137
+       },
+       "CAPACITY": {
+        "LPS": 0.09115994546339821,
+        "CLOSED": 0.4189236797379139,
+        "CAPACITY": 0.48094272405328825,
+        "NULL": 0.008973650745399641
+       },
+       "NULL": {
+        "LPS": 0.029775178303388952,
+        "CLOSED": 0.7104903007707286,
+        "CAPACITY": 0.16886338747559068,
+        "NULL": 0.09087113345029182
+       }
+      },
+      "readings": {
+       "after": "unspecified"
+      },
+      "same_piece": null,
+      "target": {
+       "density_g_cm3_now": {
+        "median": 6.37514482681043,
+        "sd": 1.049761008255654
+       },
+       "expected_posterior_sd_g_cm3": 0.6320227095939767,
+       "threshold_g_cm3": 7.2,
+       "p_above_now": 0.4190833333333333,
+       "p_above_after_q10_q50_q90": [
+        0.006801980895879079,
+        0.15618886776655477,
+        0.9267895531219719
+       ]
+      }
+     },
+     {
+      "name": "#4 (5.77, 800 C): after only, method not stated, pairing unknown",
+      "mi_mechanism_nats": 0.3550777890985253,
+      "mi_se": 0.003194941406453418,
+      "mechanism_entropy_nats": 1.1285746500113925,
+      "share_resolved": 0.3146249909963341,
+      "posterior_mechanism_by_true": {
+       "LPS": {
+        "LPS": 0.656472595338427,
+        "CLOSED": 0.260516252898531,
+        "CAPACITY": 0.07870798103140256,
+        "NULL": 0.0043031707316394776
+       },
+       "CLOSED": {
+        "LPS": 0.28638047094655866,
+        "CLOSED": 0.4102245220295448,
+        "CAPACITY": 0.29170059347579014,
+        "NULL": 0.011694413548106365
+       },
+       "CAPACITY": {
+        "LPS": 0.10191108218454253,
+        "CLOSED": 0.3689883775529028,
+        "CAPACITY": 0.5250353195370859,
+        "NULL": 0.004065220725468667
+       },
+       "NULL": {
+        "LPS": 0.2875173588960006,
+        "CLOSED": 0.4288190662597043,
+        "CAPACITY": 0.27026944538334996,
+        "NULL": 0.013394129460945207
+       }
+      },
+      "readings": {
+       "after": "unspecified"
+      },
+      "same_piece": null,
+      "target": {
+       "density_g_cm3_now": {
+        "median": 6.34280392683197,
+        "sd": 1.0458230729541282
+       },
+       "expected_posterior_sd_g_cm3": 0.6682647083332802,
+       "threshold_g_cm3": 7.2,
+       "p_above_now": 0.41258333333333336,
+       "p_above_after_q10_q50_q90": [
+        0.006227039447506851,
+        0.3506804322446885,
+        0.8694501622098341
+       ]
+      }
+     },
+     {
+      "name": "#7 (7.01, 850 C): before+after same piece, archimedes_saturated",
+      "mi_mechanism_nats": 0.07990960704223064,
+      "mi_se": 0.0028004694850354162,
+      "mechanism_entropy_nats": 1.1285746500113925,
+      "share_resolved": 0.07080577881261464,
+      "posterior_mechanism_by_true": {
+       "LPS": {
+        "LPS": 0.3869199074402375,
+        "CLOSED": 0.3525885135920332,
+        "CAPACITY": 0.2582703079770904,
+        "NULL": 0.0022212709906389468
+       },
+       "CLOSED": {
+        "LPS": 0.3691677226844362,
+        "CLOSED": 0.358671595956934,
+        "CAPACITY": 0.2644075707108165,
+        "NULL": 0.007753110647813353
+       },
+       "CAPACITY": {
+        "LPS": 0.34255844387073375,
+        "CLOSED": 0.33309026415376125,
+        "CAPACITY": 0.31888903371825617,
+        "NULL": 0.005462258257248833
+       },
+       "NULL": {
+        "LPS": 0.12933682505035216,
+        "CLOSED": 0.24972233851260547,
+        "CAPACITY": 0.228199960669208,
+        "NULL": 0.39274087576783434
+       }
+      },
+      "readings": {
+       "before": "archimedes_saturated",
+       "after": "archimedes_saturated"
+      },
+      "same_piece": true,
+      "target": {
+       "density_g_cm3_now": {
+        "median": 6.306380858430705,
+        "sd": 1.049064429992657
+       },
+       "expected_posterior_sd_g_cm3": 0.9761537642488078,
+       "threshold_g_cm3": 7.2,
+       "p_above_now": 0.40808333333333335,
+       "p_above_after_q10_q50_q90": [
+        0.13579157493161656,
+        0.44132580685221867,
+        0.5211229891768818
+       ]
+      }
+     },
+     {
+      "name": "#7 (7.01, 850 C): before+after same piece, archimedes",
+      "mi_mechanism_nats": 0.06424443579154793,
+      "mi_se": 0.0024714660981976955,
+      "mechanism_entropy_nats": 1.1285746500113925,
+      "share_resolved": 0.05692528694570573,
+      "posterior_mechanism_by_true": {
+       "LPS": {
+        "LPS": 0.38819110101397114,
+        "CLOSED": 0.353539405032365,
+        "CAPACITY": 0.2542713931434606,
+        "NULL": 0.003998100810203355
+       },
+       "CLOSED": {
+        "LPS": 0.38017675444096927,
+        "CLOSED": 0.35364142677749894,
+        "CAPACITY": 0.2614904549568132,
+        "NULL": 0.004691363824718626
+       },
+       "CAPACITY": {
+        "LPS": 0.3378987665641256,
+        "CLOSED": 0.33007154048135623,
+        "CAPACITY": 0.3215550580785085,
+        "NULL": 0.010474634876009772
+       },
+       "NULL": {
+        "LPS": 0.2576929220702289,
+        "CLOSED": 0.36950951836518486,
+        "CAPACITY": 0.23589952482035526,
+        "NULL": 0.13689803474423087
+       }
+      },
+      "readings": {
+       "before": "archimedes",
+       "after": "archimedes"
+      },
+      "same_piece": true,
+      "target": {
+       "density_g_cm3_now": {
+        "median": 6.300336554939287,
+        "sd": 1.0380360122188819
+       },
+       "expected_posterior_sd_g_cm3": 0.9818714737219418,
+       "threshold_g_cm3": 7.2,
+       "p_above_now": 0.39975,
+       "p_above_after_q10_q50_q90": [
+        0.19123375457287345,
+        0.45011686500850956,
+        0.4960899669994152
+       ]
+      }
+     },
+     {
+      "name": "#7 (7.01, 850 C): before+after same piece, geometric",
+      "mi_mechanism_nats": 0.04263213194784723,
+      "mi_se": 0.0014540162483809575,
+      "mechanism_entropy_nats": 1.1285746500113925,
+      "share_resolved": 0.03777519896217488,
+      "posterior_mechanism_by_true": {
+       "LPS": {
+        "LPS": 0.3768987978754131,
+        "CLOSED": 0.3580442564996569,
+        "CAPACITY": 0.2614938351178848,
+        "NULL": 0.0035631105070452087
+       },
+       "CLOSED": {
+        "LPS": 0.3670080584785901,
+        "CLOSED": 0.35789020100580365,
+        "CAPACITY": 0.2641702034390561,
+        "NULL": 0.010931537076550178
+       },
+       "CAPACITY": {
+        "LPS": 0.35558829652297347,
+        "CLOSED": 0.35208095489746005,
+        "CAPACITY": 0.28501482876474754,
+        "NULL": 0.007315919814818937
+       },
+       "NULL": {
+        "LPS": 0.14977953285410203,
+        "CLOSED": 0.3532558908869934,
+        "CAPACITY": 0.19556917768360738,
+        "NULL": 0.3013953985752973
+       }
+      },
+      "readings": {
+       "before": "geometric",
+       "after": "geometric"
+      },
+      "same_piece": true,
+      "target": {
+       "density_g_cm3_now": {
+        "median": 6.3343977352594605,
+        "sd": 1.049660621804794
+       },
+       "expected_posterior_sd_g_cm3": 1.0121720985034794,
+       "threshold_g_cm3": 7.2,
+       "p_above_now": 0.41375,
+       "p_above_after_q10_q50_q90": [
+        0.33243974413908917,
+        0.4263724496866719,
+        0.5010006456210891
+       ]
+      }
+     },
+     {
+      "name": "#7 (7.01, 850 C): after only, method not stated, pairing unknown",
+      "mi_mechanism_nats": 0.02794271528400018,
+      "mi_se": 0.0007454410174100938,
+      "mechanism_entropy_nats": 1.1285746500113925,
+      "share_resolved": 0.02475929729922439,
+      "posterior_mechanism_by_true": {
+       "LPS": {
+        "LPS": 0.37664412618781484,
+        "CLOSED": 0.34899143033966534,
+        "CAPACITY": 0.2694930457514418,
+        "NULL": 0.004871397721078175
+       },
+       "CLOSED": {
+        "LPS": 0.37178204592423325,
+        "CLOSED": 0.3506927280812955,
+        "CAPACITY": 0.2697972070794392,
+        "NULL": 0.007728018915031948
+       },
+       "CAPACITY": {
+        "LPS": 0.3594177764343822,
+        "CLOSED": 0.3451344986899768,
+        "CAPACITY": 0.284767857672601,
+        "NULL": 0.010679867203040053
+       },
+       "NULL": {
+        "LPS": 0.2997941492788558,
+        "CLOSED": 0.3118578982244471,
+        "CAPACITY": 0.3631117187151547,
+        "NULL": 0.02523623378154244
+       }
+      },
+      "readings": {
+       "after": "unspecified"
+      },
+      "same_piece": null,
+      "target": {
+       "density_g_cm3_now": {
+        "median": 6.31417199145297,
+        "sd": 1.047571982202164
+       },
+       "expected_posterior_sd_g_cm3": 1.0133982399749808,
+       "threshold_g_cm3": 7.2,
+       "p_above_now": 0.41083333333333333,
+       "p_above_after_q10_q50_q90": [
+        0.3113349505355112,
+        0.4637777189451284,
+        0.48510299496213233
+       ]
+      }
+     }
+    ],
+    "mechanisms": [
+     "LPS",
+     "CLOSED",
+     "CAPACITY",
+     "NULL"
+    ],
+    "prior_mechanism_weights": {
+     "LPS": 0.37280694658651425,
+     "CLOSED": 0.3488634649949625,
+     "CAPACITY": 0.2700151701016905,
+     "NULL": 0.008314418316832647
+    },
+    "n_outer": 1500,
+    "n_inner": 12000,
+    "method": "nested Monte Carlo on the anneal layer: outcomes simulated from the posterior (draws, nuisances, reading noise), each scored against an independent posterior pool with its own nuisances; I(M; y) = H(prior) - E[H(p(M | y))]",
+    "scope": "conditional on the anneal layer's priors, mechanisms and declared reading models; information about the model's mechanism label, not the power of an executable RPI protocol",
+    "tool_version": "ndfeb-sps-physics-tool-20261023.8.1",
+    "evidence_class": "owner-built conditional executable physics model (Dynamical's model fitted to RPI's released records and declared literature priors; not an RPI or collaborator model); not a physical observation; does not calibrate current-body coercivity",
+    "artifact_sha256": {
+     "physics": "444139f68fedcd65ca2f32cf1b92db02028e1573b033efdc8923878ab459411c",
+     "forward": "93658fe3821d6e4d4e3d12b4eb35370da5b39fa300a2868726e5757b66c60c9d",
+     "posterior": "e0bde0c2e6565925c701c7f8ca843dd8d594775b2fe78808b315e883cc182370",
+     "tool": "60ee32689a0234986dd213bd9b887f616d3c614f8d6f94f97e8bb4bf6da53289",
+     "microstructure": "59e64be3c62447d6733098d9cf7770830187aaa04ac66818b48f40fef6200f9d",
+     "coercivity_link": "9cc3bb827c8cd51cf98782d4d17e22646d2730cdeabf4b355fb4796224255b7d",
+     "anneal": "3ddea1b5b11188f874092014c7421b78c98f2af7d0e3e9101374b676d5081fbb",
+     "anneal_posterior": "80fccba41d5ef3ae5882f149cf7a99d5ef89348f34773f1045f90c3b798e29ec"
+    },
+    "artifact_verified": true
+   },
+   "target_new_800C_body_900C_2h_ge_7.2": {
+    "ranking": [
+     {
+      "name": "#1 (4.83, 750 C): before+after same piece, archimedes_saturated",
+      "mi_mechanism_nats": 0.6175491256791379,
+      "mi_se": 0.0038926248726444423,
+      "mechanism_entropy_nats": 1.1285746500113925,
+      "share_resolved": 0.5471938658846396,
+      "posterior_mechanism_by_true": {
+       "LPS": {
+        "LPS": 0.7962673208804053,
+        "CLOSED": 0.19715531974354128,
+        "CAPACITY": 0.006380958491745089,
+        "NULL": 0.00019640088430848918
+       },
+       "CLOSED": {
+        "LPS": 0.2116090716080281,
+        "CLOSED": 0.5232533215237447,
+        "CAPACITY": 0.2507115102316635,
+        "NULL": 0.014426096636563643
+       },
+       "CAPACITY": {
+        "LPS": 0.0074384791307995106,
+        "CLOSED": 0.33254951722558934,
+        "CAPACITY": 0.6591394655650492,
+        "NULL": 0.0008725380785618384
+       },
+       "NULL": {
+        "LPS": 0.014761290054144177,
+        "CLOSED": 0.6862129668379484,
+        "CAPACITY": 0.04298504420687691,
+        "NULL": 0.25604069890103043
+       }
+      },
+      "readings": {
+       "before": "archimedes_saturated",
+       "after": "archimedes_saturated"
+      },
+      "same_piece": true,
+      "target": {
+       "density_g_cm3_now": {
+        "median": 7.387372089873295,
+        "sd": 0.7052753835790967
+       },
+       "expected_posterior_sd_g_cm3": 0.43197326167313005,
+       "threshold_g_cm3": 7.2,
+       "p_above_now": 0.5371666666666667,
+       "p_above_after_q10_q50_q90": [
+        0.10515342566890862,
+        0.34428875363024336,
+        0.9932940125646813
+       ]
+      }
+     },
+     {
+      "name": "#4 (5.77, 800 C): before+after same piece, archimedes_saturated",
+      "mi_mechanism_nats": 0.5873702079117361,
+      "mi_se": 0.003744090887006533,
+      "mechanism_entropy_nats": 1.1285746500113925,
+      "share_resolved": 0.5204531290028593,
+      "posterior_mechanism_by_true": {
+       "LPS": {
+        "LPS": 0.7393723714308761,
+        "CLOSED": 0.24785326156001286,
+        "CAPACITY": 0.011959841208287279,
+        "NULL": 0.0008145258008237233
+       },
+       "CLOSED": {
+        "LPS": 0.2556086712348012,
+        "CLOSED": 0.5358256811924184,
+        "CAPACITY": 0.19342951540776349,
+        "NULL": 0.015136132165017012
+       },
+       "CAPACITY": {
+        "LPS": 0.021010638957146978,
+        "CLOSED": 0.2527265495602549,
+        "CAPACITY": 0.7251424495060134,
+        "NULL": 0.0011203619765847766
+       },
+       "NULL": {
+        "LPS": 0.008993715905955319,
+        "CLOSED": 0.7581906375282497,
+        "CAPACITY": 0.04157578956103075,
+        "NULL": 0.19123985700476426
+       }
+      },
+      "readings": {
+       "before": "archimedes_saturated",
+       "after": "archimedes_saturated"
+      },
+      "same_piece": true,
+      "target": {
+       "density_g_cm3_now": {
+        "median": 7.328893994193232,
+        "sd": 0.7114212359493725
+       },
+       "expected_posterior_sd_g_cm3": 0.43812369444905586,
+       "threshold_g_cm3": 7.2,
+       "p_above_now": 0.5251666666666667,
+       "p_above_after_q10_q50_q90": [
+        0.08971154438686342,
+        0.30687198783757574,
+        0.9771070253117714
+       ]
+      }
+     },
+     {
+      "name": "#1 (4.83, 750 C): before+after same piece, geometric",
+      "mi_mechanism_nats": 0.5548324507833902,
+      "mi_se": 0.003058199366718563,
+      "mechanism_entropy_nats": 1.1285746500113925,
+      "share_resolved": 0.49162228726100604,
+      "posterior_mechanism_by_true": {
+       "LPS": {
+        "LPS": 0.8023142721403989,
+        "CLOSED": 0.18917414983046257,
+        "CAPACITY": 0.008435387781945039,
+        "NULL": 7.619024719358427e-05
+       },
+       "CLOSED": {
+        "LPS": 0.21381105960605704,
+        "CLOSED": 0.4963135070690141,
+        "CAPACITY": 0.2713467634550422,
+        "NULL": 0.01852866986988659
+       },
+       "CAPACITY": {
+        "LPS": 0.010590079364830647,
+        "CLOSED": 0.3764226057782585,
+        "CAPACITY": 0.6091540658948607,
+        "NULL": 0.003833248962050104
+       },
+       "NULL": {
+        "LPS": 0.016724121062912302,
+        "CLOSED": 0.7487716148236919,
+        "CAPACITY": 0.09309354798946491,
+        "NULL": 0.14141071612393072
+       }
+      },
+      "readings": {
+       "before": "geometric",
+       "after": "geometric"
+      },
+      "same_piece": true,
+      "target": {
+       "density_g_cm3_now": {
+        "median": 7.35829148443752,
+        "sd": 0.7091631232656498
+       },
+       "expected_posterior_sd_g_cm3": 0.437820613198421,
+       "threshold_g_cm3": 7.2,
+       "p_above_now": 0.5291666666666667,
+       "p_above_after_q10_q50_q90": [
+        0.10492715065015616,
+        0.34789926359045337,
+        0.9850522539238475
+       ]
+      }
+     },
+     {
+      "name": "#1 (4.83, 750 C): before+after same piece, archimedes",
+      "mi_mechanism_nats": 0.5475937837283964,
+      "mi_se": 0.006514094460473997,
+      "mechanism_entropy_nats": 1.1285746500113925,
+      "share_resolved": 0.4852082967864542,
+      "posterior_mechanism_by_true": {
+       "LPS": {
+        "LPS": 0.7752205400147049,
+        "CLOSED": 0.18840863725509022,
+        "CAPACITY": 0.03236712886812299,
+        "NULL": 0.004003693862081975
+       },
+       "CLOSED": {
+        "LPS": 0.21776479469049032,
+        "CLOSED": 0.49247004768516306,
+        "CAPACITY": 0.2713399884606559,
+        "NULL": 0.01842516916369073
+       },
+       "CAPACITY": {
+        "LPS": 0.04422573423732898,
+        "CLOSED": 0.34639328516554224,
+        "CAPACITY": 0.6013281073045887,
+        "NULL": 0.008052873292540036
+       },
+       "NULL": {
+        "LPS": 0.113434637613639,
+        "CLOSED": 0.5306154257196055,
+        "CAPACITY": 0.24105081553340874,
+        "NULL": 0.11489912113334684
+       }
+      },
+      "readings": {
+       "before": "archimedes",
+       "after": "archimedes"
+      },
+      "same_piece": true,
+      "target": {
+       "density_g_cm3_now": {
+        "median": 7.342408504334125,
+        "sd": 0.712494421995446
+       },
+       "expected_posterior_sd_g_cm3": 0.4573031614803278,
+       "threshold_g_cm3": 7.2,
+       "p_above_now": 0.5271666666666667,
+       "p_above_after_q10_q50_q90": [
+        0.0936956644707152,
+        0.3587711159774215,
+        0.9988875362512539
+       ]
+      }
+     },
+     {
+      "name": "#4 (5.77, 800 C): before+after same piece, geometric",
+      "mi_mechanism_nats": 0.5340683361601386,
+      "mi_se": 0.0028162431657104267,
+      "mechanism_entropy_nats": 1.1285746500113925,
+      "share_resolved": 0.4732237572009503,
+      "posterior_mechanism_by_true": {
+       "LPS": {
+        "LPS": 0.7390633414572041,
+        "CLOSED": 0.23763211707591492,
+        "CAPACITY": 0.02321451583423151,
+        "NULL": 9.002563264940439e-05
+       },
+       "CLOSED": {
+        "LPS": 0.2779684266705233,
+        "CLOSED": 0.4678142576543224,
+        "CAPACITY": 0.23759994447379215,
+        "NULL": 0.016617371201362113
+       },
+       "CAPACITY": {
+        "LPS": 0.03540697863081192,
+        "CLOSED": 0.2625029033421571,
+        "CAPACITY": 0.7008796086607354,
+        "NULL": 0.0012105093662957765
+       },
+       "NULL": {
+        "LPS": 0.014148468616580857,
+        "CLOSED": 0.831647121847947,
+        "CAPACITY": 0.06228152020438081,
+        "NULL": 0.09192288933109158
+       }
+      },
+      "readings": {
+       "before": "geometric",
+       "after": "geometric"
+      },
+      "same_piece": true,
+      "target": {
+       "density_g_cm3_now": {
+        "median": 7.343304096955113,
+        "sd": 0.7164176059144838
+       },
+       "expected_posterior_sd_g_cm3": 0.463969964405006,
+       "threshold_g_cm3": 7.2,
+       "p_above_now": 0.5279166666666667,
+       "p_above_after_q10_q50_q90": [
+        0.12826575880237576,
+        0.3084090657602222,
+        0.9623976752685504
+       ]
+      }
+     },
+     {
+      "name": "#4 (5.77, 800 C): before+after same piece, archimedes",
+      "mi_mechanism_nats": 0.4916407423251534,
+      "mi_se": 0.005427669063801705,
+      "mechanism_entropy_nats": 1.1285746500113925,
+      "share_resolved": 0.4356297940239846,
+      "posterior_mechanism_by_true": {
+       "LPS": {
+        "LPS": 0.710779364282314,
+        "CLOSED": 0.24122432343706623,
+        "CAPACITY": 0.04554504575069377,
+        "NULL": 0.002451266529925946
+       },
+       "CLOSED": {
+        "LPS": 0.2529177354480736,
+        "CLOSED": 0.4817727443632063,
+        "CAPACITY": 0.2512392651937181,
+        "NULL": 0.014070254995002052
+       },
+       "CAPACITY": {
+        "LPS": 0.06757524689532338,
+        "CLOSED": 0.3091828619317149,
+        "CAPACITY": 0.618906519332838,
+        "NULL": 0.0043353718401236
+       },
+       "NULL": {
+        "LPS": 0.10825067673396817,
+        "CLOSED": 0.6593905399179519,
+        "CAPACITY": 0.18080995212315998,
+        "NULL": 0.05154883122491986
+       }
+      },
+      "readings": {
+       "before": "archimedes",
+       "after": "archimedes"
+      },
+      "same_piece": true,
+      "target": {
+       "density_g_cm3_now": {
+        "median": 7.348065383637903,
+        "sd": 0.7161491419504701
+       },
+       "expected_posterior_sd_g_cm3": 0.47037829768227624,
+       "threshold_g_cm3": 7.2,
+       "p_above_now": 0.5281666666666667,
+       "p_above_after_q10_q50_q90": [
+        0.09806816404076914,
+        0.3941141329134261,
+        0.9742569883052904
+       ]
+      }
+     },
+     {
+      "name": "#1 (4.83, 750 C): after only, method not stated, pairing unknown",
+      "mi_mechanism_nats": 0.3782964373022934,
+      "mi_se": 0.003775360585088668,
+      "mechanism_entropy_nats": 1.1285746500113925,
+      "share_resolved": 0.3351984180208856,
+      "posterior_mechanism_by_true": {
+       "LPS": {
+        "LPS": 0.7201954224960964,
+        "CLOSED": 0.20941851429056849,
+        "CAPACITY": 0.06632907533130024,
+        "NULL": 0.004056987882034864
+       },
+       "CLOSED": {
+        "LPS": 0.21353780660651228,
+        "CLOSED": 0.41595313666275135,
+        "CAPACITY": 0.356580489766705,
+        "NULL": 0.01392856696403137
+       },
+       "CAPACITY": {
+        "LPS": 0.09115994546339821,
+        "CLOSED": 0.4189236797379139,
+        "CAPACITY": 0.48094272405328825,
+        "NULL": 0.008973650745399641
+       },
+       "NULL": {
+        "LPS": 0.029775178303388952,
+        "CLOSED": 0.7104903007707286,
+        "CAPACITY": 0.16886338747559068,
+        "NULL": 0.09087113345029182
+       }
+      },
+      "readings": {
+       "after": "unspecified"
+      },
+      "same_piece": null,
+      "target": {
+       "density_g_cm3_now": {
+        "median": 7.36583754712383,
+        "sd": 0.7140981510733699
+       },
+       "expected_posterior_sd_g_cm3": 0.5309078594013832,
+       "threshold_g_cm3": 7.2,
+       "p_above_now": 0.5339166666666667,
+       "p_above_after_q10_q50_q90": [
+        0.13341299508331916,
+        0.35474926344545094,
+        0.9535465871402338
+       ]
+      }
+     },
+     {
+      "name": "#4 (5.77, 800 C): after only, method not stated, pairing unknown",
+      "mi_mechanism_nats": 0.3550777890985253,
+      "mi_se": 0.003194941406453418,
+      "mechanism_entropy_nats": 1.1285746500113925,
+      "share_resolved": 0.3146249909963341,
+      "posterior_mechanism_by_true": {
+       "LPS": {
+        "LPS": 0.656472595338427,
+        "CLOSED": 0.260516252898531,
+        "CAPACITY": 0.07870798103140256,
+        "NULL": 0.0043031707316394776
+       },
+       "CLOSED": {
+        "LPS": 0.28638047094655866,
+        "CLOSED": 0.4102245220295448,
+        "CAPACITY": 0.29170059347579014,
+        "NULL": 0.011694413548106365
+       },
+       "CAPACITY": {
+        "LPS": 0.10191108218454253,
+        "CLOSED": 0.3689883775529028,
+        "CAPACITY": 0.5250353195370859,
+        "NULL": 0.004065220725468667
+       },
+       "NULL": {
+        "LPS": 0.2875173588960006,
+        "CLOSED": 0.4288190662597043,
+        "CAPACITY": 0.27026944538334996,
+        "NULL": 0.013394129460945207
+       }
+      },
+      "readings": {
+       "after": "unspecified"
+      },
+      "same_piece": null,
+      "target": {
+       "density_g_cm3_now": {
+        "median": 7.356800333914161,
+        "sd": 0.7095239182635117
+       },
+       "expected_posterior_sd_g_cm3": 0.5356275628041386,
+       "threshold_g_cm3": 7.2,
+       "p_above_now": 0.5310833333333334,
+       "p_above_after_q10_q50_q90": [
+        0.1508975151382535,
+        0.5075775952281258,
+        0.931557749136413
+       ]
+      }
+     },
+     {
+      "name": "#7 (7.01, 850 C): before+after same piece, archimedes_saturated",
+      "mi_mechanism_nats": 0.07990960704223064,
+      "mi_se": 0.0028004694850354162,
+      "mechanism_entropy_nats": 1.1285746500113925,
+      "share_resolved": 0.07080577881261464,
+      "posterior_mechanism_by_true": {
+       "LPS": {
+        "LPS": 0.3869199074402375,
+        "CLOSED": 0.3525885135920332,
+        "CAPACITY": 0.2582703079770904,
+        "NULL": 0.0022212709906389468
+       },
+       "CLOSED": {
+        "LPS": 0.3691677226844362,
+        "CLOSED": 0.358671595956934,
+        "CAPACITY": 0.2644075707108165,
+        "NULL": 0.007753110647813353
+       },
+       "CAPACITY": {
+        "LPS": 0.34255844387073375,
+        "CLOSED": 0.33309026415376125,
+        "CAPACITY": 0.31888903371825617,
+        "NULL": 0.005462258257248833
+       },
+       "NULL": {
+        "LPS": 0.12933682505035216,
+        "CLOSED": 0.24972233851260547,
+        "CAPACITY": 0.228199960669208,
+        "NULL": 0.39274087576783434
+       }
+      },
+      "readings": {
+       "before": "archimedes_saturated",
+       "after": "archimedes_saturated"
+      },
+      "same_piece": true,
+      "target": {
+       "density_g_cm3_now": {
+        "median": 7.301185925198695,
+        "sd": 0.7117827571520142
+       },
+       "expected_posterior_sd_g_cm3": 0.6602449701601609,
+       "threshold_g_cm3": 7.2,
+       "p_above_now": 0.5206666666666667,
+       "p_above_after_q10_q50_q90": [
+        0.24231318256604634,
+        0.5582698116771883,
+        0.6437349245362018
+       ]
+      }
+     },
+     {
+      "name": "#7 (7.01, 850 C): before+after same piece, archimedes",
+      "mi_mechanism_nats": 0.06424443579154793,
+      "mi_se": 0.0024714660981976955,
+      "mechanism_entropy_nats": 1.1285746500113925,
+      "share_resolved": 0.05692528694570573,
+      "posterior_mechanism_by_true": {
+       "LPS": {
+        "LPS": 0.38819110101397114,
+        "CLOSED": 0.353539405032365,
+        "CAPACITY": 0.2542713931434606,
+        "NULL": 0.003998100810203355
+       },
+       "CLOSED": {
+        "LPS": 0.38017675444096927,
+        "CLOSED": 0.35364142677749894,
+        "CAPACITY": 0.2614904549568132,
+        "NULL": 0.004691363824718626
+       },
+       "CAPACITY": {
+        "LPS": 0.3378987665641256,
+        "CLOSED": 0.33007154048135623,
+        "CAPACITY": 0.3215550580785085,
+        "NULL": 0.010474634876009772
+       },
+       "NULL": {
+        "LPS": 0.2576929220702289,
+        "CLOSED": 0.36950951836518486,
+        "CAPACITY": 0.23589952482035526,
+        "NULL": 0.13689803474423087
+       }
+      },
+      "readings": {
+       "before": "archimedes",
+       "after": "archimedes"
+      },
+      "same_piece": true,
+      "target": {
+       "density_g_cm3_now": {
+        "median": 7.278219394346247,
+        "sd": 0.7095177209018952
+       },
+       "expected_posterior_sd_g_cm3": 0.6689703067202156,
+       "threshold_g_cm3": 7.2,
+       "p_above_now": 0.5175,
+       "p_above_after_q10_q50_q90": [
+        0.32020072062376115,
+        0.5711357793929759,
+        0.6114693616940358
+       ]
+      }
+     },
+     {
+      "name": "#7 (7.01, 850 C): before+after same piece, geometric",
+      "mi_mechanism_nats": 0.04263213194784723,
+      "mi_se": 0.0014540162483809575,
+      "mechanism_entropy_nats": 1.1285746500113925,
+      "share_resolved": 0.03777519896217488,
+      "posterior_mechanism_by_true": {
+       "LPS": {
+        "LPS": 0.3768987978754131,
+        "CLOSED": 0.3580442564996569,
+        "CAPACITY": 0.2614938351178848,
+        "NULL": 0.0035631105070452087
+       },
+       "CLOSED": {
+        "LPS": 0.3670080584785901,
+        "CLOSED": 0.35789020100580365,
+        "CAPACITY": 0.2641702034390561,
+        "NULL": 0.010931537076550178
+       },
+       "CAPACITY": {
+        "LPS": 0.35558829652297347,
+        "CLOSED": 0.35208095489746005,
+        "CAPACITY": 0.28501482876474754,
+        "NULL": 0.007315919814818937
+       },
+       "NULL": {
+        "LPS": 0.14977953285410203,
+        "CLOSED": 0.3532558908869934,
+        "CAPACITY": 0.19556917768360738,
+        "NULL": 0.3013953985752973
+       }
+      },
+      "readings": {
+       "before": "geometric",
+       "after": "geometric"
+      },
+      "same_piece": true,
+      "target": {
+       "density_g_cm3_now": {
+        "median": 7.344053733358042,
+        "sd": 0.7173549414657684
+       },
+       "expected_posterior_sd_g_cm3": 0.6894900318976594,
+       "threshold_g_cm3": 7.2,
+       "p_above_now": 0.5281666666666667,
+       "p_above_after_q10_q50_q90": [
+        0.43499777754434565,
+        0.5489990463011609,
+        0.6233027018421309
+       ]
+      }
+     },
+     {
+      "name": "#7 (7.01, 850 C): after only, method not stated, pairing unknown",
+      "mi_mechanism_nats": 0.02794271528400018,
+      "mi_se": 0.0007454410174100938,
+      "mechanism_entropy_nats": 1.1285746500113925,
+      "share_resolved": 0.02475929729922439,
+      "posterior_mechanism_by_true": {
+       "LPS": {
+        "LPS": 0.37664412618781484,
+        "CLOSED": 0.34899143033966534,
+        "CAPACITY": 0.2694930457514418,
+        "NULL": 0.004871397721078175
+       },
+       "CLOSED": {
+        "LPS": 0.37178204592423325,
+        "CLOSED": 0.3506927280812955,
+        "CAPACITY": 0.2697972070794392,
+        "NULL": 0.007728018915031948
+       },
+       "CAPACITY": {
+        "LPS": 0.3594177764343822,
+        "CLOSED": 0.3451344986899768,
+        "CAPACITY": 0.284767857672601,
+        "NULL": 0.010679867203040053
+       },
+       "NULL": {
+        "LPS": 0.2997941492788558,
+        "CLOSED": 0.3118578982244471,
+        "CAPACITY": 0.3631117187151547,
+        "NULL": 0.02523623378154244
+       }
+      },
+      "readings": {
+       "after": "unspecified"
+      },
+      "same_piece": null,
+      "target": {
+       "density_g_cm3_now": {
+        "median": 7.321954080066875,
+        "sd": 0.7139926988227325
+       },
+       "expected_posterior_sd_g_cm3": 0.691238291976118,
+       "threshold_g_cm3": 7.2,
+       "p_above_now": 0.5236666666666666,
+       "p_above_after_q10_q50_q90": [
+        0.41823214815576304,
+        0.5800850457673533,
+        0.6031821667778676
+       ]
+      }
+     }
+    ],
+    "mechanisms": [
+     "LPS",
+     "CLOSED",
+     "CAPACITY",
+     "NULL"
+    ],
+    "prior_mechanism_weights": {
+     "LPS": 0.37280694658651425,
+     "CLOSED": 0.3488634649949625,
+     "CAPACITY": 0.2700151701016905,
+     "NULL": 0.008314418316832647
+    },
+    "n_outer": 1500,
+    "n_inner": 12000,
+    "method": "nested Monte Carlo on the anneal layer: outcomes simulated from the posterior (draws, nuisances, reading noise), each scored against an independent posterior pool with its own nuisances; I(M; y) = H(prior) - E[H(p(M | y))]",
+    "scope": "conditional on the anneal layer's priors, mechanisms and declared reading models; information about the model's mechanism label, not the power of an executable RPI protocol",
+    "tool_version": "ndfeb-sps-physics-tool-20261023.8.1",
+    "evidence_class": "owner-built conditional executable physics model (Dynamical's model fitted to RPI's released records and declared literature priors; not an RPI or collaborator model); not a physical observation; does not calibrate current-body coercivity",
+    "artifact_sha256": {
+     "physics": "444139f68fedcd65ca2f32cf1b92db02028e1573b033efdc8923878ab459411c",
+     "forward": "93658fe3821d6e4d4e3d12b4eb35370da5b39fa300a2868726e5757b66c60c9d",
+     "posterior": "e0bde0c2e6565925c701c7f8ca843dd8d594775b2fe78808b315e883cc182370",
+     "tool": "60ee32689a0234986dd213bd9b887f616d3c614f8d6f94f97e8bb4bf6da53289",
+     "microstructure": "59e64be3c62447d6733098d9cf7770830187aaa04ac66818b48f40fef6200f9d",
+     "coercivity_link": "9cc3bb827c8cd51cf98782d4d17e22646d2730cdeabf4b355fb4796224255b7d",
+     "anneal": "3ddea1b5b11188f874092014c7421b78c98f2af7d0e3e9101374b676d5081fbb",
+     "anneal_posterior": "80fccba41d5ef3ae5882f149cf7a99d5ef89348f34773f1045f90c3b798e29ec"
+    },
+    "artifact_verified": true
+   }
+  },
+  "mechanism_weights": {
+   "LPS": 0.37280694658651414,
+   "CLOSED": 0.3488634649949624,
+   "CAPACITY": 0.27001517010169046,
+   "NULL": 0.008314418316832642
+  },
+  "predictions_true_density_g_cm3": {
+   "#1 (750 C)": {
+    "LPS": {
+     "q05": 7.078009983155192,
+     "q25": 7.529757293526599,
+     "median": 7.575645762918989,
+     "q75": 7.600026629917489,
+     "q95": 7.640240318060463
+    },
+    "CLOSED": {
+     "q05": 4.888683915889438,
+     "q25": 5.112611613065239,
+     "median": 5.5475655198764215,
+     "q75": 6.464656603775217,
+     "q95": 7.606298034076433
+    },
+    "CAPACITY": {
+     "q05": 5.14678466593781,
+     "q25": 5.416336903256396,
+     "median": 5.603882320088056,
+     "q75": 5.784997174839747,
+     "q95": 5.952092691141801
+    },
+    "NULL": {
+     "q05": 4.713647622391031,
+     "q25": 4.782111101694201,
+     "median": 4.832348567417998,
+     "q75": 4.879315514465322,
+     "q95": 4.945541801811715
+    }
+   },
+   "#4 (800 C)": {
+    "LPS": {
+     "q05": 7.263856069300288,
+     "q25": 7.543142979019993,
+     "median": 7.577839955194994,
+     "q75": 7.601405445531068,
+     "q95": 7.6408551627654
+    },
+    "CLOSED": {
+     "q05": 5.778953423284271,
+     "q25": 5.9631681195467285,
+     "median": 6.272616700863256,
+     "q75": 7.555901159454148,
+     "q95": 7.617410118022754
+    },
+    "CAPACITY": {
+     "q05": 6.092591829319925,
+     "q25": 6.358559024580113,
+     "median": 6.548011355652227,
+     "q75": 6.725744749510627,
+     "q95": 6.904789319307235
+    },
+    "NULL": {
+     "q05": 5.631507275198953,
+     "q25": 5.7103724622675545,
+     "median": 5.769973328860457,
+     "q75": 5.825631600422374,
+     "q95": 5.910170779156748
+    }
+   },
+   "#6 (800 C)": {
+    "LPS": {
+     "q05": 7.23205945754061,
+     "q25": 7.540994189452038,
+     "median": 7.577357777203447,
+     "q75": 7.601123832414892,
+     "q95": 7.640849084513836
+    },
+    "CLOSED": {
+     "q05": 5.651229587714548,
+     "q25": 5.833465513620342,
+     "median": 6.14406479420887,
+     "q75": 7.536114431486465,
+     "q95": 7.6145599034004094
+    },
+    "CAPACITY": {
+     "q05": 5.954893609978896,
+     "q25": 6.215437152887539,
+     "median": 6.407261121152968,
+     "q75": 6.5907766166081325,
+     "q95": 6.771039837906524
+    },
+    "NULL": {
+     "q05": 5.488543316547251,
+     "q25": 5.574276521227648,
+     "median": 5.6301864494220215,
+     "q75": 5.68724987843696,
+     "q95": 5.770388856749995
+    }
+   },
+   "#7 (850 C)": {
+    "LPS": {
+     "q05": 7.493757173892622,
+     "q25": 7.562892167387744,
+     "median": 7.584298411641884,
+     "q75": 7.6056179984244805,
+     "q95": 7.642910504096332
+    },
+    "CLOSED": {
+     "q05": 7.4551854955463845,
+     "q25": 7.563394015832351,
+     "median": 7.58353186727889,
+     "q75": 7.604636739769795,
+     "q95": 7.642033174586522
+    },
+    "CAPACITY": {
+     "q05": 7.312802119204697,
+     "q25": 7.535784462146369,
+     "median": 7.575928790504591,
+     "q75": 7.6005567478479845,
+     "q95": 7.641484848474876
+    },
+    "NULL": {
+     "q05": 6.836544013655863,
+     "q25": 6.935964957335181,
+     "median": 7.008499829785885,
+     "q75": 7.079687026303367,
+     "q95": 7.181330409147043
+    }
+   }
+  },
+  "information_about_mechanism_histogram_estimate_c7": {
+   "#1 (750 C)": {
+    "mutual_information_nats": 0.5845611519197903,
+    "mechanism_entropy_nats": 1.1285746500113925,
+    "share_resolved": 0.5179640991527582
+   },
+   "#4 (800 C)": {
+    "mutual_information_nats": 0.5659860177749605,
+    "mechanism_entropy_nats": 1.1285746500113925,
+    "share_resolved": 0.5015051665118007
+   },
+   "#6 (800 C)": {
+    "mutual_information_nats": 0.5667613912011591,
+    "mechanism_entropy_nats": 1.1285746500113925,
+    "share_resolved": 0.5021922042954251
+   },
+   "#7 (850 C)": {
+    "mutual_information_nats": 0.043602503758954296,
+    "mechanism_entropy_nats": 1.1285746500113925,
+    "share_resolved": 0.03863501963163372
+   }
+  },
+  "nuisance_prior_sensitivity": {
+   "wide_piece_gradient": {
+    "change": {
+     "c7_sdpiece": [
+      "uniform",
+      0.002,
+      0.05
+     ]
+    },
+    "mechanism_weights": {
+     "LPS": 0.37273444883235596,
+     "CLOSED": 0.34091996829184196,
+     "CAPACITY": 0.2648810702108387,
+     "NULL": 0.02146451266496344
+    }
+   },
+   "wide_geometric_bias": {
+    "change": {
+     "c7_bgeo": [
+      "normal",
+      -0.02,
+      0.03
+     ],
+     "c7_sd_geo": [
+      "uniform",
+      0.005,
+      0.03
+     ]
+    },
+    "mechanism_weights": {
+     "LPS": 0.3647027046198559,
+     "CLOSED": 0.34578816206429264,
+     "CAPACITY": 0.2693321277442137,
+     "NULL": 0.020177005571638016
+    }
+   },
+   "both_wide": {
+    "change": {
+     "c7_sdpiece": [
+      "uniform",
+      0.002,
+      0.05
+     ],
+     "c7_bgeo": [
+      "normal",
+      -0.02,
+      0.03
+     ],
+     "c7_sd_geo": [
+      "uniform",
+      0.005,
+      0.03
+     ]
+    },
+    "mechanism_weights": {
+     "LPS": 0.36115669163756975,
+     "CLOSED": 0.3392711141827846,
+     "CAPACITY": 0.26740227717817694,
+     "NULL": 0.03216991700146848
+    }
+   }
+  }
+ },
+ "2_matched_magnetic_comparison_8": {
+  "after_900": {
+   "Br_kGs": {
+    "c5_ratio_q05_q50_q95": [
+     0.8680059642759788,
+     0.9318596860116082,
+     1.0013042033262392
+    ],
+    "link_ratio_q05_q50_q95": [
+     1.048672522144522,
+     1.071001764378619,
+     1.0877199900579073
+    ],
+    "c5_share_ratio_below_1": 0.9471666666666667,
+    "link_share_ratio_below_1": 0.008166666666666666
+   },
+   "Hci_kOe": {
+    "c5_ratio_q05_q50_q95": [
+     1.0089617880187858,
+     1.0852009711106598,
+     1.164175154351759
+    ],
+    "link_ratio_q05_q50_q95": [
+     0.8154808613610259,
+     0.9975100482613589,
+     1.5568954313410788
+    ],
+    "c5_share_ratio_below_1": 0.03766666666666667,
+    "link_share_ratio_below_1": 0.51
+   },
+   "BHmax_MGOe": {
+    "c5_ratio_q05_q50_q95": [
+     0.7534678774862195,
+     0.8595437912851427,
+     0.9852302501944543
+    ],
+    "link_ratio_q05_q50_q95": [
+     0.9972831978231119,
+     1.1102984284729414,
+     1.42925804039474
+    ],
+    "c5_share_ratio_below_1": 0.9641666666666666,
+    "link_share_ratio_below_1": 0.052
+   },
+   "density_ratio_q05_q50_q95": [
+    1.0523585287624304,
+    1.0721753029990233,
+    1.0850545156492593
+   ],
+   "br_path_classification_under_assumed_reading_error": {
+    "scope": "conditional classification under an assumed per-reading relative error; not the power of an executable RPI protocol",
+    "reading_rel_sd_0.02": {
+     "threshold_ln_ratio": -0.0006507564745843325,
+     "c5_world_classified_c5": 0.9245,
+     "link_world_classified_link": 0.9851666666666666
+    },
+    "reading_rel_sd_0.05": {
+     "threshold_ln_ratio": -0.00037085289064812954,
+     "c5_world_classified_c5": 0.8131666666666667,
+     "link_world_classified_link": 0.8426666666666667
+    }
+   }
+  },
+  "after_900_520": {
+   "Br_kGs": {
+    "c5_ratio_q05_q50_q95": [
+     0.8858742529135334,
+     0.9553447505225943,
+     1.0261028644456338
+    ],
+    "link_ratio_q05_q50_q95": [
+     1.0470408824127655,
+     1.0706149223873924,
+     1.0890874833358521
+    ],
+    "c5_share_ratio_below_1": 0.863,
+    "link_share_ratio_below_1": 0.009
+   },
+   "Hci_kOe": {
+    "c5_ratio_q05_q50_q95": [
+     1.1403263898814564,
+     1.2274297255106994,
+     1.3166277054198883
+    ],
+    "link_ratio_q05_q50_q95": [
+     1.0205240404041902,
+     1.2513315409655204,
+     1.7986500759609465
+    ],
+    "c5_share_ratio_below_1": 0.0011666666666666668,
+    "link_share_ratio_below_1": 0.037
+   },
+   "BHmax_MGOe": {
+    "c5_ratio_q05_q50_q95": [
+     0.7829366490982058,
+     0.9036315680080212,
+     1.0442056050571713
+    ],
+    "link_ratio_q05_q50_q95": [
+     1.105735460202413,
+     1.2205298362875525,
+     1.5347093854560638
+    ],
+    "c5_share_ratio_below_1": 0.8848333333333334,
+    "link_share_ratio_below_1": 0.0055
+   },
+   "density_ratio_q05_q50_q95": [
+    1.0523585287624342,
+    1.0721753029990233,
+    1.0850545156492593
+   ],
+   "br_path_classification_under_assumed_reading_error": {
+    "scope": "conditional classification under an assumed per-reading relative error; not the power of an executable RPI protocol",
+    "reading_rel_sd_0.02": {
+     "threshold_ln_ratio": 0.011219209575261738,
+     "c5_world_classified_c5": 0.8838333333333334,
+     "link_world_classified_link": 0.9706666666666667
+    },
+    "reading_rel_sd_0.05": {
+     "threshold_ln_ratio": 0.012230871135170487,
+     "c5_world_classified_c5": 0.7728333333333334,
+     "link_world_classified_link": 0.7933333333333333
+    }
+   }
+  }
+ },
+ "3_joint_target_by_route_family": {
+  "R0 current isotropic SPS (850 C, 5 min, load on cooling, 4 um), as sintered": {
+   "20C": {
+    "c5": {
+     "p_one_body": 0.0,
+     "p_all_3_one_prep": 0.0,
+     "p_Hci": 0.005583333333333333,
+     "p_BHmax": 0.0,
+     "median_Hci_kOe": 7.265230482934188,
+     "median_BHmax_MGOe": 10.048685759380913
+    },
+    "coercivity_link": {
+     "p_one_body": 0.0,
+     "p_all_3_one_prep": 0.0,
+     "p_Hci": 0.0013055555555555555,
+     "p_BHmax": 0.0,
+     "median_Hci_kOe": 6.512775822422735,
+     "median_BHmax_MGOe": 8.34902482994789,
+     "by_jgb_T": {
+      "0": 0.0,
+      "0.6": 0.0,
+      "1.2": 0.0
+     }
+    }
+   },
+   "out_of_hull_magnetic": [
+    "rel_density"
+   ],
+   "structural": {
+    "Br_needed_kGs": 13.416407864998739,
+    "Br_bound_kGs_Js_rho_cos": 7.677376919050768
+   },
+   "100C": {
+    "c5": {
+     "p_one_body": 0.0,
+     "p_all_3_one_prep": 0.0,
+     "p_Hci": 0.001388888888888889,
+     "p_BHmax": 0.0,
+     "median_Hci_kOe": 2.654048534143831,
+     "median_BHmax_MGOe": 5.005825293228004
+    },
+    "coercivity_link": {
+     "p_one_body": 0.0,
+     "p_all_3_one_prep": 0.0,
+     "p_Hci": 0.00025,
+     "p_BHmax": 0.0,
+     "median_Hci_kOe": 2.057122492055125,
+     "median_BHmax_MGOe": 3.680218086769952,
+     "by_jgb_T": {
+      "0": 0.0,
+      "0.6": 0.0,
+      "1.2": 0.0
+     }
+    }
+   },
+   "150C": {
+    "c5": {
+     "p_one_body": 0.0,
+     "p_all_3_one_prep": 0.0,
+     "p_Hci": 0.00030555555555555555,
+     "p_BHmax": 0.0,
+     "median_Hci_kOe": 0.12231317820362797,
+     "median_BHmax_MGOe": 0.03825446685500696
+    },
+    "coercivity_link": {
+     "p_one_body": 0.0,
+     "p_all_3_one_prep": 0.0,
+     "p_Hci": 2.777777777777778e-05,
+     "p_BHmax": 0.0,
+     "median_Hci_kOe": 0.0,
+     "median_BHmax_MGOe": 0.0,
+     "by_jgb_T": {
+      "0": 0.0,
+      "0.6": 0.0,
+      "1.2": 0.0
+     }
+    }
+   }
+  },
+  "R0a the same after 900 + 520 C / 2 h each": {
+   "20C": {
+    "c5": {
+     "p_one_body": 0.0,
+     "p_all_3_one_prep": 0.0,
+     "p_Hci": 0.013888888888888888,
+     "p_BHmax": 0.0,
+     "median_Hci_kOe": 8.928356747527907,
+     "median_BHmax_MGOe": 9.035408609237312
+    },
+    "coercivity_link": {
+     "p_one_body": 0.0,
+     "p_all_3_one_prep": 0.0,
+     "p_Hci": 0.00425,
+     "p_BHmax": 0.0,
+     "median_Hci_kOe": 8.191552764352704,
+     "median_BHmax_MGOe": 10.230901745053707,
+     "by_jgb_T": {
+      "0": 0.0,
+      "0.6": 0.0,
+      "1.2": 0.0
+     }
+    }
+   },
+   "out_of_hull_magnetic": [
+    "rel_density"
+   ],
+   "structural": {
+    "Br_needed_kGs": 13.416407864998739,
+    "Br_bound_kGs_Js_rho_cos": 8.17038230969521
+   },
+   "100C": {
+    "c5": {
+     "p_one_body": 0.0,
+     "p_all_3_one_prep": 0.0,
+     "p_Hci": 0.002416666666666667,
+     "p_BHmax": 0.0,
+     "median_Hci_kOe": 3.8181397717793146,
+     "median_BHmax_MGOe": 5.212832340640121
+    },
+    "coercivity_link": {
+     "p_one_body": 0.0,
+     "p_all_3_one_prep": 0.0,
+     "p_Hci": 0.00047222222222222224,
+     "p_BHmax": 0.0,
+     "median_Hci_kOe": 3.230487916645316,
+     "median_BHmax_MGOe": 5.5167475194843725,
+     "by_jgb_T": {
+      "0": 0.0,
+      "0.6": 0.0,
+      "1.2": 0.0
+     }
+    }
+   },
+   "150C": {
+    "c5": {
+     "p_one_body": 0.0,
+     "p_all_3_one_prep": 0.0,
+     "p_Hci": 0.0003333333333333333,
+     "p_BHmax": 0.0,
+     "median_Hci_kOe": 0.9914837306366406,
+     "median_BHmax_MGOe": 1.7192304762373156
+    },
+    "coercivity_link": {
+     "p_one_body": 0.0,
+     "p_all_3_one_prep": 0.0,
+     "p_Hci": 0.0001388888888888889,
+     "p_BHmax": 0.0,
+     "median_Hci_kOe": 0.48714897062631213,
+     "median_BHmax_MGOe": 1.0368780352843499,
+     "by_jgb_T": {
+      "0": 0.0,
+      "0.6": 0.0,
+      "1.2": 0.0
+     }
+    }
+   }
+  },
+  "R1 aligned body (<cos> 0.95, declared), 4 um, after 900 + 520 C": {
+   "20C": {
+    "c5": {
+     "p_one_body": 0.0005833333333333334,
+     "p_all_3_one_prep": 0.0,
+     "p_Hci": 0.013888888888888888,
+     "p_BHmax": 0.0008333333333333334,
+     "median_Hci_kOe": 8.928356747527907,
+     "median_BHmax_MGOe": 23.87177533007317
+    },
+    "coercivity_link": {
+     "p_one_body": 0.00125,
+     "p_all_3_one_prep": 0.0,
+     "p_Hci": 0.0015555555555555555,
+     "p_BHmax": 0.5684722222222223,
+     "median_Hci_kOe": 6.8282085465954605,
+     "median_BHmax_MGOe": 46.4041967781928,
+     "by_jgb_T": {
+      "0": 0.001025010250102501,
+      "0.6": 0.0014574759945130316,
+      "1.2": 0.0003429355281207133
+     }
+    }
+   },
+   "out_of_hull_magnetic": [
+    "rel_density"
+   ],
+   "structural": {
+    "Br_needed_kGs": 13.416407864998739,
+    "Br_bound_kGs_Js_rho_cos": 15.523726388420899
+   },
+   "100C": {
+    "c5": {
+     "p_one_body": 0.0,
+     "p_all_3_one_prep": 0.0,
+     "p_Hci": 0.002416666666666667,
+     "p_BHmax": 0.0,
+     "median_Hci_kOe": 3.8181397717793146,
+     "median_BHmax_MGOe": 12.058154707218659
+    },
+    "coercivity_link": {
+     "p_one_body": 8.333333333333333e-05,
+     "p_all_3_one_prep": 0.0,
+     "p_Hci": 0.00022222222222222223,
+     "p_BHmax": 0.012805555555555556,
+     "median_Hci_kOe": 2.1916598429188436,
+     "median_BHmax_MGOe": 19.88133892573947,
+     "by_jgb_T": {
+      "0": 0.0002050020500205002,
+      "0.6": 4.286694101508916e-05,
+      "1.2": 0.0
+     }
+    }
+   },
+   "150C": {
+    "c5": {
+     "p_one_body": 0.0,
+     "p_all_3_one_prep": 0.0,
+     "p_Hci": 0.0003333333333333333,
+     "p_BHmax": 0.0,
+     "median_Hci_kOe": 0.9914837306366406,
+     "median_BHmax_MGOe": 3.491699752204939
+    },
+    "coercivity_link": {
+     "p_one_body": 0.0,
+     "p_all_3_one_prep": 0.0,
+     "p_Hci": 2.777777777777778e-05,
+     "p_BHmax": 0.0005277777777777777,
+     "median_Hci_kOe": 0.0,
+     "median_BHmax_MGOe": 0.0,
+     "by_jgb_T": {
+      "0": 0.0,
+      "0.6": 0.0,
+      "1.2": 0.0
+     }
+    }
+   }
+  },
+  "R2 aligned, 2 um feedstock (declared), after 900 + 520 C": {
+   "20C": {
+    "c5": {
+     "p_one_body": 0.0016111111111111111,
+     "p_all_3_one_prep": 0.00030000000000000003,
+     "p_Hci": 0.017194444444444443,
+     "p_BHmax": 0.0016666666666666668,
+     "median_Hci_kOe": 6.472278888373927,
+     "median_BHmax_MGOe": 19.424677223227484
+    },
+    "coercivity_link": {
+     "p_one_body": 0.0006111111111111111,
+     "p_all_3_one_prep": 1.5151515151515155e-06,
+     "p_Hci": 0.0008333333333333334,
+     "p_BHmax": 0.3303888888888889,
+     "median_Hci_kOe": 5.026699699399697,
+     "median_BHmax_MGOe": 39.68479926743076,
+     "by_jgb_T": {
+      "0": 0.0005125051250512505,
+      "0.6": 0.0007287379972565158,
+      "1.2": 0.0
+     }
+    }
+   },
+   "out_of_hull_magnetic": [
+    "feedstock_d50_um=2"
+   ],
+   "structural": {
+    "Br_needed_kGs": 13.416407864998739,
+    "Br_bound_kGs_Js_rho_cos": 15.535486905055794
+   },
+   "100C": {
+    "c5": {
+     "p_one_body": 0.0,
+     "p_all_3_one_prep": 0.0,
+     "p_Hci": 0.005111111111111111,
+     "p_BHmax": 8.333333333333333e-05,
+     "median_Hci_kOe": 2.066491549659819,
+     "median_BHmax_MGOe": 7.278279408819284
+    },
+    "coercivity_link": {
+     "p_one_body": 5.555555555555556e-05,
+     "p_all_3_one_prep": 0.0,
+     "p_Hci": 0.0001388888888888889,
+     "p_BHmax": 0.00786111111111111,
+     "median_Hci_kOe": 0.9399290885384115,
+     "median_BHmax_MGOe": 9.273682042751249,
+     "by_jgb_T": {
+      "0": 0.0,
+      "0.6": 8.573388203017832e-05,
+      "1.2": 0.0
+     }
+    }
+   },
+   "150C": {
+    "c5": {
+     "p_one_body": 0.0,
+     "p_all_3_one_prep": 0.0,
+     "p_Hci": 0.0006944444444444445,
+     "p_BHmax": 0.0,
+     "median_Hci_kOe": 0.0,
+     "median_BHmax_MGOe": 0.0
+    },
+    "coercivity_link": {
+     "p_one_body": 0.0,
+     "p_all_3_one_prep": 0.0,
+     "p_Hci": 5.555555555555556e-05,
+     "p_BHmax": 0.00019444444444444443,
+     "median_Hci_kOe": 0.0,
+     "median_BHmax_MGOe": 0.0,
+     "by_jgb_T": {
+      "0": 0.0,
+      "0.6": 0.0,
+      "1.2": 0.0
+     }
+    }
+   }
+  },
+  "R3 aligned, 1 um feedstock (declared), after 900 + 520 C": {
+   "20C": {
+    "c5": {
+     "p_one_body": 0.0028055555555555555,
+     "p_all_3_one_prep": 0.0007651515151515151,
+     "p_Hci": 0.01936111111111111,
+     "p_BHmax": 0.002861111111111111,
+     "median_Hci_kOe": 3.7021849160052165,
+     "median_BHmax_MGOe": 12.720994097319167
+    },
+    "coercivity_link": {
+     "p_one_body": 0.0001388888888888889,
+     "p_all_3_one_prep": 0.0,
+     "p_Hci": 0.00022222222222222223,
+     "p_BHmax": 0.11958333333333333,
+     "median_Hci_kOe": 2.5834024579969315,
+     "median_BHmax_MGOe": 24.55614025727546,
+     "by_jgb_T": {
+      "0": 0.0,
+      "0.6": 0.0002143347050754458,
+      "1.2": 0.0
+     }
+    }
+   },
+   "out_of_hull_magnetic": [
+    "feedstock_d50_um=1"
+   ],
+   "structural": {
+    "Br_needed_kGs": 13.416407864998739,
+    "Br_bound_kGs_Js_rho_cos": 15.536821968911893
+   },
+   "100C": {
+    "c5": {
+     "p_one_body": 0.0001388888888888889,
+     "p_all_3_one_prep": 1.5151515151515155e-06,
+     "p_Hci": 0.01225,
+     "p_BHmax": 0.0001388888888888889,
+     "median_Hci_kOe": 0.03399881877541766,
+     "median_BHmax_MGOe": 1.3125450353098964e-05
+    },
+    "coercivity_link": {
+     "p_one_body": 5.555555555555556e-05,
+     "p_all_3_one_prep": 0.0,
+     "p_Hci": 8.333333333333333e-05,
+     "p_BHmax": 0.0025833333333333333,
+     "median_Hci_kOe": 0.0,
+     "median_BHmax_MGOe": 0.0,
+     "by_jgb_T": {
+      "0": 0.0,
+      "0.6": 8.573388203017832e-05,
+      "1.2": 0.0
+     }
+    }
+   },
+   "150C": {
+    "c5": {
+     "p_one_body": 0.0,
+     "p_all_3_one_prep": 0.0,
+     "p_Hci": 0.0021666666666666666,
+     "p_BHmax": 0.0,
+     "median_Hci_kOe": 0.0,
+     "median_BHmax_MGOe": 0.0
+    },
+    "coercivity_link": {
+     "p_one_body": 0.0,
+     "p_all_3_one_prep": 0.0,
+     "p_Hci": 2.777777777777778e-05,
+     "p_BHmax": 8.333333333333333e-05,
+     "median_Hci_kOe": 0.0,
+     "median_BHmax_MGOe": 0.0,
+     "by_jgb_T": {
+      "0": 0.0,
+      "0.6": 0.0,
+      "1.2": 0.0
+     }
+    }
+   }
+  },
+  "R3c R3 with complete degassing (declared)": {
+   "20C": {
+    "c5": {
+     "p_one_body": 0.0037222222222222223,
+     "p_all_3_one_prep": 0.0009015151515151516,
+     "p_Hci": 0.030333333333333334,
+     "p_BHmax": 0.0038888888888888888,
+     "median_Hci_kOe": 6.315696983964616,
+     "median_BHmax_MGOe": 18.89302998924017
+    },
+    "coercivity_link": {
+     "p_one_body": 0.0005833333333333334,
+     "p_all_3_one_prep": 0.0,
+     "p_Hci": 0.0008888888888888889,
+     "p_BHmax": 0.2951666666666667,
+     "median_Hci_kOe": 4.558342681253535,
+     "median_BHmax_MGOe": 37.43424046035656,
+     "by_jgb_T": {
+      "0": 0.0005125051250512505,
+      "0.6": 0.0006001371742112483,
+      "1.2": 0.0006858710562414266
+     }
+    }
+   },
+   "out_of_hull_magnetic": [
+    "degas_completeness=complete",
+    "feedstock_d50_um=1"
+   ],
+   "structural": {
+    "Br_needed_kGs": 13.416407864998739,
+    "Br_bound_kGs_Js_rho_cos": 15.536821968911893
+   },
+   "100C": {
+    "c5": {
+     "p_one_body": 0.00016666666666666666,
+     "p_all_3_one_prep": 1.5151515151515155e-06,
+     "p_Hci": 0.016916666666666667,
+     "p_BHmax": 0.00016666666666666666,
+     "median_Hci_kOe": 2.045355749240711,
+     "median_BHmax_MGOe": 7.0318429354067415
+    },
+    "coercivity_link": {
+     "p_one_body": 5.555555555555556e-05,
+     "p_all_3_one_prep": 0.0,
+     "p_Hci": 0.00011111111111111112,
+     "p_BHmax": 0.01011111111111111,
+     "median_Hci_kOe": 0.6789045109036485,
+     "median_BHmax_MGOe": 6.649347227774152,
+     "by_jgb_T": {
+      "0": 0.0,
+      "0.6": 8.573388203017832e-05,
+      "1.2": 0.0
+     }
+    }
+   },
+   "150C": {
+    "c5": {
+     "p_one_body": 0.0,
+     "p_all_3_one_prep": 0.0,
+     "p_Hci": 0.0035555555555555557,
+     "p_BHmax": 0.0,
+     "median_Hci_kOe": 0.0,
+     "median_BHmax_MGOe": 0.0
+    },
+    "coercivity_link": {
+     "p_one_body": 0.0,
+     "p_all_3_one_prep": 0.0,
+     "p_Hci": 2.777777777777778e-05,
+     "p_BHmax": 0.00038888888888888887,
+     "median_Hci_kOe": 0.0,
+     "median_BHmax_MGOe": 0.0,
+     "by_jgb_T": {
+      "0": 0.0,
+      "0.6": 0.0,
+      "1.2": 0.0
+     }
+    }
+   }
+  }
+ },
+ "4_coercivity_leg_aligned_1um": {
+  "c5": {
+   "p_Hci_ge_20": 0.017305555555555557,
+   "median_Hci_kOe": 3.438405725040849,
+   "by_magnetic_mechanism": {
+    "H0": 0.08220338983050847,
+    "H1": 0.02,
+    "H2": 0.0004930966469428008,
+    "H3": 0.0011862396204033216,
+    "H4": 0.0015508684863523574,
+    "H5": 0.0014705882352941176
+   }
+  },
+  "coercivity_link": {
+   "p_Hci_ge_20": 0.0003333333333333333,
+   "median_Hci_kOe": 2.3944355577192256,
+   "by_jgb_T": {
+    "0": 0.0002147766323024055,
+    "0.6": 0.00038071065989847715,
+    "1.2": 0.00032808398950131233
+   },
+   "link_flags_share": {
+    "clipped_breakdown": 0.015,
+    "grain_extrapolated": 0.2703333333333333,
+    "alignment_extrapolated": 1.0,
+    "out_of_anchor_hull": 0.5863333333333334,
+    "anneal_placement_used": 0.0,
+    "anneal_term_declared": 1.0,
+    "chemistry_coupled": 1.0
+   },
+   "by_magnetic_mechanism": {
+    "H0": 0.0005649717514124294,
+    "H1": 0.0,
+    "H2": 0.0,
+    "H3": 0.0001482799525504152,
+    "H4": 0.00031017369727047146,
+    "H5": 0.00065359477124183
+   }
+  }
+ }
+}

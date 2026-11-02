@@ -1,0 +1,15 @@
+{
+  "schema": "ndfeb-vision-provider-pin-v1",
+  "model_id": "openai/gpt-6-astra",
+  "provider_kind": "openrouter",
+  "provider_tag": "openai",
+  "provider_name": "OpenAI",
+  "catalog_file": "artifacts/studies/sdl2-v1.2-20261026/arms/frontier/providers/openrouter_models_20261026.json",
+  "endpoints_file": "artifacts/studies/sdl2-v1.2-20261026/arms/frontier/providers/openai__gpt-6-astra__endpoints.json",
+  "reasoning_request": {
+    "effort": "high"
+  },
+  "recorded_at": "2026-10-26T19:20:19Z",
+  "rationale": "Jarrod 2026-10-26: every frontier model of the SDL-2 release runs through OpenRouter on one key, for one billing, one credential and one provider interface. Pinned to the model's first-party endpoint, no fallbacks, data_collection deny, reasoning effort high. the endpoint does not accept temperature; its max_prompt_tokens (922,000) sets the context window.",
+  "omit_sampling_controls": true
+}

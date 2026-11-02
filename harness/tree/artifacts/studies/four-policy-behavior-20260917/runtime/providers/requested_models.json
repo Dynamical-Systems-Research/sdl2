@@ -1,0 +1,457 @@
+{
+  "fetched_at": "2026-09-17T17:11:26.815593+00:00",
+  "data": [
+    {
+      "id": "deepseek/deepseek-v4.1-flash",
+      "canonical_slug": "deepseek/deepseek-v4.1-flash-20260910",
+      "hugging_face_id": "deepseek-ai/DeepSeek-V4.1-Flash",
+      "name": "DeepSeek: DeepSeek V4.1 Flash",
+      "created": 1789021285,
+      "description": "DeepSeek V4.1 Flash is a sparse mixture-of-experts model from DeepSeek, and the first built on the company's Causal Encoder-Decoder (CED) architecture. It activates 8B parameters on input and 16B on...",
+      "context_length": 1048576,
+      "architecture": {
+        "modality": "text+image->text",
+        "input_modalities": [
+          "text",
+          "image"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tokenizer": "DeepSeek",
+        "instruct_type": null
+      },
+      "pricing": {
+        "prompt": "0.00000015",
+        "completion": "0.0000006",
+        "input_cache_read": "0.000000003",
+        "overrides": [
+          {
+            "utc_days": [
+              "saturday",
+              "sunday"
+            ],
+            "prompt": "0.00000015",
+            "completion": "0.0000006",
+            "input_cache_read": "0.000000003"
+          },
+          {
+            "utc_days": [
+              "monday",
+              "tuesday",
+              "wednesday",
+              "thursday",
+              "friday"
+            ],
+            "utc_start": 0,
+            "utc_end": 100,
+            "prompt": "0.00000015",
+            "completion": "0.0000006",
+            "input_cache_read": "0.000000003"
+          },
+          {
+            "utc_days": [
+              "monday",
+              "tuesday",
+              "wednesday",
+              "thursday",
+              "friday"
+            ],
+            "utc_start": 100,
+            "utc_end": 400,
+            "prompt": "0.0000003",
+            "completion": "0.0000012",
+            "input_cache_read": "0.000000006"
+          },
+          {
+            "utc_days": [
+              "monday",
+              "tuesday",
+              "wednesday",
+              "thursday",
+              "friday"
+            ],
+            "utc_start": 400,
+            "utc_end": 600,
+            "prompt": "0.00000015",
+            "completion": "0.0000006",
+            "input_cache_read": "0.000000003"
+          },
+          {
+            "utc_days": [
+              "monday",
+              "tuesday",
+              "wednesday",
+              "thursday",
+              "friday"
+            ],
+            "utc_start": 600,
+            "utc_end": 1000,
+            "prompt": "0.0000003",
+            "completion": "0.0000012",
+            "input_cache_read": "0.000000006"
+          },
+          {
+            "utc_days": [
+              "monday",
+              "tuesday",
+              "wednesday",
+              "thursday",
+              "friday"
+            ],
+            "utc_start": 1000,
+            "utc_end": 0,
+            "prompt": "0.00000015",
+            "completion": "0.0000006",
+            "input_cache_read": "0.000000003"
+          }
+        ]
+      },
+      "top_provider": {
+        "context_length": 1048576,
+        "max_completion_tokens": 384000,
+        "is_moderated": false
+      },
+      "per_request_limits": null,
+      "supported_parameters": [
+        "frequency_penalty",
+        "include_reasoning",
+        "logit_bias",
+        "logprobs",
+        "max_tokens",
+        "min_p",
+        "presence_penalty",
+        "reasoning",
+        "reasoning_effort",
+        "repetition_penalty",
+        "response_format",
+        "seed",
+        "stop",
+        "structured_outputs",
+        "temperature",
+        "tool_choice",
+        "tools",
+        "top_k",
+        "top_logprobs",
+        "top_p"
+      ],
+      "default_parameters": {},
+      "supported_voices": null,
+      "knowledge_cutoff": null,
+      "expiration_date": null,
+      "links": {
+        "details": "/api/v1/models/deepseek/deepseek-v4.1-flash-20260910/endpoints"
+      },
+      "benchmarks": {
+        "design_arena": [],
+        "artificial_analysis": {
+          "intelligence_index": 39.5,
+          "coding_index": null,
+          "agentic_index": null
+        }
+      },
+      "reasoning": {
+        "mandatory": false,
+        "default_enabled": true,
+        "supported_efforts": [
+          "max",
+          "high",
+          "low"
+        ],
+        "default_effort": "high"
+      }
+    },
+    {
+      "id": "anthropic/claude-fable-5.1",
+      "canonical_slug": "anthropic/claude-fable-5.1-20260831",
+      "hugging_face_id": null,
+      "name": "Anthropic: Claude Fable 5.1",
+      "created": 1788285838,
+      "description": "Claude Fable 5.1 improves on Claude Fable 5 across the board, with the biggest gains in agentic coding, long-running agentic workflows, and knowledge work: long code refactors, front-end and visual...",
+      "context_length": 1000000,
+      "architecture": {
+        "modality": "text+image+file->text",
+        "input_modalities": [
+          "text",
+          "image",
+          "file"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tokenizer": "Claude",
+        "instruct_type": null
+      },
+      "pricing": {
+        "prompt": "0.00001",
+        "completion": "0.00005",
+        "web_search": "0.01",
+        "input_cache_read": "0.00000025",
+        "input_cache_write": "0.0000125",
+        "input_cache_write_1h": "0.00002"
+      },
+      "top_provider": {
+        "context_length": 1000000,
+        "max_completion_tokens": 128000,
+        "is_moderated": true
+      },
+      "per_request_limits": null,
+      "supported_parameters": [
+        "include_reasoning",
+        "max_completion_tokens",
+        "max_tokens",
+        "reasoning",
+        "reasoning_effort",
+        "response_format",
+        "stop",
+        "structured_outputs",
+        "tools",
+        "verbosity"
+      ],
+      "default_parameters": {},
+      "supported_voices": null,
+      "knowledge_cutoff": null,
+      "expiration_date": null,
+      "links": {
+        "details": "/api/v1/models/anthropic/claude-fable-5.1-20260831/endpoints"
+      },
+      "benchmarks": {
+        "design_arena": [
+          {
+            "arena": "agents",
+            "category": "fullstack",
+            "elo": 1334,
+            "win_rate": 57.3,
+            "rank": 1
+          },
+          {
+            "arena": "agents",
+            "category": "python-pptxslides",
+            "elo": 1328,
+            "win_rate": 62.6,
+            "rank": 1
+          },
+          {
+            "arena": "agents",
+            "category": "webapps",
+            "elo": 1336,
+            "win_rate": 56.7,
+            "rank": 1
+          },
+          {
+            "arena": "models",
+            "category": "3d",
+            "elo": 1421,
+            "win_rate": 68.2,
+            "rank": 3
+          },
+          {
+            "arena": "models",
+            "category": "asciiart",
+            "elo": 1330,
+            "win_rate": 65.5,
+            "rank": 3
+          },
+          {
+            "arena": "models",
+            "category": "codecategories",
+            "elo": 1345,
+            "win_rate": 59,
+            "rank": 3
+          },
+          {
+            "arena": "models",
+            "category": "dataviz",
+            "elo": 1365,
+            "win_rate": 63.2,
+            "rank": 2
+          },
+          {
+            "arena": "models",
+            "category": "gamedev",
+            "elo": 1413,
+            "win_rate": 66.7,
+            "rank": 1
+          },
+          {
+            "arena": "models",
+            "category": "svg",
+            "elo": 1345,
+            "win_rate": 64.2,
+            "rank": 1
+          },
+          {
+            "arena": "models",
+            "category": "uicomponent",
+            "elo": 1338,
+            "win_rate": 58.5,
+            "rank": 7
+          },
+          {
+            "arena": "models",
+            "category": "website",
+            "elo": 1322,
+            "win_rate": 56.3,
+            "rank": 3
+          }
+        ],
+        "artificial_analysis": {
+          "intelligence_index": 53.4,
+          "coding_index": 81.6,
+          "agentic_index": 58
+        }
+      },
+      "reasoning": {
+        "mandatory": true,
+        "supported_efforts": [
+          "max",
+          "xhigh",
+          "high",
+          "medium",
+          "low"
+        ],
+        "default_effort": "high"
+      }
+    },
+    {
+      "id": "z-ai/glm-5.3-flash",
+      "canonical_slug": "z-ai/glm-5.3-flash-20260826",
+      "hugging_face_id": "zai-org/GLM-5.3-Flash",
+      "name": "Z.ai: GLM 5.3 Flash",
+      "created": 1787752741,
+      "description": "GLM-5.3-Flash is a native multimodal model from Z.ai. It is suited for efficient coding and long-horizon agent tasks. Its hybrid sparse and linear attention architecture maintains accurate long-context behavior while...",
+      "context_length": 1310720,
+      "architecture": {
+        "modality": "text+image+video->text",
+        "input_modalities": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tokenizer": "Other",
+        "instruct_type": null
+      },
+      "pricing": {
+        "prompt": "0.00000009",
+        "completion": "0.0000003",
+        "input_cache_read": "0.000000018"
+      },
+      "top_provider": {
+        "context_length": 1048576,
+        "max_completion_tokens": 131072,
+        "is_moderated": false
+      },
+      "per_request_limits": null,
+      "supported_parameters": [
+        "frequency_penalty",
+        "include_reasoning",
+        "logit_bias",
+        "logprobs",
+        "max_tokens",
+        "min_p",
+        "presence_penalty",
+        "reasoning",
+        "reasoning_effort",
+        "repetition_penalty",
+        "response_format",
+        "seed",
+        "stop",
+        "structured_outputs",
+        "temperature",
+        "tool_choice",
+        "tools",
+        "top_k",
+        "top_logprobs",
+        "top_p"
+      ],
+      "default_parameters": {
+        "temperature": 1,
+        "top_p": 0.95
+      },
+      "supported_voices": null,
+      "knowledge_cutoff": null,
+      "expiration_date": null,
+      "links": {
+        "details": "/api/v1/models/z-ai/glm-5.3-flash-20260826/endpoints"
+      },
+      "benchmarks": {
+        "design_arena": [
+          {
+            "arena": "models",
+            "category": "3d",
+            "elo": 1354,
+            "win_rate": 59.4,
+            "rank": 7
+          },
+          {
+            "arena": "models",
+            "category": "asciiart",
+            "elo": 1284,
+            "win_rate": 55.5,
+            "rank": 10
+          },
+          {
+            "arena": "models",
+            "category": "codecategories",
+            "elo": 1299,
+            "win_rate": 49.7,
+            "rank": 15
+          },
+          {
+            "arena": "models",
+            "category": "dataviz",
+            "elo": 1277,
+            "win_rate": 50.9,
+            "rank": 21
+          },
+          {
+            "arena": "models",
+            "category": "gamedev",
+            "elo": 1311,
+            "win_rate": 47.7,
+            "rank": 14
+          },
+          {
+            "arena": "models",
+            "category": "svg",
+            "elo": 1307,
+            "win_rate": 57.2,
+            "rank": 7
+          },
+          {
+            "arena": "models",
+            "category": "uicomponent",
+            "elo": 1337,
+            "win_rate": 55.4,
+            "rank": 8
+          },
+          {
+            "arena": "models",
+            "category": "website",
+            "elo": 1285,
+            "win_rate": 48.5,
+            "rank": 19
+          }
+        ],
+        "artificial_analysis": {
+          "intelligence_index": 41.9,
+          "coding_index": 71.5,
+          "agentic_index": 51.2
+        }
+      },
+      "reasoning": {
+        "mandatory": true,
+        "default_enabled": true,
+        "supported_efforts": [
+          "max",
+          "high",
+          "low"
+        ],
+        "default_effort": "max"
+      }
+    }
+  ]
+}

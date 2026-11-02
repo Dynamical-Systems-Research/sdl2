@@ -1,0 +1,162 @@
+{
+ "after_900": {
+  "Br_kGs": {
+   "c5_ratio_q05_q50_q95": [
+    0.8680059642759788,
+    0.9318596860116082,
+    1.0013042033262392
+   ],
+   "link_ratio_q05_q50_q95": [
+    1.048672522144522,
+    1.071001764378619,
+    1.0877199900579073
+   ],
+   "c5_share_ratio_below_1": 0.9471666666666667,
+   "link_share_ratio_below_1": 0.008166666666666666
+  },
+  "Hci_kOe": {
+   "c5_ratio_q05_q50_q95": [
+    1.0089617880187858,
+    1.0852009711106598,
+    1.164175154351759
+   ],
+   "link_ratio_q05_q50_q95": [
+    0.8154808613610259,
+    0.9975100482613589,
+    1.5568954313410788
+   ],
+   "c5_share_ratio_below_1": 0.03766666666666667,
+   "link_share_ratio_below_1": 0.51
+  },
+  "BHmax_MGOe": {
+   "c5_ratio_q05_q50_q95": [
+    0.7534678774862195,
+    0.8595437912851427,
+    0.9852302501944543
+   ],
+   "link_ratio_q05_q50_q95": [
+    0.9972831978231119,
+    1.1102984284729414,
+    1.42925804039474
+   ],
+   "c5_share_ratio_below_1": 0.9641666666666666,
+   "link_share_ratio_below_1": 0.052
+  },
+  "density_ratio_q05_q50_q95": [
+   1.0523585287624304,
+   1.0721753029990233,
+   1.0850545156492593
+  ],
+  "br_path_classification_under_assumed_reading_error": {
+   "scope": "conditional classification under an assumed per-reading relative error; not the power of an executable RPI protocol",
+   "reading_rel_sd_0.02": {
+    "threshold_ln_ratio": -0.0006507564745843325,
+    "c5_world_classified_c5": 0.9245,
+    "link_world_classified_link": 0.9851666666666666
+   },
+   "reading_rel_sd_0.05": {
+    "threshold_ln_ratio": -0.00037085289064812954,
+    "c5_world_classified_c5": 0.8131666666666667,
+    "link_world_classified_link": 0.8426666666666667
+   }
+  }
+ },
+ "after_900_520": {
+  "Br_kGs": {
+   "c5_ratio_q05_q50_q95": [
+    0.8858742529135334,
+    0.9553447505225943,
+    1.0261028644456338
+   ],
+   "link_ratio_q05_q50_q95": [
+    1.0470408824127655,
+    1.0706149223873924,
+    1.0890874833358521
+   ],
+   "c5_share_ratio_below_1": 0.863,
+   "link_share_ratio_below_1": 0.009
+  },
+  "Hci_kOe": {
+   "c5_ratio_q05_q50_q95": [
+    1.1403263898814564,
+    1.2274297255106994,
+    1.3166277054198883
+   ],
+   "link_ratio_q05_q50_q95": [
+    1.0205240404041902,
+    1.2513315409655204,
+    1.7986500759609465
+   ],
+   "c5_share_ratio_below_1": 0.0011666666666666668,
+   "link_share_ratio_below_1": 0.037
+  },
+  "BHmax_MGOe": {
+   "c5_ratio_q05_q50_q95": [
+    0.7829366490982058,
+    0.9036315680080212,
+    1.0442056050571713
+   ],
+   "link_ratio_q05_q50_q95": [
+    1.105735460202413,
+    1.2205298362875525,
+    1.5347093854560638
+   ],
+   "c5_share_ratio_below_1": 0.8848333333333334,
+   "link_share_ratio_below_1": 0.0055
+  },
+  "density_ratio_q05_q50_q95": [
+   1.0523585287624342,
+   1.0721753029990233,
+   1.0850545156492593
+  ],
+  "br_path_classification_under_assumed_reading_error": {
+   "scope": "conditional classification under an assumed per-reading relative error; not the power of an executable RPI protocol",
+   "reading_rel_sd_0.02": {
+    "threshold_ln_ratio": 0.011219209575261738,
+  
+R0 current isotropic SPS (850 C, 5 min, load on cooling, 4 um), as sintered {'20C': {'c5': (0.0, 0.0, 0.0056, 0.0, 7.3, 10.0), 'coercivity_link': (0.0, 0.0, 0.0013, 0.0, 6.5, 8.3)}, '100C': {'c5': (0.0, 0.0, 0.0014, 0.0, 2.7, 5.0), 'coercivity_link': (0.0, 0.0, 0.0003, 0.0, 2.1, 3.7)}}
+R0a the same after 900 + 520 C / 2 h each {'20C': {'c5': (0.0, 0.0, 0.0139, 0.0, 8.9, 9.0), 'coercivity_link': (0.0, 0.0, 0.0043, 0.0, 8.2, 10.2)}, '100C': {'c5': (0.0, 0.0, 0.0024, 0.0, 3.8, 5.2), 'coercivity_link': (0.0, 0.0, 0.0005, 0.0, 3.2, 5.5)}}
+R1 aligned body (<cos> 0.95, declared), 4 um, after 900 + 520 C {'20C': {'c5': (0.0006, 0.0, 0.0139, 0.0008, 8.9, 23.9), 'coercivity_link': (0.0013, 0.0, 0.0016, 0.5685, 6.8, 46.4)}, '100C': {'c5': (0.0, 0.0, 0.0024, 0.0, 3.8, 12.1), 'coercivity_link': (0.0001, 0.0, 0.0002, 0.0128, 2.2, 19.9)}}
+R2 aligned, 2 um feedstock (declared), after 900 + 520 C {'20C': {'c5': (0.0016, 0.0003, 0.0172, 0.0017, 6.5, 19.4), 'coercivity_link': (0.0006, 0.0, 0.0008, 0.3304, 5.0, 39.7)}, '100C': {'c5': (0.0, 0.0, 0.0051, 0.0001, 2.1, 7.3), 'coercivity_link': (0.0001, 0.0, 0.0001, 0.0079, 0.9, 9.3)}}
+R3 aligned, 1 um feedstock (declared), after 900 + 520 C {'20C': {'c5': (0.0028, 0.0008, 0.0194, 0.0029, 3.7, 12.7), 'coercivity_link': (0.0001, 0.0, 0.0002, 0.1196, 2.6, 24.6)}, '100C': {'c5': (0.0001, 0.0, 0.0123, 0.0001, 0.0, 0.0), 'coercivity_link': (0.0001, 0.0, 0.0001, 0.0026, 0.0, 0.0)}}
+R3c R3 with complete degassing (declared) {'20C': {'c5': (0.0037, 0.0009, 0.0303, 0.0039, 6.3, 18.9), 'coercivity_link': (0.0006, 0.0, 0.0009, 0.2952, 4.6, 37.4)}, '100C': {'c5': (0.0002, 0.0, 0.0169, 0.0002, 2.0, 7.0), 'coercivity_link': (0.0001, 0.0, 0.0001, 0.0101, 0.7, 6.6)}}
+{
+ "c5": {
+  "p_Hci_ge_20": 0.017305555555555557,
+  "median_Hci_kOe": 3.438405725040849,
+  "by_magnetic_mechanism": {
+   "H0": 0.08220338983050847,
+   "H1": 0.02,
+   "H2": 0.0004930966469428008,
+   "H3": 0.0011862396204033216,
+   "H4": 0.0015508684863523574,
+   "H5": 0.0014705882352941176
+  }
+ },
+ "coercivity_link": {
+  "p_Hci_ge_20": 0.0003333333333333333,
+  "median_Hci_kOe": 2.3944355577192256,
+  "by_jgb_T": {
+   "0": 0.0002147766323024055,
+   "0.6": 0.00038071065989847715,
+   "1.2": 0.00032808398950131233
+  },
+  "link_flags_share": {
+   "clipped_breakdown": 0.015,
+   "grain_extrapolated": 0.2703333333333333,
+   "alignment_extrapolated": 1.0,
+   "out_of_anchor_hull": 0.5863333333333334,
+   "anneal_placement_used": 0.0,
+   "anneal_term_declared": 1.0,
+   "chemistry_coupled": 1.0
+  },
+  "by_magnetic_mechanism": {
+   "H0": 0.0005649717514124294,
+   "H1": 0.0,
+   "H2": 0.0,
+   "H3": 0.0001482799525504152,
+   "H4": 0.00031017369727047146,
+   "H5": 0.00065359477124183
+  }
+ }
+}

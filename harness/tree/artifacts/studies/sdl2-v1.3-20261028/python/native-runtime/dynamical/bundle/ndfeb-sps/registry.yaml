@@ -1,0 +1,111 @@
+{
+  "capabilities": [
+    {
+      "description": "Execute declared SPS or existing-specimen treatment and characterization in a source-grounded conditional simulator; operation and specimen histories remain in the immutable request and delivery.",
+      "input_ports": [
+        {
+          "description": "Immutable owner request, conditions, scenario assumptions and seed; full batch genealogy is preserved in the sidecar.",
+          "id": "owner_context_sha256",
+          "required": true,
+          "state_type": "string",
+          "unit": "1"
+        }
+      ],
+      "kind": "scientific",
+      "operation_id": "process-sps-batch",
+      "output_ports": [
+        {
+          "description": "Digest of complete synthetic delivery with per-specimen provenance; not a material measurement.",
+          "id": "response_sha256",
+          "required": true,
+          "state_type": "string",
+          "unit": "1"
+        },
+        {
+          "description": "Number of requested specimens; not independent scientific evidence count.",
+          "id": "specimen_count",
+          "required": true,
+          "state_type": "integer",
+          "unit": "1"
+        }
+      ],
+      "parameters": [],
+      "possible_failures": [
+        "source dependency mismatch",
+        "unsupported processing or measurement",
+        "invalid request or missing context"
+      ],
+      "required_conditions": []
+    }
+  ],
+  "document_type": "dynamical.capability-registry",
+  "providers": [
+    {
+      "adapter_links": [
+        {
+          "adapter_id": "dynamical-ndfeb-sps-python",
+          "adapter_version": "0.1.0",
+          "endpoint_ref": "ndfeb-sps-simulator-model",
+          "implementation_sha256": "1d521470e215736b679d0583f2b68424dd193d27fdc6d9c6fe4a74262bad1f4e"
+        }
+      ],
+      "admission": {
+        "authority_id": "dynamical-physical-campaign-tools-20261002",
+        "authority_kind": "facility_operator",
+        "evidence_refs": [
+          "dependency-lock-sha256=a654084b0e463b87601954813b55d0171e3b7e8d01698b08d49a16d69ffe23d1",
+          "adapter-sha256=1d521470e215736b679d0583f2b68424dd193d27fdc6d9c6fe4a74262bad1f4e",
+          "source=package:ndfeb_sps.models; revision=0.2.0 source snapshot pinned by dependency lock",
+          "owner=Dynamical Systems Research; code-license=Apache-2.0",
+          "source-observation provenance and rights=package:ndfeb_sps/models/data/sources.json",
+          "owner-acceptance=/home/jarrodbarnes/ndfeb-sps-campaign/artifacts/studies/physical-research-cycle-20261001/research/virtual_lab/runtime_build/NATIVE_MAGNETIC_OWNER_ACCEPTANCE.json",
+          "owner-acceptance-sha256=6ed6e3bb1591df73ac48127e755a300366bb037ea5dfe1cc5cb1428bb4b2688d",
+          "provider-function-audit-sha256=e305e5df58d5ec807b66e31382edc43afb3cd3db678f51c4dccbca221e2daa88",
+          "Conditional simulation only; no current-lot calibration or physical execution authority."
+        ],
+        "status": "admitted"
+      },
+      "availability": {
+        "availability_ref": "candidate-canary-sha256:c21681497685b5bbd08b3c2f628e6e8e1099811de79a788b872f6fc5a51dcc1a",
+        "available": true,
+        "observed_at": "2026-09-25T22:56:20.347083Z"
+      },
+      "cost": {
+        "currency": "USD",
+        "fixed": 0.0
+      },
+      "duration": {
+        "maximum_s": 60.0,
+        "minimum_s": 0.0,
+        "typical_s": 1.0
+      },
+      "endpoint_id": "ndfeb-sps-simulator-model",
+      "evidence_class": "simulator",
+      "facility_ids": [
+        "ndfeb-sps-compute"
+      ],
+      "failures": [
+        {
+          "code": "SPS_RESPONSE_UNAVAILABLE",
+          "description": "No invented response outside supported or explicitly conditional domain.",
+          "recoverable": true
+        }
+      ],
+      "operation_id": "process-sps-batch",
+      "policy": {
+        "permitted": true,
+        "policy_tags": [
+          "simulation-only",
+          "source-supported-and-explicit-conditional",
+          "no-physical-authority"
+        ],
+        "required_approval_ids": [],
+        "safety_limit_ids": []
+      },
+      "provider_id": "ndfeb-sps-simulator",
+      "validity_envelope": []
+    }
+  ],
+  "registry_id": "dynamical-sps-conditional-candidate-20260912",
+  "schema_version": "0.1.0"
+}

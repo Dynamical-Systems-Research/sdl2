@@ -1,0 +1,11 @@
+{
+  "owner_environment": "python (copied from ../sdl2-v1.2-20261026/python)",
+  "bridge_environment": "../sdl2-v1.2-20261026/bridge-python (read-only)",
+  "module_sha256": "e8edb743533e888f3882bd6339bd3eff521fddf3190d7d8b8c3f1ebf002cdd95",
+  "src_sdl2_v13_sha256": "e8edb743533e888f3882bd6339bd3eff521fddf3190d7d8b8c3f1ebf002cdd95",
+  "adapter_sha256": "1d521470e215736b679d0583f2b68424dd193d27fdc6d9c6fe4a74262bad1f4e",
+  "dependency_lock_sha256": "a654084b0e463b87601954813b55d0171e3b7e8d01698b08d49a16d69ffe23d1",
+  "sdl2_v12_sha256": "3897369454be8126eb569e3a458432a818bfded65424da8610fa7e449eae9a0a",
+  "c7_campaign_sha256": "afd5be39fb203be506d7b0c70ab78a34b4f73fa5e2e8ee9d2221dadf4d0fdb8d",
+  "economy_v12_sha256": "d0056bd59f90d7a326cd7accd1ef2b6e803016f97d4022d00692acda8a9bc958"
+}

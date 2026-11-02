@@ -1,0 +1,14 @@
+{
+  "schema": "ndfeb-vision-provider-pin-v1",
+  "model_id": "xiaomi/mimo-v2.6-pro",
+  "provider_kind": "openrouter",
+  "provider_tag": "xiaomi/fp8",
+  "provider_name": "Xiaomi",
+  "catalog_file": "artifacts/studies/rpi-physical-vision-20260922/runtime/providers/requested_models.json",
+  "endpoints_file": "artifacts/studies/rpi-physical-vision-20260922/runtime/providers/xiaomi__mimo-v2.6-pro__endpoints.json",
+  "reasoning_request": {
+    "effort": "high"
+  },
+  "recorded_at": "2026-09-22T22:56:38Z",
+  "rationale": "First-party Xiaomi FP8 endpoint through OpenRouter per owner route decision 2026-09-22 (OpenRouter for Xiaomi and DeepSeek). Snapshot fetched 2026-09-22T21:29:54Z. reasoning_effort is not listed for this endpoint and thinking is binary, so reasoning_request is the manifest-selected mode: the owner sets {\"effort\":\"high\"}, {\"enabled\":true} or null after the P1 probe (runtime/providers/README.md)."
+}

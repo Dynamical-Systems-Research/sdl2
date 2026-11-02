@@ -1,0 +1,14 @@
+# SDL-2 leaderboard world board-018. The world record, its hidden parameters and the true outcome of every route are in
+# the dataset under worlds/ (key ee99c8835273f05d); the agent never sees them.
+[task]
+name = "sdl2/board-018"
+world_key = "ee99c8835273f05d"
+instruction = "instruction.md"   # the SDL-2 contract, identical for every world; the run adds this world's reference body
+
+[run]
+# harness/setup.sh ROOT DATA once, then:
+command = "harness/run.sh ROOT EPISODES <episode-name> board-018 <bo|doe|openrouter-model-id>"
+
+[verifier]
+command = "tasks/board-018/tests/test.sh DATA EPISODES/<episode-name>"
+metrics = ["outcome", "supported", "both"]

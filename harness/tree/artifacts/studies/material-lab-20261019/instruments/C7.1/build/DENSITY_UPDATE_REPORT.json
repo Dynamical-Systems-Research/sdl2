@@ -1,0 +1,192 @@
+{
+ "observations": [
+  {
+   "id": "rho-C-7-archimedes",
+   "body": "#7",
+   "density_g_cm3": 7.01,
+   "method": "Archimedes",
+   "source": "RPI correction of the 7.10 typo (maintained CURRENT_STATE.md; operator check)",
+   "sd_extra": 0.0
+  },
+  {
+   "id": "rho-C-8-as-sintered",
+   "body": "#8",
+   "density_g_cm3": 7.07,
+   "method": "not stated",
+   "source": "Ziyi Wu (RPI) Gmail 1a15becba0000b94, 2026-10-20 (P5)",
+   "sd_extra": 0.01
+  }
+ ],
+ "route": {
+  "T_peak_C": 850.0,
+  "heating_rate_C_per_min": 10.0,
+  "dwell_min": 5.0,
+  "P_MPa": 60.0,
+  "pressure_mode": "cooling",
+  "cooling_rate_C_per_min": 100.0,
+  "load_ramp_min": 0.3,
+  "degas": 1.0,
+  "degas_completeness": 1.0
+ },
+ "route_basis": "RPI panel recipe (signed PSF / timeline: 850 C, 10 C/min, 300 s, nominal 60 MPa, load on cooling, degassed 600 C); #7/#8 SPS logs were not released, so the delivered schedule is the panel plan, as for #6",
+ "base_package_tool_version": "ndfeb-sps-physics-tool-20261018.7.0-dev",
+ "base_posterior_sha256": "2ccd5fdc88f6c5b060cee25e384b31ff30fcc9d418bd4072a89a546027067421",
+ "base_density_weights": {
+  "D1": 0.310117776514174,
+  "D2": 0.2907683526912186,
+  "D3": 0.20216124087870171,
+  "D0": 0.19695262991590565
+ },
+ "predictive_850_new_batch_before_g_cm3": {
+  "q05": 6.541402947843889,
+  "q25": 7.0773158921727575,
+  "median": 7.259360797099128,
+  "q75": 7.384678402348287,
+  "q95": 7.517663973801386
+ },
+ "shared_preparation": {
+  "density_weights": {
+   "D1": 0.32661540611309087,
+   "D2": 0.29203211959437486,
+   "D3": 0.19486485506302686,
+   "D0": 0.1864876192295073
+  },
+  "ess_stored": {
+   "D1": 1030.7530741952692,
+   "D2": 959.4681168178926,
+   "D3": 976.6779304545947,
+   "D0": 782.5356682640665
+  },
+  "ess_distinct": {
+   "D1": 1030.7530741952685,
+   "D2": 959.4681168178921,
+   "D3": 976.6779304545956,
+   "D0": 782.5356682640669
+  },
+  "predictive_850_new_batch_after_g_cm3": {
+   "q05": 6.45018789498001,
+   "q25": 6.944320776367957,
+   "median": 7.123552669728114,
+   "q75": 7.266095642839312,
+   "q95": 7.43727623164621
+  },
+  "predictive_850_same_batch_g_cm3": {
+   "q05": 6.878258691187718,
+   "q25": 6.983842285588744,
+   "median": 7.043776089230718,
+   "q75": 7.113422086547248,
+   "q95": 7.237960749640705
+  }
+ },
+ "separate_preparations": {
+  "density_weights": {
+   "D1": 0.32725094516875125,
+   "D2": 0.28280866342992905,
+   "D3": 0.187683115781551,
+   "D0": 0.2022572756197688
+  },
+  "ess_stored": {
+   "D1": 678.4753202647447,
+   "D2": 587.1628637383943,
+   "D3": 626.1206264721546,
+   "D0": 504.1994132444874
+  },
+  "ess_distinct": {
+   "D1": 678.4753202647446,
+   "D2": 587.1628637383949,
+   "D3": 626.1206264721552,
+   "D0": 504.19941324448786
+  },
+  "predictive_850_new_batch_after_g_cm3": {
+   "q05": 6.590876802352006,
+   "q25": 6.965877318628032,
+   "median": 7.107640777894618,
+   "q75": 7.23766767931315,
+   "q95": 7.416106476784819
+  }
+ },
+ "only_#7": {
+  "density_weights": {
+   "D1": 0.32907289883555463,
+   "D2": 0.29044226298472964,
+   "D3": 0.1954611018400215,
+   "D0": 0.18502373633969418
+  },
+  "ess_stored": {
+   "D1": 1109.184515731034,
+   "D2": 1037.2855412650842,
+   "D3": 1054.6393730272914,
+   "D0": 895.0561609508505
+  },
+  "ess_distinct": {
+   "D1": 1109.1845157310347,
+   "D2": 1037.2855412650852,
+   "D3": 1054.6393730272914,
+   "D0": 895.05616095085
+  },
+  "predictive_850_new_batch_after_g_cm3": {
+   "q05": 6.474034338840499,
+   "q25": 6.944611065020804,
+   "median": 7.128909305862612,
+   "q75": 7.274396070115387,
+   "q95": 7.442964039323578
+  },
+  "predictive_850_same_batch_g_cm3": {
+   "q05": 6.836542595277176,
+   "q25": 6.967027357684895,
+   "median": 7.039206807542601,
+   "q75": 7.123549116112665,
+   "q95": 7.296283171612586
+  }
+ },
+ "only_#8": {
+  "density_weights": {
+   "D1": 0.32427705787461847,
+   "D2": 0.28761251867465737,
+   "D3": 0.19493578000030554,
+   "D0": 0.19317464345041885
+  },
+  "ess_stored": {
+   "D1": 1401.2870006246346,
+   "D2": 1379.8360634608516,
+   "D3": 1359.0320717805314,
+   "D0": 1243.696719891232
+  },
+  "ess_distinct": {
+   "D1": 1401.2870006246337,
+   "D2": 1379.8360634608516,
+   "D3": 1359.0320717805307,
+   "D0": 1243.6967198912314
+  },
+  "predictive_850_new_batch_after_g_cm3": {
+   "q05": 6.547544511225727,
+   "q25": 7.004873475589296,
+   "median": 7.175604150656359,
+   "q75": 7.304656781006748,
+   "q95": 7.4623497187139565
+  },
+  "predictive_850_same_batch_g_cm3": {
+   "q05": 6.889852050307664,
+   "q25": 7.0348211690825515,
+   "median": 7.1271544562584905,
+   "q75": 7.226173134753567,
+   "q95": 7.398137140485286
+  }
+ },
+ "reproduction_check_c51prelim_v2": {
+  "archived": {
+   "median": 7.0376,
+   "q05": 6.8447,
+   "q95": 7.2777,
+   "what": "C5.1-prelim v2 (C4 data + #7 = 7.01, refit) forecast of #8 from the same 850 C batch, frozen 2026-10-17T00:06:18Z; its package was not preserved"
+  },
+  "this_update_only_#7": {
+   "q05": 6.836542595277176,
+   "q25": 6.967027357684895,
+   "median": 7.039206807542601,
+   "q75": 7.123549116112665,
+   "q95": 7.296283171612586
+  },
+  "note": "importance reweighting of the C6 v2 (= C5.0) density draws instead of a NUTS refit; agreement is a consistency check of the update method, not a new prediction"
+ }
+}

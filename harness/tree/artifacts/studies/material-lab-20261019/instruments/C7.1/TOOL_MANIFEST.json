@@ -1,0 +1,120 @@
+{
+  "tool_version": "ndfeb-sps-physics-tool-20261023.8.1",
+  "slice": "C7.1-material-lab",
+  "stage": "corrective release of C7: segmentation-consistent anneal layer (CAPACITY state, exact CLOSED solution), one hold dependence on both magnetic paths (grain), section readings at the stage density, eig scoped with anneal_eig/condition_anneal on the anneal layer, saturated-weight Archimedes reading; same SPS density posterior as C7; no current-panel magnetic calibration",
+  "data_cutoff_step": "released evidence through P6 (2026-10-22): densities through P5 (#8, Gmail 1a15becba0000b94, 2026-10-21T00:46:20Z); P6 adds images only",
+  "files": {
+    "tool": {
+      "name": "ndfeb_physics_tool.py",
+      "sha256": "60ee32689a0234986dd213bd9b887f616d3c614f8d6f94f97e8bb4bf6da53289"
+    },
+    "physics": {
+      "name": "physics.py",
+      "sha256": "444139f68fedcd65ca2f32cf1b92db02028e1573b033efdc8923878ab459411c"
+    },
+    "forward": {
+      "name": "forward.py",
+      "sha256": "93658fe3821d6e4d4e3d12b4eb35370da5b39fa300a2868726e5757b66c60c9d"
+    },
+    "posterior": {
+      "name": "posterior_tool.npz",
+      "sha256": "af2f784ad7a16b441498c1c3a2a680ae5e36030e6d17ebcb3d2d101950cbe56f"
+    },
+    "microstructure": {
+      "name": "microstructure.py",
+      "sha256": "59e64be3c62447d6733098d9cf7770830187aaa04ac66818b48f40fef6200f9d"
+    },
+    "coercivity_link": {
+      "name": "coercivity_link.py",
+      "sha256": "9cc3bb827c8cd51cf98782d4d17e22646d2730cdeabf4b355fb4796224255b7d"
+    },
+    "anneal": {
+      "name": "anneal.py",
+      "sha256": "3ddea1b5b11188f874092014c7421b78c98f2af7d0e3e9101374b676d5081fbb"
+    },
+    "anneal_posterior": {
+      "name": "anneal_posterior.npz",
+      "sha256": "80fccba41d5ef3ae5882f149cf7a99d5ef89348f34773f1045f90c3b798e29ec"
+    }
+  },
+  "parents": {
+    "C7": {
+      "tool_version": "ndfeb-sps-physics-tool-20261023.8.0",
+      "slice": "C7-material-lab",
+      "stage": "conditional development package: SPS density updated on #7 and #8 as sintered; anneal-densification layer calibrated on #8's one paired return; magnetic paths reconciled for joint-target use; no current-panel magnetic calibration",
+      "data_cutoff_step": "released evidence through P6 (2026-10-22): densities through P5 (#8, Gmail 1a15becba0000b94, 2026-10-21T00:46:20Z); P6 adds images only",
+      "files": {
+        "tool": {
+          "name": "ndfeb_physics_tool.py",
+          "sha256": "e1fa34cada4015764da54c203dc67007af12c1fbe62f2a965766c9f7c11747bc"
+        },
+        "physics": {
+          "name": "physics.py",
+          "sha256": "444139f68fedcd65ca2f32cf1b92db02028e1573b033efdc8923878ab459411c"
+        },
+        "forward": {
+          "name": "forward.py",
+          "sha256": "93658fe3821d6e4d4e3d12b4eb35370da5b39fa300a2868726e5757b66c60c9d"
+        },
+        "posterior": {
+          "name": "posterior_tool.npz",
+          "sha256": "e0bde0c2e6565925c701c7f8ca843dd8d594775b2fe78808b315e883cc182370"
+        },
+        "microstructure": {
+          "name": "microstructure.py",
+          "sha256": "59e64be3c62447d6733098d9cf7770830187aaa04ac66818b48f40fef6200f9d"
+        },
+        "coercivity_link": {
+          "name": "coercivity_link.py",
+          "sha256": "9cc3bb827c8cd51cf98782d4d17e22646d2730cdeabf4b355fb4796224255b7d"
+        },
+        "anneal": {
+          "name": "anneal.py",
+          "sha256": "f102c43f61063cd48da0d8d165ea8ef6d54e7b211f02039417f1c5e61136f490"
+        },
+        "anneal_posterior": {
+          "name": "anneal_posterior.npz",
+          "sha256": "6d29cf76eadb438a8edf0be45106f59e87d42507a80e036a6b3f204efa601022"
+        }
+      },
+      "parents": {
+        "C6-development": {
+          "tool_version": "ndfeb-sps-physics-tool-20261018.7.0-dev",
+          "slice": "C6-development-v2-material-lab",
+          "stage": "conditional development package; current data; anneal calibration pending",
+          "data_cutoff_step": "owner work through 2026-10-18; fresh environment snapshot 2026-10-19",
+          "files": {
+            "tool": {
+              "name": "ndfeb_physics_tool.py",
+              "sha256": "9f30e99f62908c6e471163887c51063bb9e4d51f0ef5c86dd2b714d3fa33ce8a"
+            },
+            "physics": {
+              "name": "physics.py",
+              "sha256": "444139f68fedcd65ca2f32cf1b92db02028e1573b033efdc8923878ab459411c"
+            },
+            "forward": {
+              "name": "forward.py",
+              "sha256": "93658fe3821d6e4d4e3d12b4eb35370da5b39fa300a2868726e5757b66c60c9d"
+            },
+            "posterior": {
+              "name": "posterior_tool.npz",
+              "sha256": "2ccd5fdc88f6c5b060cee25e384b31ff30fcc9d418bd4072a89a546027067421"
+            },
+            "microstructure": {
+              "name": "microstructure.py",
+              "sha256": "59e64be3c62447d6733098d9cf7770830187aaa04ac66818b48f40fef6200f9d"
+            },
+            "coercivity_link": {
+              "name": "coercivity_link.py",
+              "sha256": "eedb5095b0aea0d811bbb92fbf9b7ab7ddbdc0d2535b7db2147160efe16480bc"
+            }
+          },
+          "note": "This manifest verifies bytes and composition, not scientific calibration. Uses original C6 v2 numerical source and posterior without refitting; corrects film-magnetization refusal wording only. C5 joint probability remains a separate path."
+        }
+      },
+      "note": "This manifest verifies bytes and composition, not scientific validity. physics.py, forward.py and microstructure.py are byte-identical to C6; coercivity_link.py keeps the C6 core byte for byte and changes the tool adapter only; see README.md for every change and build/ for the reproducible fits."
+    }
+  },
+  "note": "This manifest verifies bytes and composition, not scientific validity. physics.py, forward.py and microstructure.py are byte-identical to C6; coercivity_link.py keeps the C6 core byte for byte and changes the tool adapter only; see README.md for every change and build/ for the reproducible fits.",
+  "agent_release": "v1.3 agent copy: posterior rows reserved for hidden worlds are removed; the remaining rows are an unbiased subset of the same posterior"
+}

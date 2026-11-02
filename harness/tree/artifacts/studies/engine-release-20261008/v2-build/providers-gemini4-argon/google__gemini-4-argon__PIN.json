@@ -1,0 +1,14 @@
+{
+  "schema": "ndfeb-vision-provider-pin-v1",
+  "model_id": "google/gemini-4-argon",
+  "provider_kind": "openrouter",
+  "provider_tag": "google-vertex/global",
+  "provider_name": "Google",
+  "catalog_file": "artifacts/studies/engine-release-20261008/v2-build/providers-gemini4-argon/google__gemini-4-argon__catalog.json",
+  "endpoints_file": "artifacts/studies/engine-release-20261008/v2-build/providers-gemini4-argon/google__gemini-4-argon__endpoints.json",
+  "reasoning_request": {
+    "effort": "high"
+  },
+  "recorded_at": "2026-10-14T17:04:39Z",
+  "rationale": "Jarrod 2026-10-14: run Gemini 4 Argon for the SDL-2 RUN-1 leaderboard through OpenRouter on his OpenRouter key, routed to google-vertex/global. Same pin form as the DeepSeek and MiMo routes: one provider, no fallbacks, data_collection deny, reasoning effort high (OpenRouter maps effort high to Gemini thinkingLevel high)."
+}

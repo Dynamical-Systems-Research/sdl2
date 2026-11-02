@@ -1,0 +1,14 @@
+{
+  "schema": "ndfeb-vision-provider-pin-v1",
+  "model_id": "x-ai/grok-4.7",
+  "provider_kind": "openrouter",
+  "provider_tag": "xai/zdr",
+  "provider_name": "xAI",
+  "catalog_file": "artifacts/studies/sdl2-v1.2-20261026/arms/frontier/providers/openrouter_models_20261026.json",
+  "endpoints_file": "artifacts/studies/sdl2-v1.2-20261026/arms/frontier/providers/x-ai__grok-4.7__endpoints.json",
+  "reasoning_request": {
+    "effort": "high"
+  },
+  "recorded_at": "2026-10-26T19:57:05Z",
+  "rationale": "Jarrod 2026-10-26: Grok 4.7 replaces GLM 5.3 Flash in the SDL-2 release lineup, through OpenRouter on the one key like every frontier model. xAI is the model's only provider; pinned to its zero-data-retention endpoint (xai/zdr, same price as xai), no fallbacks, data_collection deny, reasoning effort high. The endpoint accepts temperature and tool_choice, and caches implicitly, so no omit_sampling_controls and no cache_control."
+}

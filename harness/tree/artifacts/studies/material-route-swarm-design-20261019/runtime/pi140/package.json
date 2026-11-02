@@ -1,0 +1,15 @@
+{
+  "name": "ndfeb-material-route-swarm-pi140",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "license": "Apache-2.0",
+  "scripts": {
+    "test": "node --test ../../checks/test_launch_vision_pi130.mjs ../../checks/test_vision_transport_pi130.mjs"
+  },
+  "dependencies": {
+    "@earendil-works/pi-ai": "1.4.0",
+    "@earendil-works/pi-coding-agent": "1.4.0"
+  },
+  "description": "Isolated fresh-campaign candidate; no preserved runtime changed"
+}

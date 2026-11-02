@@ -1,0 +1,15 @@
+{
+  "schema": "ndfeb-vision-provider-pin-v1",
+  "model_id": "qwen/qwen3.8-max-0902",
+  "provider_kind": "openrouter",
+  "provider_tag": "alibaba",
+  "provider_name": "Alibaba",
+  "catalog_file": "artifacts/studies/physical-fresh-20261012/runtime/providers/qwen__qwen3.8-max-0902__catalog.json",
+  "endpoints_file": "artifacts/studies/physical-fresh-20261012/runtime/providers/qwen__qwen3.8-max-0902__endpoints.json",
+  "reasoning_request": {
+    "effort": "high"
+  },
+  "cache_control": "anthropic",
+  "recorded_at": "2026-10-12T17:12:43Z",
+  "rationale": "Fresh restart D1 (Jarrod, 2026-10-12): Qwen 3.8 Max via OpenRouter qwen/qwen3.8-max-0902 replaces Gemini. First-party Alibaba endpoint 'alibaba' (the endpoint that lists an input_cache_write price; implicit caching is not supported, so explicit cache_control markers are sent). reasoning_effort is a supported parameter; high, as for the other OpenRouter routes. Snapshot fetched from the public OpenRouter catalog and endpoints API at recorded_at. Accepted only after the qualification stages pass (image input, tool calls, reasoning, caching)."
+}

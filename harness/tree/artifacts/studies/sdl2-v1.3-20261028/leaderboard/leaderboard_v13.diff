@@ -1,0 +1,106 @@
+--- sdl2-v1.2-20261026/leaderboard/leaderboard.py
++++ sdl2-v1.3-20261028/leaderboard/leaderboard_v13.py
+@@ -1,4 +1,8 @@
+-"""The sealed leaderboard: every arm once on every sealed state (artifacts/proposals/sdl2-release-20261026/
++"""SDL-2 v1.3 Phase C (built from ../sdl2-v1.2-20261026/leaderboard/leaderboard.py by leaderboard/port_leaderboard.py;
++diff in leaderboard/leaderboard_v13.diff). SDL2_PANEL=board (default): every D14 arm once on each of the 32 board
++states (C1); SDL2_PANEL=heldout: the DeepSeek V4.1 Flash 1017 base on the 96 held-out states (C2, D4). Episodes run
++under /lab (D12). The v1.2 text follows for the record.
++The sealed leaderboard: every arm once on every sealed state (artifacts/proposals/sdl2-release-20261026/
+ SEALED_PANEL_AND_LEADERBOARD.md §3). Owner only; README.md is the operator procedure.
+   ../python/bin/python -B leaderboard.py build              writes QUEUE.json once: 96 states x the arms below
+   ../python/bin/python -B leaderboard.py run N [K/S]        runs every entry not yet started, N at a time; on two machines
+@@ -26,8 +30,10 @@
+ 
+ HERE = Path(__file__).resolve().parent
+ STUDY = HERE.parent
+-QUEUE = HERE / "QUEUE.json"
+-EPISODES = HERE / "episodes"
++PANEL = os.environ.get("SDL2_PANEL", "board")   # v1.3: board (C1) or heldout (C2)
++assert PANEL in ("board", "heldout"), PANEL
++QUEUE = HERE / ("QUEUE.json" if PANEL == "board" else "QUEUE_HELDOUT.json")
++EPISODES = Path("/lab")   # v1.3: every split under /lab, random names (D12)
+ PY = str(STUDY / "python/bin/python")
+ STALL_S = 1800   # 30 minutes with no Pi event and no provider request or retry record (twice the native-command bound):
+                  # a stalled provider stream, which the transport's inactivity timer misses because keep-alive bytes reset it
+@@ -37,11 +43,12 @@
+ 
+ # Jarrod, October 26: every arm once on all 96 sealed states (Qwen 3.8 Max and Grok 4.7 qualified but are not on the board).
+ MODELS = ["anthropic/claude-opus-5.5", "anthropic/claude-sonnet-5.5", "openai/gpt-6-astra", "google/gemini-4-argon",
+-          "deepseek/deepseek-v4.1-flash-1017"]
++          "deepseek/deepseek-v4.1-flash-1017", "z-ai/glm-5.3-flash"]   # v1.3: D14 adds GLM-5.3 Flash
+ ARMS = [{"arm": "frontier", "model": m} for m in MODELS] + [{"arm": "policy", "policy": "bo"},
+                                                             {"arm": "policy", "policy": "doe"}]
+ # Queue order: the policies first (minutes each), then the longest episodes first, so slow arms never trail the run.
+ ORDER = ["bo", "doe", "anthropic/claude-opus-5.5", "google/gemini-4-argon", "deepseek/deepseek-v4.1-flash-1017",
++         "z-ai/glm-5.3-flash",
+          "openai/gpt-6-astra", "anthropic/claude-sonnet-5.5"]
+ # The context pilot's frozen decision for every model arm (context/PILOT_PREREG.md), e.g. {"native_command_timeout_s": 600}.
+ MODEL_FIELDS = {"native_command_timeout_s": 900}   # context/PILOT_DECISION.md: C2, the bound raised to 15 minutes
+@@ -54,17 +61,24 @@
+ def build():
+     if QUEUE.exists():
+         sys.exit("QUEUE.json exists; it is built once")
+-    states = [st["name"] for st in json.loads((STUDY / "owner/SEALED_PANEL.json").read_text())["states"]]
++    states = [st["name"] for st in json.loads((STUDY / f"owner/{PANEL.upper()}_PANEL.json").read_text())["states"]]
+     seed = secrets.randbits(32)
+     random.Random(seed).shuffle(states)
+     entries = []
+-    for run in sorted(ARMS, key=lambda r: ORDER.index(label(r))):
++    arms = ARMS if PANEL == "board" else [{"arm": "frontier", "model": "deepseek/deepseek-v4.1-flash-1017"}]   # v1.3: C2
++    for run in sorted(arms, key=lambda r: ORDER.index(label(r))):
+         run = dict(run, **({} if run["arm"] == "policy" else MODEL_FIELDS))
+         for k, state in enumerate(states):
+             entries.append({"index": len(entries), "name": "e-" + secrets.token_hex(5), "state": state, "order": k,
+                             "label": label(run), "run": run})
+-    QUEUE.write_text(json.dumps({"panel": "sealed", "order_seed": seed, "entries": entries}, indent=1) + "\n")
+-    print(f"{len(entries)} entries: {len(states)} states x {len(ARMS)} arms")
++    # v1.3: the policies first, then each world's model arms together, longest first: the order v1.2's QUEUE.json ran
++    # in after October 26, when an arm-blocked order saturated the CPU (v1.2 leaderboard/README.md, "Order").
++    entries.sort(key=lambda e: (e["run"]["arm"] != "policy", 0 if e["run"]["arm"] == "policy" else e["order"],
++                                ORDER.index(e["label"]), e["order"]))
++    for i, e in enumerate(entries):
++        e["index"] = i
++    QUEUE.write_text(json.dumps({"panel": PANEL, "order_seed": seed, "entries": entries}, indent=1) + "\n")
++    print(f"{len(entries)} entries: {len(states)} states x {len(arms)} arms")
+ 
+ 
+ def sha_file(p):
+@@ -117,8 +131,8 @@
+     ep = EPISODES / e["name"]
+     marks, start = (ep / "pi/pi_events.jsonl", ep / "pi/api"), time.time()
+     with open(ep / "run.log", "a") as log:
+-        p = subprocess.Popen([NODE, "run_v12.mjs", e["name"], *mode], cwd=STUDY / "env", stdout=log, stderr=subprocess.STDOUT,
+-                             env={**os.environ, "SDL2_V12_EPISODES": str(EPISODES)})
++        p = subprocess.Popen([NODE, "run_v13.mjs", e["name"], *mode], cwd=STUDY / "env", stdout=log, stderr=subprocess.STDOUT,
++                             env={**os.environ, "SDL2_V13_EPISODES": str(EPISODES)})
+         while p.poll() is None:
+             time.sleep(POLL_S)
+             if time.time() - max([start] + [m.stat().st_mtime for m in marks if m.exists()]) > STALL_S:
+@@ -128,7 +142,7 @@
+                 except subprocess.TimeoutExpired:   # stuck: kill it, and remove the sandbox its handler would have removed
+                     p.kill()
+                     p.wait()
+-                    subprocess.run(["docker", "rm", "-f", "ndfeb-sdl2-ep-" + e["name"]], capture_output=True)
++                    subprocess.run(["docker", "rm", "-f", "ndfeb-sdl2v13-ep-" + e["name"]], capture_output=True)
+                 return "stalled"
+         return p.returncode
+ 
+@@ -168,7 +182,7 @@
+     ep = EPISODES / e["name"]
+     if ep.exists() or stopping():
+         return
+-    prep = subprocess.run([PY, "-B", "prepare_v12.py", e["name"], "--panel", panel, "--state", e["state"], "--root",
++    prep = subprocess.run([PY, "-B", "prepare_v13.py", e["name"], "--panel", panel, "--state", e["state"], "--root",
+                            str(EPISODES)], cwd=STUDY / "env", stdout=subprocess.DEVNULL, stderr=subprocess.PIPE, text=True)
+     if prep.returncode:   # recorded, not stranded: nothing ran; move the folder aside and `run` starts it again
+         ep.mkdir(parents=True, exist_ok=True)
+@@ -202,7 +216,7 @@
+     signal.signal(signal.SIGINT, signal.default_int_handler)
+     k, s = map(int, shard.split("/"))
+     q = json.loads(QUEUE.read_text())
+-    EPISODES.mkdir(exist_ok=True)
++    assert EPISODES.is_dir(), "/lab is the episode root (D12)"
+     todo = [e for e in q["entries"] if e["order"] % s == k and not (EPISODES / e["name"]).exists()]
+     pool = ThreadPoolExecutor(n)
+     futures = [(e, pool.submit(run_entry, e, q["panel"])) for e in todo]

@@ -1,0 +1,231 @@
+{
+  "preview_task": {
+    "anneal_model_domain": "c7-campaign-v1",
+    "measurement_capabilities": [
+      "bhmax_MGOe",
+      "boundary_chemistry",
+      "br_kGs",
+      "coarse_number_fraction",
+      "demagnetization_curve",
+      "density_g_cm3",
+      "grain_d90_nm",
+      "grain_size_nm",
+      "hci_kOe",
+      "hci_screen_kOe",
+      "microstructure",
+      "porosity_area_fraction",
+      "powder_icp_oes",
+      "sps_log"
+    ]
+  },
+  "public_capabilities": {
+    "version": "c7-campaign-twin-v1",
+    "selection": "simulation='magnetic'",
+    "reference_id": "campaign-world-C7.3-material-lab",
+    "world_family": "ndfeb_c7_campaign_v1",
+    "evidence_class": "conditional_computational",
+    "physical_execution": false,
+    "description": "Simulates a campaign world drawn from the owner-built physics tool C7.3-material-lab (tool ndfeb-sps-physics-tool-20261023.8.3; data cut-off as stated in its README), which is Dynamical's model fitted to RPI's released records, with its microstructure layer and coercivity link. The world is one posterior draw of that tool: a density mechanism, a coercivity mechanism, a load-timing explanation, the microstructure-layer parameters, an anneal-densification mechanism and their values, fixed for this laboratory and hidden. Returns are conditional computation, not physical observations, and agreement with the tool is not independent validation of it. C7 (2026-10-23): SPS density updated on #7 and #8 as sintered; a load-free 900 C anneal can densify a body (calibrated on #8's one paired return, whose hold, method and piece pairing RPI has not stated); density readings name their method and piece.",
+    "declared_and_uncalibrated": [
+      "Feedstock particle size other than 4 um (feedstock_d50_um): grain, coercivity and density layers are priors that no record constrains (tool README, 'Feedstock particle size').",
+      "SEM grain size (grain_size_nm): ln G = ln D + ln c_m + e, method factor c_m fixed per world, field sampling e (log-sd 0.15) per reading (tool README, 'SEM and BSE outputs').",
+      "Grain-size distribution (grain_d90_nm, coarse_number_fraction): log-normal whose mean is the same reading as grain_size_nm (median = mean x exp(-sigma^2/2)); sigma_ln (prior 0.46-0.51) fixed per world (tool README, microstructure layer).",
+      "BSE class reading: P(spread) = Phi((W - W*) / tau) from the world's continuity index W; W* and tau fixed per world; anchored only at owner readings of historical micrographs.",
+      "Nd-rich phase numbers and their anneal change: declared link functions of the continuity W with declared reading scatter; the change after 900 C/2 h + 520 C/2 h is a declared paired transition of the same body; after 900 C/2 h alone the declared share of it (tool README, microstructure layer).",
+      "sps_log: a descriptive trace; final density from the world's density; the densification kinetics are not identified; load timing other than on cooling is a declared placement of the load step.",
+      "Degassing completeness other than the fitted states, complete degassing, an insulated current path and load from the start of the dwell are declared scenarios of the tool.",
+      "Anneal densification (C7): four mechanisms (liquid-assisted for all porosity, closed porosity only, a bounded removable porosity, none) all fit #8's 7.07 -> 7.58 g/cm3 apart from the last; they disagree below about 90 %TD. The world holds one. Holds other than #8's unstated one, and E's 2 h magnetic anneal response at other holds, are declared.",
+      "Density readings (C7): archimedes counts a fixed share of open porosity as solid (unsealed protocol unknown); geometric carries a fixed relative bias; each piece has its own offset from its body."
+    ],
+    "limits": [
+      "Magnetic outputs (hci_kOe, br_kGs, bhmax_MGOe, hci_screen_kOe, demagnetization_curve) are simulated and unscored in this window. Each returns the coercivity link's model distribution at the body's hidden microstructure (mean, sd, quantiles and the means conditional on a boundary-film magnetization of 0, 0.6 and 1.2 T) in model_distribution, with value null: no simulated measurement is returned.",
+      "Film magnetization: not observable here. The 2-3 nm boundary film's magnetization is not observable by any measurement in this window, and no world holds a value of it.",
+      "SEM at 13-27 nm/px cannot see the 2-3 nm boundary film: the Nd-rich phase numbers cover the thick (resolvable) phase only. No STEM, atom-probe or EDS chemistry is simulated.",
+      "Polished-section readings (porosity_area_fraction, microstructure, boundary_chemistry) need a planar section: below 0.80 relative density they return status not_planar and no value; 0.80-0.92 is planar by declaration (no section on record).",
+      "sps_log carries time, sensor temperature, ram displacement and derived relative density (no pressure channel) for RPI's 10 mm die and charges of 0.2-3.0 g.",
+      "Outside the fitted records the world follows the tool's priors.",
+      "Bodies made in an earlier virtual world remain readable records; they cannot be measured or annealed in this world.",
+      "Every body is isotropic; magnetic distributions are material (demagnetization-corrected) quantities at room temperature, normalized by the body's own stage density unless measurement_context.normalization_density_g_cm3 states another.",
+      "Section readings (porosity_area_fraction, microstructure, boundary_chemistry) on surface 'fracture' return status not_quantitative_on_fracture; SEM grain readings are fracture-surface readings; planarity follows the body's density at its current stage."
+    ],
+    "measurement_models": {
+      "density_g_cm3": "the world's density at the route with the batch's preparation effect, plus a body deviation (sd 0.02 g/cm3), carried through any executed anneal, plus the piece's offset (measurement_context.piece_id), read by measurement_context.density_method (archimedes, default, or geometric) with that method's world-fixed bias and reading sd",
+      "grain_size_nm": "C5 SEM model at the body's stage (as_sintered, after_first_anneal, after_second_anneal)",
+      "grain_d90_nm, coarse_number_fraction": "the grain distribution behind the same reading as grain_size_nm at the body's stage; coarse_number_fraction requires measurement_context.coarse_threshold_nm (nm)",
+      "porosity_area_fraction": "BSE dark area fraction of a planar polished section (1 - rho) x exp(b + e), b fixed per world, e per reading (log-sd 0.5)",
+      "microstructure": "one planar-section BSE reading: 'Nd-rich phase spread along grain boundaries' or 'Nd-rich phase pooled at triple junctions' (as sintered or after the second anneal) plus the Nd-rich area fraction, pocket size, pocket share, elongated share and faint-line coverage",
+      "boundary_chemistry": "the same section reading with 'film magnetization: not observable here'; no EDS pocket chemistry",
+      "sps_log": "descriptive display trace for the requested schedule (manufacture only)",
+      "hci_kOe, br_kGs, bhmax_MGOe, hci_screen_kOe, demagnetization_curve": "the coercivity link's model distribution (value null)",
+      "preparation_effect": "each new preparation_id draws its batch effect once in this world",
+      "pairing": "measure and anneal on an existing body use that body's hidden state"
+    },
+    "supported_quantities": [
+      "bhmax_MGOe",
+      "boundary_chemistry",
+      "br_kGs",
+      "coarse_number_fraction",
+      "demagnetization_curve",
+      "density_g_cm3",
+      "grain_d90_nm",
+      "grain_size_nm",
+      "hci_kOe",
+      "hci_screen_kOe",
+      "microstructure",
+      "porosity_area_fraction",
+      "sps_log"
+    ],
+    "unsupported_in_this_world": {
+      "powder_icp_oes": "not supported by this world: no model of powder chemistry by ICP-OES"
+    },
+    "not_offered": {
+      "film_magnetization": "the 2-3 nm boundary film's magnetization is not observable by any measurement in this window (STEM-EDS or atom-probe tomography can constrain chemistry, not directly measure film magnetization)",
+      "stem_eds": "no STEM or atom-probe instrument is simulated in this window"
+    },
+    "units": {
+      "density_g_cm3": "g/cm^3",
+      "grain_size_nm": "nm",
+      "grain_d90_nm": "nm",
+      "coarse_number_fraction": "1",
+      "porosity_area_fraction": "1",
+      "hci_kOe": "kOe",
+      "br_kGs": "kGs",
+      "bhmax_MGOe": "MGOe",
+      "hci_screen_kOe": "kOe"
+    },
+    "controls": {
+      "lot_id": "CAMPAIGN-C7.3-LOT",
+      "operations": [
+        "manufacture",
+        "measure",
+        "anneal"
+      ],
+      "manufacture": [
+        "current_path",
+        "diameter_mm",
+        "heating_rate_c_min",
+        "hold_time_s",
+        "mass_g",
+        "measurement_context",
+        "operation",
+        "output_stage",
+        "pressure_full_at_c",
+        "pressure_mpa",
+        "pressure_schedule",
+        "route",
+        "temperature_c"
+      ],
+      "required_manufacture": [
+        "temperature_c",
+        "heating_rate_c_min",
+        "hold_time_s",
+        "pressure_mpa",
+        "pressure_schedule",
+        "mass_g"
+      ],
+      "pressure_schedules": {
+        "on_heating": "load rises during heating and is held",
+        "on_cooling": "load applied at the peak on cooling; pressure_full_at_c sets the ramp at 100 C/min cooling (default ramp 0.3 min)",
+        "on_dwell": "load rises from the start of the dwell (declared scenario)"
+      },
+      "current_path": [
+        "compact",
+        "insulated"
+      ],
+      "preparation": "Every manufacture request includes request.preparations for each preparation it uses, including a reused one with identical conditions. conditions: method vacuum_degassing (temperature_c, hold_time_s) or none; optional feedstock_d50_um (0.5-8.0 um, default 4.0) and degassing_completeness (number in [0, 1.5] or 'complete'; default 1 at 600 C for 600-900 s, required at other set-points).",
+      "anneal": "Existing body; canonical anneal_steps: after_first_anneal 900 C for 1800-14400 s (7200 s is the planned program; #8's hold was not stated), after_second_anneal 520 C for 7200 s; cooling_mode furnace_cooling or argon_quench (recorded, no modeled effect)",
+      "measurement": [
+        "input_stage",
+        "mass_g",
+        "measurement_context",
+        "operation",
+        "output_stage",
+        "process_stage"
+      ],
+      "measurement_context": [
+        "coarse_threshold_nm",
+        "density_method",
+        "features_per_field",
+        "field_count",
+        "field_set_id",
+        "normalization_density_g_cm3",
+        "piece_id",
+        "selection",
+        "surface"
+      ],
+      "measurement_context_c7": {
+        "density_method": [
+          "archimedes",
+          "archimedes_saturated",
+          "geometric"
+        ],
+        "surface": [
+          "polished",
+          "fracture"
+        ],
+        "normalization_density_g_cm3": "number in [4, 8] g/cm3; default the body's own stage density",
+        "piece_id": "names the piece; the same piece at two stages is paired"
+      },
+      "support_envelope": {
+        "temperature_c": [
+          650.0,
+          950.0
+        ],
+        "heating_rate_c_min": [
+          10.0,
+          100.0
+        ],
+        "hold_time_s": [
+          60.0,
+          1800.0
+        ],
+        "pressure_mpa": [
+          30.0,
+          60.0
+        ],
+        "pressure_full_at_c": [
+          600.0,
+          950.0
+        ],
+        "mass_g": [
+          0.01,
+          25.0
+        ],
+        "degassing_temperature_c": [
+          550.0,
+          700.0
+        ],
+        "degassing_hold_time_s": [
+          0.0,
+          3600.0
+        ],
+        "degassing_completeness": [
+          0.0,
+          1.5
+        ],
+        "feedstock_d50_um": [
+          0.5,
+          8.0
+        ],
+        "coarse_threshold_nm": [
+          1.0,
+          100000.0
+        ],
+        "first_anneal_hold_time_s": [
+          1800.0,
+          14400.0
+        ],
+        "normalization_density_g_cm3": [
+          4.0,
+          8.0
+        ],
+        "status": "declared conditional support envelope (the span of the tool's fitted records for temperature); outside it no response is claimed"
+      }
+    },
+    "resources": "No specimen or request ceiling is configured for this virtual laboratory."
+  },
+  "python": "/home/jarrodbarnes/ndfeb-sps-campaign/artifacts/studies/material-lab-20261019/runtime/python-c7/bin/python",
+  "runtime": "/home/jarrodbarnes/ndfeb-sps-campaign/artifacts/studies/material-lab-20261019/runtime/python-c7/native-runtime",
+  "seed": null,
+  "world_config": null
+}

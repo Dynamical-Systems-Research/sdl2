@@ -1,0 +1,33 @@
+--- sdl2-v1.2-20261026/arms/classical/policy_v12.py
++++ sdl2-v1.3-20261028/arms/classical/policy_v13.py
+@@ -1,7 +1,8 @@
+-"""SDL-2 v1.2 classical policy arms: design of experiments (`doe`, port of A1) and Bayesian optimisation (`bo`, port of
++"""SDL-2 v1.3 classical policy arms (built from ../sdl2-v1.2-20261026/arms/classical/policy_v12.py
++by arms/port_policies.py; diff in arms/classical/policy_v13.diff): design of experiments (`doe`, port of A1) and Bayesian optimisation (`bo`, port of
+ A2 with A3's released-model prior). Protocol: arms/POLICY_PROTOCOL.md (binding).
+ 
+-    python/bin/python -B arms/classical/policy_v12.py STATE.json      # prints one JSON action on stdout
++    python/bin/python -B arms/classical/policy_v13.py STATE.json      # prints one JSON action on stdout
+ 
+ Information. The policy reads only STATE.json: the contract's numbers, the reference body's observations, the agent-
+ visible returns of its own requests, the economy_v12 ledger, its own action history, and (bo only) the disclosed
+@@ -23,8 +24,8 @@
+ doe weights three ln Hci (preparation, body) variance pairs by their marginal likelihood (VAR_GRID); bo uses the earlier
+ study's pair. A body meets the requirement when Hci >= 10 kOe and (BH)max >= 11 MGOe. For a fresh preparation of three bodies,
+ p3 = E_prep[P(body meets | prep)^3], integrated by Gauss-Hermite quadrature over the preparation effects; a route's
+-P(meets) is the posterior probability that p3 >= 0.5, and P(any declared route meets) the posterior probability that
+-some route in the arm's candidate set has p3 >= 0.5.
++P(meets) is the posterior probability that p3 >= 0.95, and P(any declared route meets) the posterior probability that
++some route in the arm's candidate set has p3 >= 0.95.
+ """
+ from __future__ import annotations
+ 
+@@ -61,7 +62,7 @@
+            # ~60, two loop extensions 76: 171)
+            "reserve_explore": 247, "reserve_build": 171},
+ }
+-REQUIREMENT = {"hci_kOe": 10.0, "bhmax_MGOe": 11.0, "bodies": 3, "p_all": 0.5}
++REQUIREMENT = {"hci_kOe": 10.0, "bhmax_MGOe": 11.0, "bodies": 3, "p_all": 0.95}
+ LOT = "SDL2-LOT"
+ PIECE = "P1"
+ DENSITY_METHOD = "archimedes_saturated"   # reads bulk density without bias (CONTRACT.md); same price as the others

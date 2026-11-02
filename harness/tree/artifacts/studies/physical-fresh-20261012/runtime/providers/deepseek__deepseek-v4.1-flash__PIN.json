@@ -1,0 +1,14 @@
+{
+  "schema": "ndfeb-vision-provider-pin-v1",
+  "model_id": "deepseek/deepseek-v4.1-flash",
+  "provider_kind": "openrouter",
+  "provider_tag": "deepinfra/fp8",
+  "provider_name": "DeepInfra",
+  "catalog_file": "artifacts/studies/four-policy-behavior-20260917/runtime/providers/requested_models.json",
+  "endpoints_file": "artifacts/studies/rpi-physical-vision-20260922/runtime/providers/deepseek__deepseek-v4.1-flash__endpoints.json",
+  "reasoning_request": {
+    "effort": "high"
+  },
+  "recorded_at": "2026-09-23T02:29:21.244432+00:00",
+  "rationale": "Owner approved 2026-09-23: Use DeepInfra FP8; retain DeepSeek. Original first-party endpoint rejected data_collection deny. Keep the same model, high reasoning, temperature, output ceiling, privacy setting and no fallbacks. Prior PIN and failed qualification native session/accounting are preserved."
+}

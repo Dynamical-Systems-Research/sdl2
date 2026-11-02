@@ -1,0 +1,34 @@
+{
+  "tool_version": "ndfeb-sps-physics-tool-20261018.7.0-dev",
+  "slice": "C6-development-v2-material-lab",
+  "stage": "conditional development package; current data; anneal calibration pending",
+  "data_cutoff_step": "owner work through 2026-10-18; fresh environment snapshot 2026-10-19",
+  "files": {
+    "tool": {
+      "name": "ndfeb_physics_tool.py",
+      "sha256": "9f30e99f62908c6e471163887c51063bb9e4d51f0ef5c86dd2b714d3fa33ce8a"
+    },
+    "physics": {
+      "name": "physics.py",
+      "sha256": "444139f68fedcd65ca2f32cf1b92db02028e1573b033efdc8923878ab459411c"
+    },
+    "forward": {
+      "name": "forward.py",
+      "sha256": "93658fe3821d6e4d4e3d12b4eb35370da5b39fa300a2868726e5757b66c60c9d"
+    },
+    "posterior": {
+      "name": "posterior_tool.npz",
+      "sha256": "5995b1c4b32827ed45219189945ea0082ff40bcaaffba363cf8f50bd202ddff5"
+    },
+    "microstructure": {
+      "name": "microstructure.py",
+      "sha256": "59e64be3c62447d6733098d9cf7770830187aaa04ac66818b48f40fef6200f9d"
+    },
+    "coercivity_link": {
+      "name": "coercivity_link.py",
+      "sha256": "eedb5095b0aea0d811bbb92fbf9b7ab7ddbdc0d2535b7db2147160efe16480bc"
+    }
+  },
+  "note": "This manifest verifies bytes and composition, not scientific calibration. Uses original C6 v2 numerical source and posterior without refitting; corrects film-magnetization refusal wording only. C5 joint probability remains a separate path.",
+  "agent_release": "v1.3 agent copy: posterior rows reserved for hidden worlds are removed; the remaining rows are an unbiased subset of the same posterior"
+}

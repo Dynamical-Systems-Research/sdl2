@@ -1,0 +1,131 @@
+--- sdl2-v1.2-20261026/env/prepare_v12.py
++++ sdl2-v1.3-20261028/env/prepare_v13.py
+@@ -1,13 +1,14 @@
+-"""Prepare one SDL-2 v1.2 episode from the shared contract, the clean P7 base ledger and an owner world.
+-
+-  ../python/bin/python -B prepare_v12.py NAME --panel dev --state dev-01     a development-panel world
+-  ../python/bin/python -B prepare_v12.py auto --panel train --state train-0001  a training-panel world (same design)
+-  ../python/bin/python -B prepare_v12.py NAME --seed 7300123                 any generator seed: owner checks only (an
++"""Prepare one SDL-2 v1.3 episode from the shared contract, the clean P7 base ledger and an owner world (built from
++../sdl2-v1.2-20261026/env/prepare_v12.py by env/port_prepare.py; diff in env/prepare_v13.diff).
++
++  ../python/bin/python -B prepare_v13.py NAME --panel dev --state dev-01     a development-panel world
++  ../python/bin/python -B prepare_v13.py auto --panel train --state train-0001  a training-panel world (same design)
++  ../python/bin/python -B prepare_v13.py NAME --seed 7300123                 any generator seed: owner checks only (an
+                                                                              unselected world is outside the contract's
+                                                                              stated lot distribution)
+ 
+ Workspace (agent-visible): START_HERE.md (= CONTRACT.md), LABORATORY.md, library/ and models/supplied/ (empty mount
+-points: run_v12.mjs bind-mounts env/library-master and env/models-master/supplied read-only), outbox/. INITIAL_EVIDENCE.json and COVERAGE.md are written by run_v12.mjs at
++points: run_v13.mjs bind-mounts env/library-agent and env/models-agent/supplied read-only), outbox/. INITIAL_EVIDENCE.json and COVERAGE.md are written by run_v13.mjs at
+ initialization. Owner-only (never mounted): simulation-magnetic/ world and runtime, PREPARATION.json.
+ Training rollouts and evaluation episodes are prepared by this same function; only the world differs.
+ """
+@@ -21,13 +22,15 @@
+ import secrets
+ import shutil
+ import sqlite3
++import sys
+ from pathlib import Path
+ 
+ HERE = Path(__file__).resolve().parent
+ STUDY = HERE.parent
++V12 = STUDY.parent / "sdl2-v1.2-20261026"
+ LAB = STUDY.parent / "material-lab-20261019"
+ OWNER_ENV = STUDY / "python"
+-BASE = HERE / "base-investigation"
++BASE = V12 / "env/base-investigation"   # read-only: sqlite immutable, blobs hard-linked
+ LOT = "SDL2-LOT"
+ REFERENCE = {"preparation_id": "REF-P", "specimen_id": "REF-B1", "cycle_id": "REF-C1",
+              "preparation": {"method": "vacuum_degassing", "temperature_c": 600, "hold_time_s": 900, "feedstock_d50_um": 4.0},
+@@ -66,14 +69,15 @@
+ def capabilities(world):
+     """The C7.3 twin's public capability description, corrected for this instrument (no version names: agent-visible)."""
+     from ndfeb_sps.models import c7_campaign as c7, sdl2_v12 as v12
+-    caps = c7.public_capabilities(world["base_world"])
++    caps = c7.public_capabilities(world["v12"]["base_world"])
+     caps["world_family"] = v12.PUBLIC_WORLD
+     caps["description"] = (
+-        "Simulates one virtual powder lot. The hidden world is one posterior draw of the owner-built physics package C7.3 "
+-        "(ndfeb-sps-physics-tool-20261023.8.3; its README states the data cutoff) with one of its two magnetic "
+-        "calculations, the coercivity link or the C5 path, as this lot's magnetic response. Evaluation lots are selected so "
+-        "that about half have a declared route meeting the requirement and the supplied model's favourite route passes in "
+-        "only some. Instrument corrections: degassing completeness is not a control; Hci is bounded at 30 kOe; the 900 C "
++        "Simulates one virtual powder lot. The hidden world is drawn from the same posterior as the supplied physics "
++        "package C7.3 (ndfeb-sps-physics-tool-20261023.8.3; its README states the data cutoff), not from its stored "
++        "rows, with one of its two magnetic "
++        "calculations, the coercivity link or the C5 path, as this lot's magnetic response. About half of the lots in this "
++        "program have a declared route meeting the requirement. "
++        "Instrument corrections: degassing completeness is not a control; Hci is bounded at 30 kOe; the 900 C "
+         "hold acts on coercivity through the hold-scaled grain on both magnetic calculations, as in the package. Returns are "
+         "conditional computation, not physical observations, and "
+         "agreement with the package is not independent validation of it.")
+@@ -84,7 +88,11 @@
+                                          for s in caps.get("declared_and_uncalibrated", [])]
+     caps["limits"] += [
+         "Numeric hypothetical demagnetization-corrected loops at 20 C on isotropic bodies; persistent hidden state; "
+-        "new reading noise per acquisition (field_set_id); independent 2% log reading errors on Hci and Br",
++        "new reading noise per acquisition (field_set_id); independent 2% log reading errors on Hci and Br; the knee field "
++        "(Hk) is read with its own error, including a demagnetization correction fixed per piece",
++        "Density readings report each method's nominal reading sd; this lot's actual scatter is not stated",
++        "SEM distribution readings (d90, coarse fraction) carry a width read from their own field set; the SPS log's "
++        "geometry-derived densities carry a calibration error of about 2%",
+         "Ideal own-piece magnetic normalization is assumed, not measured; no numeric density is disclosed by a loop",
+         "Degassing runs as method none or vacuum degassing at 600 C for 600-900 s; completeness is not a control",
+         "No current-panel magnetic validation; the reading model is declared, not a qualified RPI protocol"]
+@@ -110,13 +118,14 @@
+ 
+ 
+ def world_for(panel, state, seed):
+-    from ndfeb_sps.models import sdl2_v12 as v12
++    sys.path.insert(0, str(STUDY / "src"))   # owner-side draws resolve owner/ through src/sdl2_v13.py
++    import sdl2_v13 as v13
+     if panel:
+         states = json.loads((STUDY / "owner" / f"{panel.upper()}_PANEL.json").read_text())["states"]
+         row = next(s for s in states if s["name"] == state)
+         return row["world"], {"panel": panel, "state": state, "seed": row["seed"], "class": row["class"]}
+     meas = {"density_body_sd_g_cm3": 0.02, "link_model_draws": 4000}
+-    world = v12.draw(LAB / "instruments/C7.3", seed, f"v12-adhoc-{seed}", meas, lot_id=LOT, drawn_at="2026-10-26")
++    world = v13.draw("eval", f"v13-adhoc-{seed}", meas, lot_id=LOT, drawn_at="2026-10-28", world_seed=seed)
+     return world, {"panel": None, "state": None, "seed": seed, "class": None}
+ 
+ 
+@@ -141,7 +150,7 @@
+     shutil.copytree(BASE / "simulation", ep / "simulation", ignore=skip)
+     shutil.copytree(BASE / "simulation-magnetic/campaign", ep / "simulation-magnetic/campaign", ignore=skip)
+     ws = ep / "pi/workspace"
+-    for mount in ("library", "models/supplied"):   # run_v12.mjs mounts env/library-master and models-master read-only here
++    for mount in ("library", "models/supplied"):   # run_v13.mjs mounts env/library-agent and models-agent read-only here
+         (ws / mount).mkdir(parents=True)
+     (ws / "outbox").mkdir()
+     shutil.copy2(contract_path, ws / "START_HERE.md")
+@@ -154,7 +163,7 @@
+         task.pop(k, None)
+     task.update(
+         objective="Decide, for one virtual powder lot, whether a declared route meets Hci >= 10 kOe and (BH)max >= 11 MGOe "
+-                  "for three bodies of a new preparation with probability >= 0.5; nominate it or restrict.",
++                  "for three bodies of a new preparation with probability >= 0.95; nominate it or restrict.",
+         mission=contract, material_question=contract.split("\n\n")[1],
+         scientific_scope="SDL-2: one virtual lot; physical record through P7 as calibration context",
+         current_campaign_stage="Physical record through P7; one virtual evaluation lot with one reference body",
+@@ -188,17 +197,18 @@
+     packet["reviewed_public_sources"] = [s for s in packet["reviewed_public_sources"]
+                                          if not s["content"].startswith("# Release R0 (t0): context")]
+     save(ep / "sources.json", packet)
++    sim_seed = secrets.randbits(62)   # reading noise; independent of the world seed
+     template = json.loads((LAB / "template/investigation/simulation-magnetic/owner_simulation_runtime.json").read_text())
+     cfg = copy.deepcopy(template)
+     cfg.update(python=str(OWNER_ENV / "bin/python"), runtime=str(OWNER_ENV / "native-runtime"),
+-               seed=origin["seed"], world_config=world, public_capabilities=capabilities(world))
++               seed=sim_seed, world_config=world, public_capabilities=capabilities(world))
+     save(ep / "simulation-magnetic/owner_simulation_runtime.json", cfg)
+     save(ep / "simulation-magnetic/reference_world.json", world)
+     save(ep / "INITIAL_REQUESTS.json", [reference_request()])
+     for d in ("api", "pi_sessions"):
+         (ep / "pi" / d).mkdir()
+     save(ep / "PREPARATION.json", {
+-        "version": "sdl2-v1.2-dev.1", "origin": origin, "data_cutoff": "P7", "new_session": True, "pi": "1.4.0",
++        "version": "sdl2-v1.3-dev.1", "origin": origin, "sim_seed": sim_seed, "data_cutoff": "P7", "new_session": True, "pi": "1.4.0",
+         "world_sha256": sha(ep / "simulation-magnetic/reference_world.json"),
+         "contract_sha256": sha(ws / "START_HERE.md"), "contract_source": contract_path.name, "laboratory_sha256": sha(ws / "LABORATORY.md"),
+         "base_ledger_sha256": sha(BASE / "campaign/campaign.sqlite3"), "training": False})

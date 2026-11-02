@@ -1,0 +1,1040 @@
+{
+  "schema_version": 2,
+  "source_packet_version": "ndfeb-public-sources-v2",
+  "source_id": "wu_2025",
+  "metadata": {
+    "doi": "10.1016/j.jallcom.2025.183663",
+    "title": "Microstructure refinement of hot deformed Dy-free NdFeB magnets through a novel cold sintering approach by pressure-assisted spark plasma sintering",
+    "url": "https://doi.org/10.1016/j.jallcom.2025.183663",
+    "publication_year": 2025,
+    "pdf_sha256": "82955f863d7f20b00f3f726a885480e62aad5f84fd38a6a6b182a69155846632",
+    "source_license": "User-supplied final Elsevier paper; no broad reuse or model-training permission asserted",
+    "included_artifact": "Independently transcribed numerical facts and factual summaries only; no PDF, figure raster or article prose",
+    "training_admission": "not_admitted",
+    "reference_density_g_cm3": null,
+    "raw_replicates": "not_reported",
+    "warnings": [
+      "Initial SPS and post-hot-deformation/thermal states are separate",
+      "Middle initial-SPS point is 500 C in body/Fig2 and 550 C in Fig3; conflict unresolved",
+      "Dwell duration and numeric theoretical-density reference not given",
+      "Pressure and tooling change with temperature; this is not a temperature-only or pressure-response law"
+    ]
+  },
+  "starting_material": {
+    "description": "Commercial nanocrystalline melt-spun MQU-F ribbon powder",
+    "nominal_composition_at_percent": {
+      "Nd": 13.6,
+      "Fe": 73.6,
+      "Ga": 0.6,
+      "Co": 6.6,
+      "B": 5.6
+    },
+    "lot_id": null,
+    "powder_mass_g_approx": 4,
+    "particle_size_distribution": null,
+    "oxygen_content": null,
+    "measured_composition": null,
+    "preparation_history": "Ball milling and an additional anneal are not reported",
+    "initial_structure": "Fine/coarse regions attributed to ribbon cooling history; raw-powder grain distribution not supplied"
+  },
+  "methods": {
+    "initial_sps_instrument": "Fuji Dr. Sinter SPS211-LX",
+    "hot_deformation_instrument": "Thermo Technology Model10-3",
+    "equipment_status": "Reported publication methods, not confirmation of current facility access",
+    "initial_vacuum_upper_torr": 0.02,
+    "initial_heating_rate_c_min": 100,
+    "initial_dwell_policy": "steady_displacement",
+    "initial_hold_time_s": null,
+    "die_rule": {
+      "below60MPa": {
+        "material": "graphite",
+        "diameter_mm": 8
+      },
+      "above60MPa": {
+        "material": "tungsten_carbide",
+        "diameter_mm": 10
+      }
+    },
+    "density_method": "Archimedes",
+    "theoretical_density_g_cm3": null,
+    "SEM": "FEI Versa3D",
+    "magnetics": "VSM on Quantum Design DynaCool PPMS",
+    "magnetometry_maximum_field_T": 9,
+    "magnetometry_pressure_torr": 50,
+    "demagnetization_factor_approx": 0.6
+  },
+  "observations": [
+    {
+      "observation_id": "wu-pre-350",
+      "source_id": "wu_2025",
+      "process_stage": "initial_sps",
+      "conditions": {
+        "route": "mqu_f_sps",
+        "lot_id": null,
+        "temperature_c": 350,
+        "pressure_mpa": 300,
+        "heating_rate_c_min": 100,
+        "hold_time_s": null,
+        "dwell_policy": "steady_displacement",
+        "mass_g": 4,
+        "diameter_mm": 10,
+        "die_material": "tungsten_carbide",
+        "post_treatment": null
+      },
+      "condition_qualifiers": {
+        "mass_g": "approximately, general methods",
+        "diameter_mm": "general methods pressure-dependent tooling rule",
+        "die_material": "general methods pressure-dependent tooling rule",
+        "hold_time_s": "unreported; an endpoint criterion is not a duration",
+        "lot_id": "unreported",
+        "post_treatment": "Additional treatment is unreported, not a known executed history"
+      },
+      "excluded_from_unconflicted_evidence": false,
+      "temperature_alternatives_c": [],
+      "measurements": {
+        "relative_density_pct_td": {
+          "value": 91,
+          "unit": "%TD",
+          "locator": "PDF p4 Fig3E density point label",
+          "extraction": "printed_numeric_fact",
+          "uncertainty": null,
+          "measurement_population": "bulk_compact",
+          "measurement_statistic": "Archimedes_relative_density"
+        },
+        "fine_region_mean_grain_size_nm": {
+          "value": 50.1,
+          "unit": "nm",
+          "locator": "PDF p4 Fig3E black point label",
+          "extraction": "printed_numeric_fact",
+          "uncertainty": null,
+          "measurement_population": "fine_grain_region",
+          "measurement_statistic": "reported_mean_grain_size",
+          "graphical_error_bars": true,
+          "error_bar_definition": null,
+          "grain_count": null
+        }
+      },
+      "density_reference_g_cm3": null,
+      "independent_manufacture_n": null,
+      "fields_measured_n": null,
+      "scope_notes": [
+        "No specimen genealogy establishes that later HD specimens are the same manufactured bodies",
+        "No independent preparation count or physical repeatability stated"
+      ]
+    },
+    {
+      "observation_id": "wu-pre-450",
+      "source_id": "wu_2025",
+      "process_stage": "initial_sps",
+      "conditions": {
+        "route": "mqu_f_sps",
+        "lot_id": null,
+        "temperature_c": 450,
+        "pressure_mpa": 200,
+        "heating_rate_c_min": 100,
+        "hold_time_s": null,
+        "dwell_policy": "steady_displacement",
+        "mass_g": 4,
+        "diameter_mm": 10,
+        "die_material": "tungsten_carbide",
+        "post_treatment": null
+      },
+      "condition_qualifiers": {
+        "mass_g": "approximately, general methods",
+        "diameter_mm": "general methods pressure-dependent tooling rule",
+        "die_material": "general methods pressure-dependent tooling rule",
+        "hold_time_s": "unreported; an endpoint criterion is not a duration",
+        "lot_id": "unreported",
+        "post_treatment": "Additional treatment is unreported, not a known executed history"
+      },
+      "excluded_from_unconflicted_evidence": false,
+      "temperature_alternatives_c": [],
+      "measurements": {
+        "relative_density_pct_td": {
+          "value": 98,
+          "unit": "%TD",
+          "locator": "PDF p4 Fig3E density point label",
+          "extraction": "printed_numeric_fact",
+          "uncertainty": null,
+          "measurement_population": "bulk_compact",
+          "measurement_statistic": "Archimedes_relative_density"
+        },
+        "fine_region_mean_grain_size_nm": {
+          "value": 51.8,
+          "unit": "nm",
+          "locator": "PDF p4 Fig3E black point label",
+          "extraction": "printed_numeric_fact",
+          "uncertainty": null,
+          "measurement_population": "fine_grain_region",
+          "measurement_statistic": "reported_mean_grain_size",
+          "graphical_error_bars": true,
+          "error_bar_definition": null,
+          "grain_count": null
+        }
+      },
+      "density_reference_g_cm3": null,
+      "independent_manufacture_n": null,
+      "fields_measured_n": null,
+      "scope_notes": [
+        "No specimen genealogy establishes that later HD specimens are the same manufactured bodies",
+        "No independent preparation count or physical repeatability stated"
+      ]
+    },
+    {
+      "observation_id": "wu-pre-middle-500-or-550",
+      "source_id": "wu_2025",
+      "process_stage": "initial_sps",
+      "conditions": {
+        "route": "mqu_f_sps",
+        "lot_id": null,
+        "temperature_c": 550,
+        "pressure_mpa": 50,
+        "heating_rate_c_min": 100,
+        "hold_time_s": null,
+        "dwell_policy": "steady_displacement",
+        "mass_g": 4,
+        "diameter_mm": 8,
+        "die_material": "graphite",
+        "post_treatment": null
+      },
+      "condition_qualifiers": {
+        "mass_g": "approximately, general methods",
+        "diameter_mm": "general methods pressure-dependent tooling rule",
+        "die_material": "general methods pressure-dependent tooling rule",
+        "hold_time_s": "unreported; an endpoint criterion is not a duration",
+        "lot_id": "unreported",
+        "post_treatment": "Additional treatment is unreported, not a known executed history"
+      },
+      "excluded_from_unconflicted_evidence": true,
+      "temperature_alternatives_c": [
+        500,
+        550
+      ],
+      "measurements": {
+        "relative_density_pct_td": {
+          "value": 95,
+          "unit": "%TD",
+          "locator": "PDF p4 Fig3E density point label",
+          "extraction": "printed_numeric_fact",
+          "uncertainty": null,
+          "measurement_population": "bulk_compact",
+          "measurement_statistic": "Archimedes_relative_density"
+        },
+        "fine_region_mean_grain_size_nm": {
+          "value": 82.9,
+          "unit": "nm",
+          "locator": "PDF p4 Fig3E black point label",
+          "extraction": "printed_numeric_fact",
+          "uncertainty": null,
+          "measurement_population": "fine_grain_region",
+          "measurement_statistic": "reported_mean_grain_size",
+          "graphical_error_bars": true,
+          "error_bar_definition": null,
+          "grain_count": null
+        }
+      },
+      "density_reference_g_cm3": null,
+      "independent_manufacture_n": null,
+      "fields_measured_n": null,
+      "scope_notes": [
+        "Text p2 and Fig2C caption p3 assign500degC; Fig3C caption and Fig3E x-axis p4 assign550degC",
+        "Text gives fine-grain average82nm at500degC; figure label82.9nm at550degC",
+        "Do not create two independent experiments from the conflict"
+      ]
+    },
+    {
+      "observation_id": "wu-pre-650",
+      "source_id": "wu_2025",
+      "process_stage": "initial_sps",
+      "conditions": {
+        "route": "mqu_f_sps",
+        "lot_id": null,
+        "temperature_c": 650,
+        "pressure_mpa": 50,
+        "heating_rate_c_min": 100,
+        "hold_time_s": null,
+        "dwell_policy": "steady_displacement",
+        "mass_g": 4,
+        "diameter_mm": 8,
+        "die_material": "graphite",
+        "post_treatment": null
+      },
+      "condition_qualifiers": {
+        "mass_g": "approximately, general methods",
+        "diameter_mm": "general methods pressure-dependent tooling rule",
+        "die_material": "general methods pressure-dependent tooling rule",
+        "hold_time_s": "unreported; an endpoint criterion is not a duration",
+        "lot_id": "unreported",
+        "post_treatment": "Additional treatment is unreported, not a known executed history"
+      },
+      "excluded_from_unconflicted_evidence": false,
+      "temperature_alternatives_c": [],
+      "measurements": {
+        "relative_density_pct_td": {
+          "value": 99,
+          "unit": "%TD",
+          "locator": "PDF p4 Fig3E density point label",
+          "extraction": "printed_numeric_fact",
+          "uncertainty": null,
+          "measurement_population": "bulk_compact",
+          "measurement_statistic": "Archimedes_relative_density"
+        },
+        "fine_region_mean_grain_size_nm": {
+          "value": 130.1,
+          "unit": "nm",
+          "locator": "PDF p4 Fig3E black point label",
+          "extraction": "printed_numeric_fact",
+          "uncertainty": null,
+          "measurement_population": "fine_grain_region",
+          "measurement_statistic": "reported_mean_grain_size",
+          "graphical_error_bars": true,
+          "error_bar_definition": null,
+          "grain_count": null
+        }
+      },
+      "density_reference_g_cm3": null,
+      "independent_manufacture_n": null,
+      "fields_measured_n": null,
+      "scope_notes": [
+        "No specimen genealogy establishes that later HD specimens are the same manufactured bodies",
+        "No independent preparation count or physical repeatability stated"
+      ]
+    },
+    {
+      "observation_id": "wu-HD-A",
+      "source_id": "wu_2025",
+      "process_stage": "post_hot_deformation",
+      "conditions": {
+        "route": "mqu_f_sps",
+        "lot_id": null,
+        "initial_sintering_temperature_c": 650,
+        "initial_sintering_pressure_mpa": 40,
+        "hot_deformation_temperature_c": 848,
+        "hot_deformation_pressure_mpa": null,
+        "hot_deformation_hold_time_s": null,
+        "bulk_compressive_strain_pct": 80
+      },
+      "condition_qualifiers": {
+        "bulk_compressive_strain_pct": "approximately; strain definition unreported",
+        "lot_id": "unreported"
+      },
+      "excluded_from_unconflicted_evidence": false,
+      "measurements": {
+        "fine_platelet_length_nm": {
+          "value": 1350,
+          "unit": "nm",
+          "locator": "PDF p4 Table1",
+          "extraction": "printed_numeric_fact",
+          "uncertainty": null,
+          "measurement_population": "fine_grain_region",
+          "measurement_statistic": "mean_platelet_length",
+          "reported_plus_minus": 237,
+          "reported_plus_minus_definition": null
+        },
+        "fine_platelet_width_nm": {
+          "value": 143,
+          "unit": "nm",
+          "locator": "PDF p4 Table1",
+          "extraction": "printed_numeric_fact",
+          "uncertainty": null,
+          "measurement_population": "fine_grain_region",
+          "measurement_statistic": "mean_platelet_width",
+          "reported_plus_minus": 19,
+          "reported_plus_minus_definition": null
+        },
+        "fine_platelet_aspect_ratio": {
+          "value": 9.4,
+          "unit": "dimensionless",
+          "locator": "PDF p4 Table1",
+          "extraction": "printed_numeric_fact",
+          "uncertainty": null,
+          "measurement_population": "fine_grain_region",
+          "measurement_statistic": "platelet_aspect_ratio",
+          "reported_plus_minus": 2.1,
+          "reported_plus_minus_definition": null
+        },
+        "fine_grain_image_area_pct": {
+          "value": 66.08,
+          "unit": "%",
+          "locator": "PDF p4 Table1 and discussion",
+          "extraction": "printed_numeric_fact",
+          "uncertainty": null,
+          "measurement_population": "selected_SEM_field",
+          "measurement_statistic": "image_area_fraction"
+        },
+        "Br_kGs": {
+          "value": 13.3,
+          "unit": "kGs",
+          "locator": "PDF p5 Table2",
+          "extraction": "printed_numeric_fact",
+          "uncertainty": null,
+          "measurement_population": "magnetometry_specimen",
+          "measurement_statistic": "remanence"
+        },
+        "Hci_kOe": {
+          "value": 7.7,
+          "unit": "kOe",
+          "locator": "PDF p5 Table2",
+          "extraction": "printed_numeric_fact",
+          "uncertainty": null,
+          "measurement_population": "magnetometry_specimen",
+          "measurement_statistic": "intrinsic_coercivity"
+        },
+        "BHmax_MGOe": {
+          "value": 40,
+          "unit": "MGOe",
+          "locator": "PDF p5 Table2",
+          "extraction": "printed_numeric_fact",
+          "uncertainty": null,
+          "measurement_population": "magnetometry_specimen",
+          "measurement_statistic": "maximum_energy_product"
+        }
+      },
+      "measurement_temperature_K": null,
+      "independent_manufacture_n": null,
+      "fields_measured_n": null,
+      "scope_notes": [
+        "Not matched: Fig3 pre-SPS650degC point is50MPa, HDrouteA initialSPS is40MPa",
+        "Reported dimensional plus-minus values are not defined as predictive uncertainty",
+        "No measured final density or specimen correspondence supplied"
+      ]
+    },
+    {
+      "observation_id": "wu-HD-B",
+      "source_id": "wu_2025",
+      "process_stage": "post_hot_deformation",
+      "conditions": {
+        "route": "mqu_f_sps",
+        "lot_id": null,
+        "initial_sintering_temperature_c": 620,
+        "initial_sintering_pressure_mpa": 50,
+        "hot_deformation_temperature_c": 810,
+        "hot_deformation_pressure_mpa": null,
+        "hot_deformation_hold_time_s": null,
+        "bulk_compressive_strain_pct": 80
+      },
+      "condition_qualifiers": {
+        "bulk_compressive_strain_pct": "approximately; strain definition unreported",
+        "lot_id": "unreported"
+      },
+      "excluded_from_unconflicted_evidence": false,
+      "measurements": {
+        "fine_platelet_length_nm": {
+          "value": 1090,
+          "unit": "nm",
+          "locator": "PDF p4 Table1",
+          "extraction": "printed_numeric_fact",
+          "uncertainty": null,
+          "measurement_population": "fine_grain_region",
+          "measurement_statistic": "mean_platelet_length",
+          "reported_plus_minus": 212,
+          "reported_plus_minus_definition": null
+        },
+        "fine_platelet_width_nm": {
+          "value": 125,
+          "unit": "nm",
+          "locator": "PDF p4 Table1",
+          "extraction": "printed_numeric_fact",
+          "uncertainty": null,
+          "measurement_population": "fine_grain_region",
+          "measurement_statistic": "mean_platelet_width",
+          "reported_plus_minus": 14,
+          "reported_plus_minus_definition": null
+        },
+        "fine_platelet_aspect_ratio": {
+          "value": 9,
+          "unit": "dimensionless",
+          "locator": "PDF p4 Table1",
+          "extraction": "printed_numeric_fact",
+          "uncertainty": null,
+          "measurement_population": "fine_grain_region",
+          "measurement_statistic": "platelet_aspect_ratio",
+          "reported_plus_minus": 2,
+          "reported_plus_minus_definition": null
+        },
+        "fine_grain_image_area_pct": {
+          "value": 83.33,
+          "unit": "%",
+          "locator": "PDF p4 Table1 and discussion",
+          "extraction": "printed_numeric_fact",
+          "uncertainty": null,
+          "measurement_population": "selected_SEM_field",
+          "measurement_statistic": "image_area_fraction"
+        },
+        "Br_kGs": {
+          "value": 13.7,
+          "unit": "kGs",
+          "locator": "PDF p5 Table2",
+          "extraction": "printed_numeric_fact",
+          "uncertainty": null,
+          "measurement_population": "magnetometry_specimen",
+          "measurement_statistic": "remanence"
+        },
+        "Hci_kOe": {
+          "value": 9.8,
+          "unit": "kOe",
+          "locator": "PDF p5 Table2",
+          "extraction": "printed_numeric_fact",
+          "uncertainty": null,
+          "measurement_population": "magnetometry_specimen",
+          "measurement_statistic": "intrinsic_coercivity"
+        },
+        "BHmax_MGOe": {
+          "value": 45,
+          "unit": "MGOe",
+          "locator": "PDF p5 Table2",
+          "extraction": "printed_numeric_fact",
+          "uncertainty": null,
+          "measurement_population": "magnetometry_specimen",
+          "measurement_statistic": "maximum_energy_product"
+        }
+      },
+      "measurement_temperature_K": null,
+      "independent_manufacture_n": null,
+      "fields_measured_n": null,
+      "scope_notes": [
+        "Not matched:620degC not present in Fig3E",
+        "Reported dimensional plus-minus values are not defined as predictive uncertainty",
+        "No measured final density or specimen correspondence supplied"
+      ]
+    },
+    {
+      "observation_id": "wu-HD-C",
+      "source_id": "wu_2025",
+      "process_stage": "post_hot_deformation",
+      "conditions": {
+        "route": "mqu_f_sps",
+        "lot_id": null,
+        "initial_sintering_temperature_c": 450,
+        "initial_sintering_pressure_mpa": 200,
+        "hot_deformation_temperature_c": 810,
+        "hot_deformation_pressure_mpa": null,
+        "hot_deformation_hold_time_s": null,
+        "bulk_compressive_strain_pct": 80
+      },
+      "condition_qualifiers": {
+        "bulk_compressive_strain_pct": "approximately; strain definition unreported",
+        "lot_id": "unreported"
+      },
+      "excluded_from_unconflicted_evidence": false,
+      "measurements": {
+        "fine_platelet_length_nm": {
+          "value": 871,
+          "unit": "nm",
+          "locator": "PDF p4 Table1",
+          "extraction": "printed_numeric_fact",
+          "uncertainty": null,
+          "measurement_population": "fine_grain_region",
+          "measurement_statistic": "mean_platelet_length",
+          "reported_plus_minus": 197,
+          "reported_plus_minus_definition": null
+        },
+        "fine_platelet_width_nm": {
+          "value": 102,
+          "unit": "nm",
+          "locator": "PDF p4 Table1",
+          "extraction": "printed_numeric_fact",
+          "uncertainty": null,
+          "measurement_population": "fine_grain_region",
+          "measurement_statistic": "mean_platelet_width",
+          "reported_plus_minus": 18,
+          "reported_plus_minus_definition": null
+        },
+        "fine_platelet_aspect_ratio": {
+          "value": 8.5,
+          "unit": "dimensionless",
+          "locator": "PDF p4 Table1",
+          "extraction": "printed_numeric_fact",
+          "uncertainty": null,
+          "measurement_population": "fine_grain_region",
+          "measurement_statistic": "platelet_aspect_ratio",
+          "reported_plus_minus": 2.4,
+          "reported_plus_minus_definition": null
+        },
+        "fine_grain_image_area_pct": {
+          "value": 72.65,
+          "unit": "%",
+          "locator": "PDF p4 Table1 and discussion",
+          "extraction": "printed_numeric_fact",
+          "uncertainty": null,
+          "measurement_population": "selected_SEM_field",
+          "measurement_statistic": "image_area_fraction"
+        },
+        "Br_kGs": {
+          "value": 13.3,
+          "unit": "kGs",
+          "locator": "PDF p5 Table2",
+          "extraction": "printed_numeric_fact",
+          "uncertainty": null,
+          "measurement_population": "magnetometry_specimen",
+          "measurement_statistic": "remanence"
+        },
+        "Hci_kOe": {
+          "value": 9.1,
+          "unit": "kOe",
+          "locator": "PDF p5 Table2",
+          "extraction": "printed_numeric_fact",
+          "uncertainty": null,
+          "measurement_population": "magnetometry_specimen",
+          "measurement_statistic": "intrinsic_coercivity"
+        },
+        "BHmax_MGOe": {
+          "value": 41,
+          "unit": "MGOe",
+          "locator": "PDF p5 Table2",
+          "extraction": "printed_numeric_fact",
+          "uncertainty": null,
+          "measurement_population": "magnetometry_specimen",
+          "measurement_statistic": "maximum_energy_product"
+        }
+      },
+      "measurement_temperature_K": null,
+      "independent_manufacture_n": null,
+      "fields_measured_n": null,
+      "scope_notes": [
+        "Same450degC/200MPa settings, not proven same specimen",
+        "Reported dimensional plus-minus values are not defined as predictive uncertainty",
+        "No measured final density or specimen correspondence supplied"
+      ]
+    },
+    {
+      "observation_id": "wu-HD-D",
+      "source_id": "wu_2025",
+      "process_stage": "post_hot_deformation",
+      "conditions": {
+        "route": "mqu_f_sps",
+        "lot_id": null,
+        "initial_sintering_temperature_c": 350,
+        "initial_sintering_pressure_mpa": 300,
+        "hot_deformation_temperature_c": 710,
+        "hot_deformation_pressure_mpa": null,
+        "hot_deformation_hold_time_s": null,
+        "bulk_compressive_strain_pct": 80
+      },
+      "condition_qualifiers": {
+        "bulk_compressive_strain_pct": "approximately; strain definition unreported",
+        "lot_id": "unreported"
+      },
+      "excluded_from_unconflicted_evidence": false,
+      "measurements": {
+        "fine_platelet_length_nm": {
+          "value": 480,
+          "unit": "nm",
+          "locator": "PDF p4 Table1",
+          "extraction": "printed_numeric_fact",
+          "uncertainty": null,
+          "measurement_population": "fine_grain_region",
+          "measurement_statistic": "mean_platelet_length",
+          "reported_plus_minus": 118,
+          "reported_plus_minus_definition": null
+        },
+        "fine_platelet_width_nm": {
+          "value": 55,
+          "unit": "nm",
+          "locator": "PDF p4 Table1",
+          "extraction": "printed_numeric_fact",
+          "uncertainty": null,
+          "measurement_population": "fine_grain_region",
+          "measurement_statistic": "mean_platelet_width",
+          "reported_plus_minus": 9,
+          "reported_plus_minus_definition": null
+        },
+        "fine_platelet_aspect_ratio": {
+          "value": 8.7,
+          "unit": "dimensionless",
+          "locator": "PDF p4 Table1",
+          "extraction": "printed_numeric_fact",
+          "uncertainty": null,
+          "measurement_population": "fine_grain_region",
+          "measurement_statistic": "platelet_aspect_ratio",
+          "reported_plus_minus": 2.3,
+          "reported_plus_minus_definition": null
+        },
+        "fine_grain_image_area_pct": {
+          "value": 92.94,
+          "unit": "%",
+          "locator": "PDF p4 Table1 and discussion",
+          "extraction": "printed_numeric_fact",
+          "uncertainty": null,
+          "measurement_population": "selected_SEM_field",
+          "measurement_statistic": "image_area_fraction"
+        },
+        "Br_kGs": {
+          "value": 14.3,
+          "unit": "kGs",
+          "locator": "PDF p5 Table2",
+          "extraction": "printed_numeric_fact",
+          "uncertainty": null,
+          "measurement_population": "magnetometry_specimen",
+          "measurement_statistic": "remanence"
+        },
+        "Hci_kOe": {
+          "value": 11.4,
+          "unit": "kOe",
+          "locator": "PDF p5 Table2",
+          "extraction": "printed_numeric_fact",
+          "uncertainty": null,
+          "measurement_population": "magnetometry_specimen",
+          "measurement_statistic": "intrinsic_coercivity"
+        },
+        "BHmax_MGOe": {
+          "value": 48,
+          "unit": "MGOe",
+          "locator": "PDF p5 Table2",
+          "extraction": "printed_numeric_fact",
+          "uncertainty": null,
+          "measurement_population": "magnetometry_specimen",
+          "measurement_statistic": "maximum_energy_product"
+        }
+      },
+      "measurement_temperature_K": null,
+      "independent_manufacture_n": null,
+      "fields_measured_n": null,
+      "scope_notes": [
+        "Same350degC/300MPa settings, not proven same specimen",
+        "Reported dimensional plus-minus values are not defined as predictive uncertainty",
+        "No measured final density or specimen correspondence supplied"
+      ]
+    },
+    {
+      "observation_id": "wu-HD-D-thermal-300",
+      "source_id": "wu_2025",
+      "process_stage": "post_hot_deformation_thermal",
+      "conditions": {
+        "route": "mqu_f_sps",
+        "parent_route": "wu-HD-D",
+        "initial_sintering_temperature_c": 350,
+        "initial_sintering_pressure_mpa": 300,
+        "hot_deformation_temperature_c": 710,
+        "measurement_temperature_K": 300
+      },
+      "excluded_from_unconflicted_evidence": false,
+      "measurements": {
+        "Br_kGs": {
+          "value": 14.3,
+          "unit": "kGs",
+          "locator": "PDF p7 Fig10B black point label",
+          "extraction": "printed_numeric_fact",
+          "uncertainty": null,
+          "measurement_population": "magnetometry_specimen",
+          "measurement_statistic": "remanence"
+        },
+        "Hci_kOe": {
+          "value": 11.4,
+          "unit": "kOe",
+          "locator": "PDF p7 Fig10B red point label",
+          "extraction": "printed_numeric_fact",
+          "uncertainty": null,
+          "measurement_population": "magnetometry_specimen",
+          "measurement_statistic": "intrinsic_coercivity"
+        }
+      },
+      "independent_manufacture_n": null,
+      "scope_notes": [
+        "Temperature series on named sample D; not five independent manufactured magnets",
+        "Measurement sequence/reversibility protocol and uncertainty unreported"
+      ]
+    },
+    {
+      "observation_id": "wu-HD-D-thermal-325",
+      "source_id": "wu_2025",
+      "process_stage": "post_hot_deformation_thermal",
+      "conditions": {
+        "route": "mqu_f_sps",
+        "parent_route": "wu-HD-D",
+        "initial_sintering_temperature_c": 350,
+        "initial_sintering_pressure_mpa": 300,
+        "hot_deformation_temperature_c": 710,
+        "measurement_temperature_K": 325
+      },
+      "excluded_from_unconflicted_evidence": false,
+      "measurements": {
+        "Br_kGs": {
+          "value": 14,
+          "unit": "kGs",
+          "locator": "PDF p7 Fig10B black point label",
+          "extraction": "printed_numeric_fact",
+          "uncertainty": null,
+          "measurement_population": "magnetometry_specimen",
+          "measurement_statistic": "remanence"
+        },
+        "Hci_kOe": {
+          "value": 9.1,
+          "unit": "kOe",
+          "locator": "PDF p7 Fig10B red point label",
+          "extraction": "printed_numeric_fact",
+          "uncertainty": null,
+          "measurement_population": "magnetometry_specimen",
+          "measurement_statistic": "intrinsic_coercivity"
+        }
+      },
+      "independent_manufacture_n": null,
+      "scope_notes": [
+        "Temperature series on named sample D; not five independent manufactured magnets",
+        "Measurement sequence/reversibility protocol and uncertainty unreported"
+      ]
+    },
+    {
+      "observation_id": "wu-HD-D-thermal-350",
+      "source_id": "wu_2025",
+      "process_stage": "post_hot_deformation_thermal",
+      "conditions": {
+        "route": "mqu_f_sps",
+        "parent_route": "wu-HD-D",
+        "initial_sintering_temperature_c": 350,
+        "initial_sintering_pressure_mpa": 300,
+        "hot_deformation_temperature_c": 710,
+        "measurement_temperature_K": 350
+      },
+      "excluded_from_unconflicted_evidence": false,
+      "measurements": {
+        "Br_kGs": {
+          "value": 13.7,
+          "unit": "kGs",
+          "locator": "PDF p7 Fig10B black point label",
+          "extraction": "printed_numeric_fact",
+          "uncertainty": null,
+          "measurement_population": "magnetometry_specimen",
+          "measurement_statistic": "remanence"
+        },
+        "Hci_kOe": {
+          "value": 7.2,
+          "unit": "kOe",
+          "locator": "PDF p7 Fig10B red point label",
+          "extraction": "printed_numeric_fact",
+          "uncertainty": null,
+          "measurement_population": "magnetometry_specimen",
+          "measurement_statistic": "intrinsic_coercivity"
+        }
+      },
+      "independent_manufacture_n": null,
+      "scope_notes": [
+        "Temperature series on named sample D; not five independent manufactured magnets",
+        "Measurement sequence/reversibility protocol and uncertainty unreported"
+      ]
+    },
+    {
+      "observation_id": "wu-HD-D-thermal-375",
+      "source_id": "wu_2025",
+      "process_stage": "post_hot_deformation_thermal",
+      "conditions": {
+        "route": "mqu_f_sps",
+        "parent_route": "wu-HD-D",
+        "initial_sintering_temperature_c": 350,
+        "initial_sintering_pressure_mpa": 300,
+        "hot_deformation_temperature_c": 710,
+        "measurement_temperature_K": 375
+      },
+      "excluded_from_unconflicted_evidence": false,
+      "measurements": {
+        "Br_kGs": {
+          "value": 13.3,
+          "unit": "kGs",
+          "locator": "PDF p7 Fig10B black point label",
+          "extraction": "printed_numeric_fact",
+          "uncertainty": null,
+          "measurement_population": "magnetometry_specimen",
+          "measurement_statistic": "remanence"
+        },
+        "Hci_kOe": {
+          "value": 5.6,
+          "unit": "kOe",
+          "locator": "PDF p7 Fig10B red point label",
+          "extraction": "printed_numeric_fact",
+          "uncertainty": null,
+          "measurement_population": "magnetometry_specimen",
+          "measurement_statistic": "intrinsic_coercivity"
+        }
+      },
+      "independent_manufacture_n": null,
+      "scope_notes": [
+        "Temperature series on named sample D; not five independent manufactured magnets",
+        "Measurement sequence/reversibility protocol and uncertainty unreported"
+      ]
+    },
+    {
+      "observation_id": "wu-HD-D-thermal-400",
+      "source_id": "wu_2025",
+      "process_stage": "post_hot_deformation_thermal",
+      "conditions": {
+        "route": "mqu_f_sps",
+        "parent_route": "wu-HD-D",
+        "initial_sintering_temperature_c": 350,
+        "initial_sintering_pressure_mpa": 300,
+        "hot_deformation_temperature_c": 710,
+        "measurement_temperature_K": 400
+      },
+      "excluded_from_unconflicted_evidence": false,
+      "measurements": {
+        "Br_kGs": {
+          "value": 12.9,
+          "unit": "kGs",
+          "locator": "PDF p7 Fig10B black point label",
+          "extraction": "printed_numeric_fact",
+          "uncertainty": null,
+          "measurement_population": "magnetometry_specimen",
+          "measurement_statistic": "remanence"
+        },
+        "Hci_kOe": {
+          "value": 4.3,
+          "unit": "kOe",
+          "locator": "PDF p7 Fig10B red point label",
+          "extraction": "printed_numeric_fact",
+          "uncertainty": null,
+          "measurement_population": "magnetometry_specimen",
+          "measurement_statistic": "intrinsic_coercivity"
+        }
+      },
+      "independent_manufacture_n": null,
+      "scope_notes": [
+        "Temperature series on named sample D; not five independent manufactured magnets",
+        "Measurement sequence/reversibility protocol and uncertainty unreported"
+      ]
+    }
+  ],
+  "coarse_region_observations": [
+    {
+      "condition": "350degC300MPa",
+      "locator": "PDF p2 section3.1 and p3 Fig2A",
+      "grain_size_nm_approx": 80,
+      "reported_description": "coarsestgrainregion",
+      "some_coarse_regions_up_to_nm": 200,
+      "conflict": "80nm cannot be treated as globalmaximum because sameparagraph allows200nm",
+      "grain_count": null
+    },
+    {
+      "condition": "450degC200MPa",
+      "locator": "PDF p2 section3.1 and p3 Fig2B",
+      "grain_size_nm": null,
+      "reported_description": "similargrain sizes to350degC; no separate numericcoarseregionmean"
+    },
+    {
+      "condition": "500degC50MPa intext/Fig2C; Fig3C/E calls550degC",
+      "locator": "PDF p2 section3.1 and p3 Fig2C",
+      "grain_size_range_nm": [
+        250,
+        800
+      ],
+      "fine_region_average_nm_in_text": 82,
+      "do_not_resolve_500_vs550": true
+    },
+    {
+      "condition": "650degC50MPa",
+      "locator": "PDF p2 section3.1 and p3 Fig2D",
+      "coarse_grains_up_to_nm": 1000,
+      "fine_region_size_nm_in_text_approx": 130
+    }
+  ],
+  "thermal_coefficients": [
+    {
+      "quantity": "alphaBr",
+      "value": -0.097,
+      "unit": "%/K",
+      "temperature_range_K": [
+        300,
+        400
+      ],
+      "locator": "PDF p1 abstract,p6 section3.3,p7 conclusion",
+      "uncertainty": null
+    },
+    {
+      "quantity": "alphaHci",
+      "value": -0.616,
+      "unit": "%/K",
+      "temperature_range_K": [
+        300,
+        400
+      ],
+      "locator": "PDF p1 abstract",
+      "uncertainty": null,
+      "conflict_group": "alphaHci"
+    },
+    {
+      "quantity": "alphaHci",
+      "value": -0.622,
+      "unit": "%/K",
+      "temperature_range_K": [
+        300,
+        400
+      ],
+      "locator": "PDF p6 section3.3,p7 conclusion",
+      "uncertainty": null,
+      "conflict_group": "alphaHci"
+    }
+  ],
+  "reported_conflicts": [
+    {
+      "id": "temperature_500_550",
+      "severity": "blocks_unique_middle_pre_HD_temperature_assignment",
+      "sources": [
+        "p2 text500degC",
+        "p3 Fig2C500degC50MPa",
+        "p4 Fig3Ccaption550degC50MPa",
+        "p4 Fig3Exaxis550degC"
+      ]
+    },
+    {
+      "id": "HD_routeA_820_848",
+      "severity": "magnetic_curve_identity_conflict",
+      "sources": [
+        "p6 Fig9 greenlegend650-820",
+        "p4 Table1,p5 Fig4/Table2/Fig6,p6 Fig8 identify650-848"
+      ]
+    },
+    {
+      "id": "alphaHci_abstract_body",
+      "severity": "reported_coefficient_conflict",
+      "values_percent_per_K": [
+        -0.616,
+        -0.622
+      ]
+    },
+    {
+      "id": "Br_conclusion",
+      "severity": "numerical_and_unit_inconsistency",
+      "sources": [
+        "p1abstract,p5Table2,p7Fig10B give14.3kGs",
+        "p7conclusion gives14.4kGs and1.42T"
+      ]
+    },
+    {
+      "id": "coarsest80_up_to200",
+      "severity": "statistic_scope_ambiguity",
+      "sources": [
+        "p2 calls350degCcoarsestregionaround80nm",
+        "sameparagraphsomecoarseregionsup_to200nm"
+      ]
+    },
+    {
+      "id": "pressure_stress_state",
+      "severity": "method_definition_gap",
+      "sources": [
+        "p2methods hydrostaticpressure",
+        "p2results verticalhydraulicloading"
+      ]
+    },
+    {
+      "id": "aspect_ratio_definition",
+      "severity": "definition_not_proven_error",
+      "sources": [
+        "Table1B length1090nm/width125nm givesratioofmeans8.72 butreportedratio9.0",
+        "Table1D reportedspreads do notuniquelyreproduceaspectspread withoutcovariance/definition"
+      ]
+    },
+    {
+      "id": "distinct_pressure_for650",
+      "severity": "specimen_correspondence_limit_not_required_typo",
+      "sources": [
+        "Fig3D/E preHD650degC50MPa",
+        "Fig4A HDroute begins650degC40MPa"
+      ]
+    }
+  ],
+  "limitations": [
+    "No numeric theoretical-density reference; relative density is not absolute density",
+    "Initial dwell duration and actual process logs unavailable",
+    "Grain/image/preparation/cycle counts and error-bar definitions unavailable",
+    "Region-specific grain means, platelet dimensions and image-area fractions are different measurements",
+    "No independently repeated manufacturing or recovered-feedstock result is established"
+  ]
+}

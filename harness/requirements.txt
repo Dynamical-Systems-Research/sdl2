@@ -1,0 +1,12 @@
+# Exact packages of both frozen Python environments (owner and bridge), CPython 3.13.12. ndfeb_sps is vendored
+# (vendor/*-site-packages), because the frozen copies were patched in place after installation.
+annotated-types==0.8.0
+dynamical-cli==0.1.22
+numpy==2.5.3
+packaging==26.3
+pydantic==2.13.5
+pydantic-core==2.46.5
+pyyaml==6.0.3
+scipy==1.18.1
+typing-extensions==4.16.0
+typing-inspection==0.4.4

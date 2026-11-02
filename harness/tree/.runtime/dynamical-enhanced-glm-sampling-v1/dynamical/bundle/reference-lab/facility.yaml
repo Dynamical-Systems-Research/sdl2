@@ -1,0 +1,1649 @@
+document_type: dynamical.facility
+schema_version: 0.1.0
+facility:
+  id: ac-electrodeposition-cell
+  name: AC SDL1 single-deck electrodeposition bench
+  schema_version: 0.1.0
+  frame:
+    up_axis: Z
+    length_unit: m
+  workstation_ids:
+  - ot2-liquid-handling
+  authoring_basis: derived
+  source_refs:
+  - uri: https://zenodo.org/records/15575908
+    role: hardware-source
+    revision: 0.0.2
+  - uri: https://github.com/AccelerationConsortium/SDL1_OpenTron_electrodeposition/blob/2c5a911/example/experiment.py#L154-L199
+    role: workflow-source
+    revision: 2c5a911
+  - uri: https://github.com/AccelerationConsortium/SDL1_OpenTron_electrodeposition/blob/2c5a911/src/openTron_electrodeposition/parameters.py#L27-L56
+    role: workflow-source
+    revision: 2c5a911
+  - uri: https://github.com/AccelerationConsortium/SDL1_OpenTron_electrodeposition/blob/2c5a911/manuals/Canada%20Electrodeposition%20Bill%20of%20Materials%20(BOM).xlsx
+    role: hardware-source
+    revision: 2c5a911
+  - uri: https://github.com/AccelerationConsortium/SDL1_OpenTron_electrodeposition/blob/2c5a911/manuals/Electric_diagram.pdf
+    role: electrode-wiring-source
+    revision: 2c5a911
+  - uri: https://github.com/AccelerationConsortium/SDL1_OpenTron_electrodeposition/blob/2c5a911/example/experiment.py#L248-L539
+    role: measurement-protocol-source
+    revision: 2c5a911
+  claim_boundary:
+  - 'SDL1 uses one OT-2 deck. Deposition and OER testing act on the stationary Ni-tape working electrode at the
+    test-well bottom; the pipette carries the Ni counter-electrode tool, OER counter/reference tool, or flush tool
+    to the well. No sample transfer or separate electrochemical-cell loading is modeled. Source: example/experiment.py:154-199,1274-1430,1548-1734,2017-2066;
+    parameters.py:27-56; Electric_diagram.pdf page 1.'
+  - The geometry archive is AC-hosted SDL1 hardware at tag 0.0.2. FastCat is a separate DTU platform, with its own
+    facility bundle. No predictive instrument model in this SDL1 bundle was supplied by AC.
+  - Assets labelled execution_visualization_primitive are visualization markers with unknown physical shape and
+    placement. Their required dimensions_m, poses, colors and local frame are Dynamical display conventions, not
+    physical bounds, collision evidence or metrology. No asset mass is asserted.
+  - Admitted exact_source_geometry meshes preserve the source CAD geometry. Scene placements are schematic, not
+    measured deck coordinates. Except the recorded 132.5 x 190.5 x 113.7 mm well-cartridge mesh extent, dimensions_m
+    are display conventions; cleaning-cartridge and stock-rack values reproduce the upstream labware definition
+    footprints, not measured mesh extents. Exact source meshes, not dimensions_m, are the geometry record.
+  - Deck slot assignments and tool-rack positions come from example/experiment.py:154-199 and parameters.py:27-56.
+    Fourteen test wells are used (parameters.py:57-72); the fifteenth position is reserved for the temperature sensor
+    (README.md:97).
+  - The working electrode is nickel tape (BOM Ark1 B41); the nickel rod is the deposition counter tool (B52, Electric_diagram.pdf).
+    The OER tool combines counter and reference electrodes; the BOM lists Mini Hydroflex, platinum electrode and
+    platinum wire (B53-B55). Which reference electrode was physically mounted during a measured run is not established
+    by this code.
+  - The test well is temperature-controlled by the Arduino (example/experiment.py:2017-2018; src/arduino/main/main.ino:76-93,212-230).
+    Its inclusion establishes controller topology, not measured temperature accuracy or uniformity.
+  - This bundle supplies no measured SDL1 campaign rows or calibrated physical response predictions.
+  - A compiled stage proves scene composition only. Embodied evidence needs a preserved real execution trace, render,
+    replay, and inspection. No physical execution is claimed.
+  - Mixture aliquoting follows upstream integer-uL truncation. Fractional electrolyte volumes are Dynamical nominal
+    bookkeeping; the upstream range loop requires Python integer mL inputs (experiment.py:1433-1456), and the example
+    supplies integer 3. This extension does not establish upstream execution or measured delivery. Upstream pipette
+    strokes are at most 1000 uL. The 3.895 mL admission
+    cap follows the labware definition; parameters.py declares 3.9 mL and the main recipe uses 2.5 mL bath plus
+    a later 3 mL electrolyte fill. Command inventory is not measured delivered volume.
+  - The reference deposition command is cathodic -0.002827 A at a 35 degC setpoint for 60 s (the upstream function
+    also has a 10 s default), followed by 120 s OCP. Nominal precursor ratios are not measured film stoichiometry;
+    actual mass, thickness, temperature and delivered charge are unavailable.
+  - Cleaning retains deposit history while replacing nominal bath inventory, following the same-well sequence between
+    deposition and test. Neither perfect liquid removal nor unchanged film chemistry is established. Pumps rinse/drain
+    only; pipette dispensing is separate.
+  - 'The Arduino exposes temperature setpoint and timed ultrasound, not a power percentage. The admitted well-conditioning
+    command is the example recipe: cartridge 1, 30 s at a 35 C setpoint, not a verified continuous hardware envelope.
+    Unknown physical outputs are unavailable and carry no invented uncertainty. Except for the OER CP dwell lower
+    bound, duration/cost zero is unexecuted-physical-work bookkeeping; actual handling duration and cost remain
+    unknown.'
+  - measure-oer binds the full SDL1 source protocol, including 0.200 A/cm^2 activation and the 0.100,0.050,0.020,0.010,0.005,0.002,0.001
+    A/cm^2 staircase. These fixed source stages are admitted together, not as a continuous calibrated current envelope.
+    The last-third iR-corrected potential at 0.010 A/cm^2 is the upstream headline. Any 1.229 V overpotential offset
+    is a Dynamical convention; the mounted reference and compatible potential scale remain unverified.
+  - Squidstat hardware current/voltage limits and actual elapsed duration are unverified. Device channels have no
+    hardware bounds; deposition-only constraints do not describe the full OER protocol.
+workstations:
+- id: ot2-liquid-handling
+  facility_id: ac-electrodeposition-cell
+  member_asset_ids:
+  - ot2-robot-body
+  - ot2-tiprack
+  - ot2-cleaning-cartridge
+  - ot2-stock-reservoir-slot-7
+  - ot2-test-plate
+  - ot2-tool-rack
+  - ot2-stock-reservoir-slot-11
+  - arduino-controller-body
+  - arduino-ultrasound-mount
+  - squidstat-instrument-body
+  - deposition-counter-nickel-tool
+  - oer-counter-reference-tool
+  - working-electrode-nickel-tape
+  - flush-tool
+  - ag-reference-tool
+  local_frame:
+    position_m:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    orientation:
+      w: 1.0
+      x: 0.0
+      y: 0.0
+      z: 0.0
+assets:
+- id: ot2-robot-body
+  workstation_id: ot2-liquid-handling
+  asset_kind: Opentrons OT-2 liquid handler
+  geometry:
+    representation: execution_visualization_primitive
+    portable_primitive: cube
+    dimensions_m:
+      x: 0.66
+      y: 0.52
+      z: 0.55
+    display_color_rgb:
+    - 0.25
+    - 0.27
+    - 0.3
+  pose:
+    position_m:
+      x: 0.0
+      y: 0.0
+      z: 0.275
+    orientation:
+      w: 1.0
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  collision:
+    enabled: false
+    shape: none
+  manipulation_frames: {}
+  physical_properties: {}
+  source_refs:
+  - uri: https://github.com/AccelerationConsortium/SDL1_OpenTron_electrodeposition/blob/2c5a911/example/experiment.py#L154-L199
+    role: workflow-source
+    revision: 2c5a911
+- id: ot2-tiprack
+  workstation_id: ot2-liquid-handling
+  asset_kind: 'OT-2 deck slot 1: tiprack'
+  geometry:
+    representation: execution_visualization_primitive
+    portable_primitive: cube
+    dimensions_m:
+      x: 0.0864
+      y: 0.127
+      z: 0.092
+    display_color_rgb:
+    - 0.85
+    - 0.85
+    - 0.85
+  pose:
+    position_m:
+      x: -0.2
+      y: 0.1
+      z: 0.596
+    orientation:
+      w: 1.0
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  collision:
+    enabled: false
+    shape: none
+  manipulation_frames: {}
+  physical_properties: {}
+  source_refs:
+  - uri: https://github.com/AccelerationConsortium/SDL1_OpenTron_electrodeposition/blob/2c5a911/example/experiment.py#L154-L199
+    role: workflow-source
+    revision: 2c5a911
+- id: ot2-cleaning-cartridge
+  workstation_id: ot2-liquid-handling
+  asset_kind: 'OT-2 deck slot 3: cleaning cartridge; two wells; footprint from labware definition'
+  geometry:
+    representation: exact_source_geometry
+    mesh_source_id: assets/assembly-cleaning-cartridge-v15.usdc
+    dimensions_m:
+      x: 0.127
+      y: 0.085
+      z: 0.104
+    display_color_rgb:
+    - 0.55
+    - 0.58
+    - 0.62
+  pose:
+    position_m:
+      x: -0.2
+      y: -0.1
+      z: 0.562
+    orientation:
+      w: 1.0
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  collision:
+    enabled: false
+    shape: none
+  manipulation_frames: {}
+  physical_properties: {}
+  source_refs:
+  - uri: sources/ac-sdl1/assembly_cleaning_cartridge v15.step
+    role: vendor-asset
+    revision: 0.0.2
+  - uri: https://github.com/AccelerationConsortium/SDL1_OpenTron_electrodeposition/blob/2c5a911/example/experiment.py#L154-L199
+    role: workflow-source
+    revision: 2c5a911
+  - uri: https://github.com/AccelerationConsortium/SDL1_OpenTron_electrodeposition/blob/2c5a911/src/opentron_labware/nis_2_wellplate_30000ul.json#L20-L45
+    role: labware-definition
+    revision: 2c5a911
+- id: ot2-stock-reservoir-slot-7
+  workstation_id: ot2-liquid-handling
+  asset_kind: 'OT-2 deck slot 7: stock reservoir rack, 8 x 25 mL; vial-rack mesh correspondence is unverified, display only'
+  geometry:
+    representation: exact_source_geometry
+    mesh_source_id: assets/vial-rack-v3.usdc
+    dimensions_m:
+      x: 0.12775
+      y: 0.0855
+      z: 0.0604
+    display_color_rgb:
+    - 0.55
+    - 0.58
+    - 0.62
+  pose:
+    position_m:
+      x: 0.0
+      y: 0.1
+      z: 0.58
+    orientation:
+      w: 1.0
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  collision:
+    enabled: false
+    shape: none
+  manipulation_frames: {}
+  physical_properties: {}
+  source_refs:
+  - uri: sources/ac-sdl1/vial_rack v3.step
+    role: vendor-asset
+    revision: 0.0.2
+  - uri: https://github.com/AccelerationConsortium/SDL1_OpenTron_electrodeposition/blob/2c5a911/example/experiment.py#L154-L199
+    role: workflow-source
+    revision: 2c5a911
+  - uri: https://github.com/AccelerationConsortium/SDL1_OpenTron_electrodeposition/blob/2c5a911/src/opentron_labware/nis_8_reservoir_25000ul.json#L29-L42
+    role: labware-definition
+    revision: 2c5a911
+- id: ot2-test-plate
+  workstation_id: ot2-liquid-handling
+  asset_kind: 'OT-2 deck slot 9: test cartridge; 14 usable wells, one temperature-sensor position'
+  geometry:
+    representation: exact_source_geometry
+    mesh_source_id: assets/assembly-well-cartridge-v44.usdc
+    dimensions_m:
+      x: 0.1325
+      y: 0.1905
+      z: 0.1137
+    display_color_rgb:
+    - 0.55
+    - 0.58
+    - 0.62
+  pose:
+    position_m:
+      x: 0.0
+      y: -0.1
+      z: 0.607
+    orientation:
+      w: 1.0
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  collision:
+    enabled: false
+    shape: none
+  manipulation_frames: {}
+  physical_properties: {}
+  source_refs:
+  - uri: sources/ac-sdl1/assembly_well_cartridge v44.step
+    role: vendor-asset
+    revision: 0.0.2
+  - uri: https://github.com/AccelerationConsortium/SDL1_OpenTron_electrodeposition/blob/2c5a911/example/experiment.py#L154-L199
+    role: workflow-source
+    revision: 2c5a911
+  - uri: https://github.com/AccelerationConsortium/SDL1_OpenTron_electrodeposition/blob/2c5a911/src/openTron_electrodeposition/parameters.py#L57-L72
+    role: workflow-source
+    revision: 2c5a911
+- id: ot2-tool-rack
+  workstation_id: ot2-liquid-handling
+  asset_kind: 'OT-2 deck slot 10: tool rack'
+  geometry:
+    representation: exact_source_geometry
+    mesh_source_id: assets/tool-cartridge-v7.usdc
+    dimensions_m:
+      x: 0.1
+      y: 0.15
+      z: 0.05
+    display_color_rgb:
+    - 0.55
+    - 0.58
+    - 0.62
+  pose:
+    position_m:
+      x: 0.2
+      y: 0.1
+      z: 0.575
+    orientation:
+      w: 1.0
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  collision:
+    enabled: false
+    shape: none
+  manipulation_frames: {}
+  physical_properties: {}
+  source_refs:
+  - uri: sources/ac-sdl1/tool_cartridge_v7.step
+    role: vendor-asset
+    revision: 0.0.2
+  - uri: https://github.com/AccelerationConsortium/SDL1_OpenTron_electrodeposition/blob/2c5a911/example/experiment.py#L154-L199
+    role: workflow-source
+    revision: 2c5a911
+- id: ot2-stock-reservoir-slot-11
+  workstation_id: ot2-liquid-handling
+  asset_kind: 'OT-2 deck slot 11: stock reservoir rack, 8 x 25 mL; vial-rack mesh correspondence is unverified, display only'
+  geometry:
+    representation: exact_source_geometry
+    mesh_source_id: assets/vial-rack-v3.usdc
+    dimensions_m:
+      x: 0.12775
+      y: 0.0855
+      z: 0.0604
+    display_color_rgb:
+    - 0.55
+    - 0.58
+    - 0.62
+  pose:
+    position_m:
+      x: 0.2
+      y: -0.1
+      z: 0.58
+    orientation:
+      w: 1.0
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  collision:
+    enabled: false
+    shape: none
+  manipulation_frames: {}
+  physical_properties: {}
+  source_refs:
+  - uri: sources/ac-sdl1/vial_rack v3.step
+    role: vendor-asset
+    revision: 0.0.2
+  - uri: https://github.com/AccelerationConsortium/SDL1_OpenTron_electrodeposition/blob/2c5a911/example/experiment.py#L154-L199
+    role: workflow-source
+    revision: 2c5a911
+  - uri: https://github.com/AccelerationConsortium/SDL1_OpenTron_electrodeposition/blob/2c5a911/src/opentron_labware/nis_8_reservoir_25000ul.json#L29-L42
+    role: labware-definition
+    revision: 2c5a911
+- id: arduino-controller-body
+  workstation_id: ot2-liquid-handling
+  asset_kind: Arduino relay/PID/ultrasound controller enclosure
+  geometry:
+    representation: execution_visualization_primitive
+    portable_primitive: cube
+    dimensions_m:
+      x: 0.15
+      y: 0.1
+      z: 0.06
+    display_color_rgb:
+    - 0.15
+    - 0.16
+    - 0.18
+  pose:
+    position_m:
+      x: 0.0
+      y: 0.0
+      z: 0.03
+    orientation:
+      w: 1.0
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  collision:
+    enabled: false
+    shape: none
+  manipulation_frames: {}
+  physical_properties: {}
+  source_refs:
+  - uri: https://github.com/AccelerationConsortium/SDL1_OpenTron_electrodeposition/blob/2c5a911/src/arduino/main/main.ino#L7-L14
+    role: controller-source
+    revision: 2c5a911
+- id: arduino-ultrasound-mount
+  workstation_id: ot2-liquid-handling
+  asset_kind: Test-well ultrasound mount; schematic placement on the single deck
+  geometry:
+    representation: exact_source_geometry
+    mesh_source_id: assets/1-well-cartridge-ultrasound-mount-v5.usdc
+    dimensions_m:
+      x: 0.05
+      y: 0.05
+      z: 0.03
+    display_color_rgb:
+    - 0.55
+    - 0.58
+    - 0.62
+  pose:
+    position_m:
+      x: 0.0
+      y: -0.1
+      z: 0.55
+    orientation:
+      w: 1.0
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  collision:
+    enabled: false
+    shape: none
+  manipulation_frames: {}
+  physical_properties: {}
+  source_refs:
+  - uri: sources/ac-sdl1/1_well_catridge_ultrasound_mount v5.step
+    role: vendor-asset
+    revision: 0.0.2
+- id: squidstat-instrument-body
+  workstation_id: ot2-liquid-handling
+  asset_kind: Admiral Squidstat potentiostat
+  geometry:
+    representation: execution_visualization_primitive
+    portable_primitive: cube
+    dimensions_m:
+      x: 0.3
+      y: 0.25
+      z: 0.1
+    display_color_rgb:
+    - 0.2
+    - 0.2
+    - 0.22
+  pose:
+    position_m:
+      x: 0.0
+      y: 0.0
+      z: 0.05
+    orientation:
+      w: 1.0
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  collision:
+    enabled: false
+    shape: none
+  manipulation_frames: {}
+  physical_properties: {}
+  source_refs:
+  - uri: https://github.com/AccelerationConsortium/SDL1_OpenTron_electrodeposition/blob/2c5a911/example/main.py#L8-L9
+    role: controller-source
+    revision: 2c5a911
+- id: deposition-counter-nickel-tool
+  workstation_id: ot2-liquid-handling
+  asset_kind: Pipette-carried Ni deposition counter-electrode tool; parked at tool-rack A1
+  geometry:
+    representation: exact_source_geometry
+    mesh_source_id: assets/nickel-electrode-v30.usdc
+    dimensions_m:
+      x: 0.01
+      y: 0.01
+      z: 0.05
+    display_color_rgb:
+    - 0.75
+    - 0.76
+    - 0.78
+  pose:
+    position_m:
+      x: 0.18
+      y: 0.1
+      z: 0.6
+    orientation:
+      w: 1.0
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  collision:
+    enabled: false
+    shape: none
+  manipulation_frames: {}
+  physical_properties: {}
+  source_refs:
+  - uri: sources/ac-sdl1/nickel_electrode v30.step
+    role: vendor-asset
+    revision: 0.0.2
+  - uri: https://github.com/AccelerationConsortium/SDL1_OpenTron_electrodeposition/blob/2c5a911/src/openTron_electrodeposition/parameters.py#L27-L56
+    role: workflow-source
+    revision: 2c5a911
+  - uri: https://github.com/AccelerationConsortium/SDL1_OpenTron_electrodeposition/blob/2c5a911/manuals/Canada%20Electrodeposition%20Bill%20of%20Materials%20(BOM).xlsx
+    role: hardware-source
+    revision: 2c5a911
+  - uri: https://github.com/AccelerationConsortium/SDL1_OpenTron_electrodeposition/blob/2c5a911/manuals/Electric_diagram.pdf
+    role: electrode-wiring-source
+    revision: 2c5a911
+- id: oer-counter-reference-tool
+  workstation_id: ot2-liquid-handling
+  asset_kind: Pipette-carried OER counter/reference tool; parked at tool-rack B2
+  geometry:
+    representation: exact_source_geometry
+    mesh_source_id: assets/platinum-electrode-v46.usdc
+    dimensions_m:
+      x: 0.01
+      y: 0.01
+      z: 0.05
+    display_color_rgb:
+    - 0.82
+    - 0.8
+    - 0.74
+  pose:
+    position_m:
+      x: 0.22
+      y: 0.12
+      z: 0.6
+    orientation:
+      w: 1.0
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  collision:
+    enabled: false
+    shape: none
+  manipulation_frames: {}
+  physical_properties: {}
+  source_refs:
+  - uri: sources/ac-sdl1/platinum_electrode v46.step
+    role: vendor-asset
+    revision: 0.0.2
+  - uri: https://github.com/AccelerationConsortium/SDL1_OpenTron_electrodeposition/blob/2c5a911/src/openTron_electrodeposition/parameters.py#L27-L56
+    role: workflow-source
+    revision: 2c5a911
+  - uri: https://github.com/AccelerationConsortium/SDL1_OpenTron_electrodeposition/blob/2c5a911/manuals/Canada%20Electrodeposition%20Bill%20of%20Materials%20(BOM).xlsx
+    role: hardware-source
+    revision: 2c5a911
+  - uri: https://github.com/AccelerationConsortium/SDL1_OpenTron_electrodeposition/blob/2c5a911/manuals/Electric_diagram.pdf
+    role: electrode-wiring-source
+    revision: 2c5a911
+- id: working-electrode-nickel-tape
+  workstation_id: ot2-liquid-handling
+  asset_kind: Stationary Ni-tape working electrode at test-well bottom; visualization-only marker, physical
+    extent and exact pose unknown
+  geometry:
+    representation: execution_visualization_primitive
+    portable_primitive: cube
+    dimensions_m:
+      x: 0.01
+      y: 0.01
+      z: 0.01
+    display_color_rgb:
+    - 0.4
+    - 0.5
+    - 0.6
+  pose:
+    position_m:
+      x: 0
+      y: -0.1
+      z: 0.565
+    orientation:
+      w: 1.0
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  collision:
+    enabled: false
+    shape: none
+  manipulation_frames: {}
+  physical_properties: {}
+  source_refs:
+  - uri: https://github.com/AccelerationConsortium/SDL1_OpenTron_electrodeposition/blob/2c5a911/manuals/Canada%20Electrodeposition%20Bill%20of%20Materials%20(BOM).xlsx
+    role: hardware-source
+    revision: 2c5a911
+  - uri: https://github.com/AccelerationConsortium/SDL1_OpenTron_electrodeposition/blob/2c5a911/manuals/Electric_diagram.pdf
+    role: electrode-wiring-source
+    revision: 2c5a911
+- id: flush-tool
+  workstation_id: ot2-liquid-handling
+  asset_kind: Pipette-carried rinse/drain tool; parked at tool-rack B1; visualization-only marker. Upstream Flush_tool v11.step is not bundled; mesh extent is not recorded here and installed pose is unverified.
+  geometry:
+    representation: execution_visualization_primitive
+    portable_primitive: cube
+    dimensions_m:
+      x: 0.01
+      y: 0.01
+      z: 0.01
+    display_color_rgb:
+    - 0.4
+    - 0.5
+    - 0.6
+  pose:
+    position_m:
+      x: 0.22
+      y: 0.1
+      z: 0.6
+    orientation:
+      w: 1.0
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  collision:
+    enabled: false
+    shape: none
+  manipulation_frames: {}
+  physical_properties: {}
+  source_refs:
+  - uri: https://github.com/AccelerationConsortium/SDL1_OpenTron_electrodeposition/blob/2c5a911/src/openTron_electrodeposition/parameters.py#L27-L56
+    role: workflow-source
+    revision: 2c5a911
+  - uri: https://github.com/AccelerationConsortium/SDL1_OpenTron_electrodeposition/blob/2c5a911/example/experiment.py#L895-L1125
+    role: workflow-source
+    revision: 2c5a911
+- id: ag-reference-tool
+  workstation_id: ot2-liquid-handling
+  asset_kind: Unused Ag-labelled pipette tool at B2; role unverified. CAD exists upstream but is not bundled; rendered
+    marker and pose are conventions.
+  geometry:
+    representation: execution_visualization_primitive
+    portable_primitive: cube
+    dimensions_m:
+      x: 0.01
+      y: 0.01
+      z: 0.01
+    display_color_rgb: [0.4, 0.5, 0.6]
+  pose:
+    position_m:
+      x: 0.18
+      y: 0.12
+      z: 0.6
+    orientation:
+      w: 1.0
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  collision:
+    enabled: false
+    shape: none
+  manipulation_frames: {}
+  physical_properties: {}
+  source_refs:
+  - uri: https://github.com/AccelerationConsortium/SDL1_OpenTron_electrodeposition/blob/2c5a911/src/openTron_electrodeposition/parameters.py#L27-L56
+    role: workflow-source
+    revision: 2c5a911
+devices:
+- id: ot2-device
+  asset_id: ot2-robot-body
+  state_channels:
+  - id: ot2.dispense_volume_requested_ml
+    value_type: number
+    unit: mL
+    minimum: 0.0
+    maximum: 3.895
+  - id: ot2.dispense_volume_commanded_ml
+    value_type: number
+    unit: mL
+    minimum: 0.0
+    maximum: 3.895
+  - id: ot2.dispense_volume_applied_ml
+    value_type: number
+    unit: mL
+    minimum: 0.0
+    maximum: 3.895
+  - id: ot2.aliquot_volume_requested_ml
+    value_type: number
+    unit: mL
+    minimum: 0.0
+    maximum: 3.895
+  - id: ot2.aliquot_volume_commanded_ml
+    value_type: number
+    unit: mL
+    minimum: 0.0
+    maximum: 3.895
+  - id: ot2.aliquot_volume_applied_ml
+    value_type: number
+    unit: mL
+    minimum: 0.0
+    maximum: 3.895
+  capability_ids:
+  - dispense-electrolyte-capability
+  - aliquot-to-well-capability
+- id: arduino-device
+  asset_id: arduino-controller-body
+  state_channels:
+  - id: arduino.ultrasound_commanded_s
+    value_type: number
+    unit: s
+  - id: arduino.temperature_setpoint_c
+    value_type: number
+    unit: degC
+  - id: arduino.temperature_observed_c
+    value_type: number
+    unit: degC
+  capability_ids:
+  - condition-ultrasonic-capability
+- id: squidstat-device
+  asset_id: squidstat-instrument-body
+  state_channels:
+  - id: squidstat.current_a
+    value_type: number
+    unit: A
+  - id: squidstat.duration_s
+    value_type: number
+    unit: s
+  - id: squidstat.commanded_charge_c
+    value_type: number
+    unit: C
+  - id: squidstat.deposited_mass_g
+    value_type: number
+    unit: g
+    minimum: 0.0
+  - id: squidstat.deposited_thickness_um
+    value_type: number
+    unit: um
+    minimum: 0.0
+  - id: squidstat.current_density_a_cm2
+    value_type: number
+    unit: A/cm^2
+    minimum: -0.01
+    maximum: 0.2
+  - id: squidstat.overpotential_v
+    value_type: number
+    unit: V
+  - id: squidstat.potential_at_10ma_cm2_v
+    value_type: number
+    unit: V
+  - id: squidstat.corrected_potential_at_10ma_cm2_v
+    value_type: number
+    unit: V
+  - id: squidstat.ohmic_resistance_ohm
+    value_type: number
+    unit: ohm
+  capability_ids: [electrodeposit-constant-current-capability, measure-oer-capability]
+- id: cleaning-station-device
+  asset_id: ot2-test-plate
+  state_channels:
+  - id: cleaning.water_commanded_ml
+    value_type: number
+    unit: mL
+  - id: cleaning.acid_commanded_ml
+    value_type: number
+    unit: mL
+  - id: cleaning.drain_commanded_ml
+    value_type: number
+    unit: mL
+  - id: cleaning.ultrasound_commanded_s
+    value_type: number
+    unit: s
+  - id: cleaning.residual_volume_ml
+    value_type: number
+    unit: mL
+  capability_ids: [clean-electrode-capability]
+agents: []
+capabilities:
+- id: dispense-electrolyte-capability
+  provider_id: ot2-device
+  action_type: dispense
+  parameters:
+  - name: volume_ml
+    value_type: number
+    required: true
+    unit: mL
+    minimum: 0.0
+    maximum: 3.895
+  - name: chemical
+    value_type: string
+    required: false
+    unit: '1'
+    enum:
+    - Ni
+    - Fe
+    - Cr
+    - Mn
+    - Co
+    - Zn
+    - Cu
+    - NH4OH
+    - NaCi
+    - KOH
+  observation_channel_ids:
+  - ot2.dispense_volume_requested_ml
+  - ot2.dispense_volume_commanded_ml
+  - ot2.dispense_volume_applied_ml
+  echoed_parameter_bindings:
+    ot2.dispense_volume_requested_ml: volume_ml
+  reported_output_port_ids:
+    ot2.dispense_volume_requested_ml: volume_requested_ml
+    ot2.dispense_volume_commanded_ml: volume_commanded_ml
+    ot2.dispense_volume_applied_ml: volume_applied_ml
+  precondition_constraint_ids:
+  - dispense-volume-envelope
+  postcondition_constraint_ids: []
+- id: aliquot-to-well-capability
+  provider_id: ot2-device
+  action_type: aliquot
+  parameters:
+  - name: volume_ml
+    value_type: number
+    required: true
+    unit: mL
+    minimum: 0.0
+    maximum: 3.895
+  - name: chemical
+    value_type: string
+    required: false
+    unit: '1'
+    enum:
+    - Ni
+    - Fe
+    - Cr
+    - Mn
+    - Co
+    - Zn
+    - Cu
+    - NH4OH
+    - NaCi
+    - KOH
+  observation_channel_ids:
+  - ot2.aliquot_volume_requested_ml
+  - ot2.aliquot_volume_commanded_ml
+  - ot2.aliquot_volume_applied_ml
+  echoed_parameter_bindings:
+    ot2.aliquot_volume_requested_ml: volume_ml
+  reported_output_port_ids:
+    ot2.aliquot_volume_requested_ml: volume_requested_ml
+    ot2.aliquot_volume_commanded_ml: volume_commanded_ml
+    ot2.aliquot_volume_applied_ml: volume_applied_ml
+  precondition_constraint_ids:
+  - aliquot-volume-envelope
+  postcondition_constraint_ids: []
+- id: condition-ultrasonic-capability
+  provider_id: arduino-device
+  action_type: condition
+  parameters:
+  - name: duration_s
+    value_type: number
+    required: true
+    unit: s
+    enum: [30.0]
+  - name: temperature_setpoint_c
+    value_type: number
+    required: true
+    unit: degC
+    enum: [35.0]
+  observation_channel_ids: [arduino.ultrasound_commanded_s, arduino.temperature_setpoint_c, arduino.temperature_observed_c]
+  echoed_parameter_bindings:
+    arduino.ultrasound_commanded_s: duration_s
+    arduino.temperature_setpoint_c: temperature_setpoint_c
+  reported_output_port_ids:
+    arduino.ultrasound_commanded_s: instrument.ultrasound_commanded_s
+    arduino.temperature_setpoint_c: instrument.temperature_setpoint_c
+    arduino.temperature_observed_c: instrument.temperature_observed_c
+  precondition_constraint_ids: [conditioning-duration-envelope, conditioning-setpoint-envelope]
+  postcondition_constraint_ids: []
+- id: electrodeposit-constant-current-capability
+  provider_id: squidstat-device
+  action_type: electrodeposit
+  parameters:
+  - name: current_a
+    value_type: number
+    required: true
+    unit: A
+    enum: [-0.002827]
+  - name: duration_s
+    value_type: number
+    required: true
+    unit: s
+    enum: [60.0]
+  - name: temperature_setpoint_c
+    value_type: number
+    required: true
+    unit: degC
+    enum: [35.0]
+  observation_channel_ids: [squidstat.current_a, squidstat.duration_s, arduino.temperature_setpoint_c, squidstat.commanded_charge_c,
+    squidstat.deposited_mass_g, squidstat.deposited_thickness_um, squidstat.current_density_a_cm2]
+  echoed_parameter_bindings:
+    squidstat.current_a: current_a
+    squidstat.duration_s: duration_s
+    arduino.temperature_setpoint_c: temperature_setpoint_c
+  reported_output_port_ids:
+    squidstat.commanded_charge_c: commanded_charge_c
+    squidstat.deposited_mass_g: deposited_mass_g
+    squidstat.deposited_thickness_um: deposited_thickness_um
+    squidstat.current_density_a_cm2: current_density_a_cm2
+  precondition_constraint_ids: [current-envelope, deposition-duration-envelope, deposition-temperature-envelope]
+  postcondition_constraint_ids: []
+- id: measure-oer-capability
+  provider_id: squidstat-device
+  action_type: measure
+  parameters:
+  - name: protocol_id
+    value_type: string
+    unit: '1'
+    required: true
+    enum:
+    - sdl1-oer-2c5a911
+  observation_channel_ids:
+  - squidstat.current_density_a_cm2
+  - squidstat.potential_at_10ma_cm2_v
+  - squidstat.corrected_potential_at_10ma_cm2_v
+  - squidstat.ohmic_resistance_ohm
+  - squidstat.overpotential_v
+  echoed_parameter_bindings: {}
+  reported_output_port_ids:
+    squidstat.current_density_a_cm2: current_density_a_cm2
+    squidstat.potential_at_10ma_cm2_v: potential_at_10ma_cm2_v
+    squidstat.corrected_potential_at_10ma_cm2_v: corrected_potential_at_10ma_cm2_v
+    squidstat.ohmic_resistance_ohm: ohmic_resistance_ohm
+    squidstat.overpotential_v: overpotential_v
+  precondition_constraint_ids: []
+  postcondition_constraint_ids: []
+- id: clean-electrode-capability
+  provider_id: cleaning-station-device
+  action_type: clean
+  parameters:
+  - name: use_acid
+    value_type: boolean
+    unit: '1'
+    required: true
+  - name: acid_dwell_s
+    value_type: number
+    required: true
+    unit: s
+    enum:
+    - 0.0
+    - 0.1
+    - 30.0
+  observation_channel_ids:
+  - cleaning.water_commanded_ml
+  - cleaning.acid_commanded_ml
+  - cleaning.drain_commanded_ml
+  - cleaning.ultrasound_commanded_s
+  - cleaning.residual_volume_ml
+  echoed_parameter_bindings: {}
+  reported_output_port_ids:
+    cleaning.water_commanded_ml: instrument.water_commanded_ml
+    cleaning.acid_commanded_ml: instrument.acid_commanded_ml
+    cleaning.drain_commanded_ml: instrument.drain_commanded_ml
+    cleaning.ultrasound_commanded_s: instrument.ultrasound_commanded_s
+    cleaning.residual_volume_ml: instrument.residual_volume_ml
+  precondition_constraint_ids: []
+  postcondition_constraint_ids: []
+material_states: []
+model_bindings:
+- id: ac-opentron-model
+  implementation_ref: dynamical/instruments/ac_opentron.py
+  implementation_sha256: 6889670e4729e59302158240a39438daa4307c958dccf74de536834dc37329a8
+  input_channel_map: {}
+  output_channel_map: {}
+  parameter_map:
+    evidence-class: simulator
+    physical-calibration: false
+  update_interval_s: 1.0
+  calibration_evidence_ids: []
+- id: ac-arduino-model
+  implementation_ref: dynamical/instruments/ac_arduino.py
+  implementation_sha256: 859eeb9551099fa8d423811f7b55e36eeba87d0ee1e3b43e54d0c50c8ef8adc0
+  input_channel_map: {}
+  output_channel_map: {}
+  parameter_map:
+    evidence-class: simulator
+    physical-calibration: false
+  update_interval_s: 1.0
+  calibration_evidence_ids: []
+- id: ac-potentiostat-model
+  implementation_ref: dynamical/instruments/ac_potentiostat.py
+  implementation_sha256: 8e109fd72da319994adfc7d09609afa7dd5c606c118724c639d52b894a0aded2
+  input_channel_map: {}
+  output_channel_map: {}
+  parameter_map:
+    evidence-class: simulator
+    physical-calibration: false
+  update_interval_s: 1.0
+  calibration_evidence_ids: []
+- id: ac-cleaning-model
+  implementation_ref: dynamical/instruments/ac_cleaning.py
+  implementation_sha256: 9d78cd6cc23ff0fe8287a9db598a0811e6c1a04f95e02f1383d6be8278a9a2ec
+  input_channel_map: {}
+  output_channel_map: {}
+  parameter_map:
+    evidence-class: simulator
+    physical-calibration: false
+  update_interval_s: 1.0
+  calibration_evidence_ids: []
+- id: bounded-constraint-verifier
+  implementation_ref: dynamical/runtime/constraints.py
+  implementation_sha256: 9211c861006f2df7a6d3941fedcc0e1e643b9ce35b42f7309c5e2d371762a1a7
+  input_channel_map: {}
+  output_channel_map: {}
+  parameter_map:
+    verifier-owner: independent-runtime
+  update_interval_s: 0.001
+  calibration_evidence_ids: []
+- id: ac-sdl1-oer-model
+  implementation_ref: dynamical/instruments/ac_sdl1_oer.py
+  implementation_sha256: 52d15ac9e804acd91634b90111855d07eaf3f511f651fb16d1a38f2f033cbfe7
+  input_channel_map: {}
+  output_channel_map: {}
+  parameter_map:
+    evidence-class: simulator
+    physical-calibration: false
+    protocol-ref: protocols/sdl1-oer.json
+    protocol-sha256: 5238b6230b5f5a13a8fc23f172fcb98276f10f2f7a10145a1d65fc9feb3bd9c2
+  update_interval_s: 1.0
+  calibration_evidence_ids: []
+adapter_bindings:
+- id: ac-electrodeposition-isaac-adapter
+  target: isaac
+  subject_id: ac-electrodeposition-cell
+  adapter_id: dynamical-isaac-sim
+  adapter_version: 0.1.0
+  binding_schema_ref: dynamical.isaac-sim-target.v1
+  configuration:
+    isaac_sim_version: 6.0.1
+    isaac_lab_revision: portable-runtime-no-isaac-lab-task
+    task_id: Dynamical-AC-Electrodeposition-Cell-v0
+    experience: isaacsim.exp.full
+    vendor_asset_paths: {}
+- id: ac-electrodeposition-openusd-adapter
+  target: openusd
+  subject_id: ac-electrodeposition-cell
+  adapter_id: dynamical-openusd
+  adapter_version: 0.1.0
+  binding_schema_ref: dynamical.openusd-target.v1
+  configuration:
+    material_policy: UsdPreviewSurface
+    vendor_references: false
+- id: ac-electrodeposition-replay-adapter
+  target: replay
+  subject_id: ac-electrodeposition-cell
+  adapter_id: dynamical-replay
+  adapter_version: 0.1.0
+  binding_schema_ref: dynamical.trace.v0.1
+  configuration:
+    trace_contract_version: 0.1.0
+    preserve_observation_origin: true
+provider_admission_bindings:
+- id: admitted-ac-ot2-dispense-electrolyte
+  provider_id: ac-ot2-simulator
+  operation_id: dispense-electrolyte
+  evidence_classes:
+  - simulator
+  facility_ids:
+  - ot2-liquid-handling
+  endpoint_id: ac-opentron-model
+  adapter_links:
+  - adapter_id: dynamical-ac-opentron-python
+    adapter_version: 0.1.0
+    endpoint_ref: ac-opentron-model
+  - adapter_id: dynamical-ac-ot2-control
+    adapter_version: 0.1.0
+    endpoint_ref: ot2-device
+  validity_envelope:
+  - subject_kind: parameter
+    subject_id: volume_ml
+    value_type: number
+    unit: mL
+    minimum: 0.0
+    maximum: 3.895
+  - subject_kind: parameter
+    subject_id: chemical
+    value_type: string
+    unit: '1'
+    enum:
+    - Ni
+    - Fe
+    - Cr
+    - Mn
+    - Co
+    - Zn
+    - Cu
+    - NH4OH
+    - NaCi
+    - KOH
+  safety_limit_ids:
+  - dispense-volume-envelope
+  policy_tags:
+  - simulation-only
+  - source-command-only
+  - physical-response-unavailable
+  required_approval_ids: []
+- id: admitted-ac-ot2-aliquot-to-well
+  provider_id: ac-ot2-simulator
+  operation_id: aliquot-to-well
+  evidence_classes:
+  - simulator
+  facility_ids:
+  - ot2-liquid-handling
+  endpoint_id: ac-opentron-model
+  adapter_links:
+  - adapter_id: dynamical-ac-opentron-python
+    adapter_version: 0.1.0
+    endpoint_ref: ac-opentron-model
+  - adapter_id: dynamical-ac-ot2-control
+    adapter_version: 0.1.0
+    endpoint_ref: ot2-device
+  validity_envelope:
+  - subject_kind: parameter
+    subject_id: volume_ml
+    value_type: number
+    unit: mL
+    minimum: 0.0
+    maximum: 3.895
+  - subject_kind: parameter
+    subject_id: chemical
+    value_type: string
+    unit: '1'
+    enum:
+    - Ni
+    - Fe
+    - Cr
+    - Mn
+    - Co
+    - Zn
+    - Cu
+    - NH4OH
+    - NaCi
+    - KOH
+  safety_limit_ids:
+  - aliquot-volume-envelope
+  policy_tags:
+  - simulation-only
+  - source-command-only
+  - physical-response-unavailable
+  required_approval_ids: []
+- id: admitted-ac-arduino-condition-ultrasonic
+  provider_id: ac-arduino-simulator
+  operation_id: condition-ultrasonic
+  evidence_classes: [simulator]
+  facility_ids: [ot2-liquid-handling]
+  endpoint_id: ac-arduino-model
+  adapter_links:
+  - adapter_id: dynamical-ac-arduino-python
+    adapter_version: 0.1.0
+    endpoint_ref: ac-arduino-model
+  - adapter_id: dynamical-ac-arduino-control
+    adapter_version: 0.1.0
+    endpoint_ref: arduino-device
+  validity_envelope:
+  - subject_kind: parameter
+    subject_id: duration_s
+    value_type: number
+    unit: s
+    enum: [30.0]
+  - subject_kind: parameter
+    subject_id: temperature_setpoint_c
+    value_type: number
+    unit: degC
+    enum: [35.0]
+  safety_limit_ids: [conditioning-duration-envelope, conditioning-setpoint-envelope]
+  policy_tags: [simulation-only, source-command-only, physical-response-unavailable]
+  required_approval_ids: []
+- id: admitted-ac-squidstat-electrodeposit
+  provider_id: ac-squidstat-simulator
+  operation_id: electrodeposit-constant-current
+  evidence_classes: [simulator]
+  facility_ids: [ot2-liquid-handling]
+  endpoint_id: ac-potentiostat-model
+  adapter_links:
+  - adapter_id: dynamical-ac-potentiostat-python
+    adapter_version: 0.1.0
+    endpoint_ref: ac-potentiostat-model
+  - adapter_id: dynamical-ac-squidstat-control
+    adapter_version: 0.1.0
+    endpoint_ref: squidstat-device
+  validity_envelope:
+  - subject_kind: parameter
+    subject_id: current_a
+    value_type: number
+    unit: A
+    enum: [-0.002827]
+  - subject_kind: parameter
+    subject_id: duration_s
+    value_type: number
+    unit: s
+    enum: [60.0]
+  - subject_kind: parameter
+    subject_id: temperature_setpoint_c
+    value_type: number
+    unit: degC
+    enum: [35.0]
+  safety_limit_ids: [current-envelope, deposition-duration-envelope, deposition-temperature-envelope]
+  policy_tags: [simulation-only, source-command-only, physical-response-unavailable]
+  required_approval_ids: []
+- id: admitted-ac-sdl1-measure-oer
+  provider_id: ac-sdl1-oer-protocol
+  operation_id: measure-oer
+  evidence_classes:
+  - simulator
+  facility_ids:
+  - ot2-liquid-handling
+  endpoint_id: ac-sdl1-oer-model
+  adapter_links:
+  - adapter_id: dynamical-ac-sdl1-oer-python
+    adapter_version: 0.1.0
+    endpoint_ref: ac-sdl1-oer-model
+  validity_envelope:
+  - subject_kind: parameter
+    subject_id: protocol_id
+    value_type: string
+    unit: '1'
+    enum:
+    - sdl1-oer-2c5a911
+  safety_limit_ids: []
+  policy_tags:
+  - simulation-only
+  - source-protocol-only
+  - physical-response-unavailable
+  required_approval_ids: []
+- id: admitted-ac-cleaning-clean-electrode
+  provider_id: ac-cleaning-simulator
+  operation_id: clean-electrode
+  evidence_classes:
+  - simulator
+  facility_ids:
+  - ot2-liquid-handling
+  endpoint_id: ac-cleaning-model
+  adapter_links:
+  - adapter_id: dynamical-ac-cleaning-python
+    adapter_version: 0.1.0
+    endpoint_ref: ac-cleaning-model
+  - adapter_id: dynamical-ac-ot2-control
+    adapter_version: 0.1.0
+    endpoint_ref: cleaning-station-device
+  validity_envelope:
+  - subject_kind: parameter
+    subject_id: use_acid
+    value_type: boolean
+    unit: '1'
+  - subject_kind: parameter
+    subject_id: acid_dwell_s
+    value_type: number
+    unit: s
+    enum:
+    - 0.0
+    - 0.1
+    - 30.0
+  safety_limit_ids: []
+  policy_tags:
+  - simulation-only
+  - source-command-only
+  - physical-response-unavailable
+  required_approval_ids: []
+constraints:
+- id: dispense-volume-envelope
+  phase: pre_action
+  channel_id: ot2.dispense_volume_requested_ml
+  operator: between
+  bound:
+    minimum: 0.0
+    maximum: 3.895
+  unit: mL
+  enforcement: reject
+  verifier_binding_id: bounded-constraint-verifier
+  constrained_parameter_name: volume_ml
+- id: aliquot-volume-envelope
+  phase: pre_action
+  channel_id: ot2.aliquot_volume_requested_ml
+  operator: between
+  bound:
+    minimum: 0.0
+    maximum: 3.895
+  unit: mL
+  enforcement: reject
+  verifier_binding_id: bounded-constraint-verifier
+  constrained_parameter_name: volume_ml
+- id: conditioning-duration-envelope
+  phase: pre_action
+  channel_id: arduino.ultrasound_commanded_s
+  operator: between
+  bound:
+    minimum: 30.0
+    maximum: 30.0
+  unit: s
+  enforcement: reject
+  verifier_binding_id: bounded-constraint-verifier
+  constrained_parameter_name: duration_s
+- id: conditioning-setpoint-envelope
+  phase: pre_action
+  channel_id: arduino.temperature_setpoint_c
+  operator: between
+  bound:
+    minimum: 35.0
+    maximum: 35.0
+  unit: degC
+  enforcement: reject
+  verifier_binding_id: bounded-constraint-verifier
+  constrained_parameter_name: temperature_setpoint_c
+- id: current-envelope
+  phase: pre_action
+  channel_id: squidstat.current_a
+  operator: between
+  bound:
+    minimum: -0.002827
+    maximum: -0.002827
+  unit: A
+  enforcement: reject
+  verifier_binding_id: bounded-constraint-verifier
+  constrained_parameter_name: current_a
+- id: deposition-duration-envelope
+  phase: pre_action
+  channel_id: squidstat.duration_s
+  operator: between
+  bound:
+    minimum: 60.0
+    maximum: 60.0
+  unit: s
+  enforcement: reject
+  verifier_binding_id: bounded-constraint-verifier
+  constrained_parameter_name: duration_s
+- id: deposition-temperature-envelope
+  phase: pre_action
+  channel_id: arduino.temperature_setpoint_c
+  operator: between
+  bound:
+    minimum: 35.0
+    maximum: 35.0
+  unit: degC
+  enforcement: reject
+  verifier_binding_id: bounded-constraint-verifier
+  constrained_parameter_name: temperature_setpoint_c
+calibration_evidence: []
+asset_sources:
+- id: sources/ac-sdl1/assembly_well_cartridge v44.step
+  retrieval_uri: https://zenodo.org/api/records/15575908/files/AccelerationConsortium/SDL1_OpenTron_electrodeposition-0.0.2.zip/content
+  sha256: 0d646ba7e37d1a441472ac165b40a2902be24b7fd2f5d5720133615a47432e76
+  admission: admitted
+  authority_id: dynamical-v0.1-release-authority
+  license_ref: zenodo-record-metadata
+  license_evidence: 'GET https://zenodo.org/api/records/15575908 (Zenodo record for tag 0.0.2, re-verified
+    live 2026-08-09) -> metadata.license = {"id": "cc-by-4.0"}'
+  conflict_notes:
+  - 'the vendored archive (sha256 253a751531a83a62f3dc028dc4909069d23fe648da89339badf78a1fd00e986c) contains
+    no LICENSE/COPYING file and no ''license'' or ''copyright'' string anywhere in its 174 members (grep
+    -rli ''license|copyright'' over the full extraction: zero matches)'
+  - 'Zenodo record 15575908 (tag 0.0.2) metadata.license = {''id'': ''cc-by-4.0''}: a versioned CC BY
+    4.0 slug, but it is asserted only by the Zenodo platform''s own record metadata -- it is not an SPDX
+    license identifier field and is not evidenced anywhere inside the archive''s own contents'
+  - GitHub AccelerationConsortium/SDL1_OpenTron_electrodeposition main (checked 2026-08-09) now carries
+    LICENSE=MIT, copyright Technical University of Denmark 2025 (api.github.com/repos/AccelerationConsortium/SDL1_OpenTron_electrodeposition/license
+    -> spdx_id MIT); raw.githubusercontent.com/.../0.0.2/LICENSE returns HTTP 404, so this MIT grant postdates
+    the vendored 0.0.2 tag and cannot be relied on for these files
+  revision: 0.0.2
+  retrieved_at: '2026-08-09'
+- id: assets/assembly-well-cartridge-v44.usdc
+  retrieval_uri: https://zenodo.org/api/records/15575908/files/AccelerationConsortium/SDL1_OpenTron_electrodeposition-0.0.2.zip/content
+  sha256: 491e53a4c9df7a8718d4b890d50b7427e5cc8025cefa07b631b835af5aad333f
+  admission: admitted
+  authority_id: dynamical-v0.1-release-authority
+  license_ref: zenodo-record-metadata
+  license_evidence: 'GET https://zenodo.org/api/records/15575908 (Zenodo record for tag 0.0.2, re-verified
+    live 2026-08-09) -> metadata.license = {"id": "cc-by-4.0"}'
+  conflict_notes:
+  - 'the vendored archive (sha256 253a751531a83a62f3dc028dc4909069d23fe648da89339badf78a1fd00e986c) contains
+    no LICENSE/COPYING file and no ''license'' or ''copyright'' string anywhere in its 174 members (grep
+    -rli ''license|copyright'' over the full extraction: zero matches)'
+  - 'Zenodo record 15575908 (tag 0.0.2) metadata.license = {''id'': ''cc-by-4.0''}: a versioned CC BY
+    4.0 slug, but it is asserted only by the Zenodo platform''s own record metadata -- it is not an SPDX
+    license identifier field and is not evidenced anywhere inside the archive''s own contents'
+  - GitHub AccelerationConsortium/SDL1_OpenTron_electrodeposition main (checked 2026-08-09) now carries
+    LICENSE=MIT, copyright Technical University of Denmark 2025 (api.github.com/repos/AccelerationConsortium/SDL1_OpenTron_electrodeposition/license
+    -> spdx_id MIT); raw.githubusercontent.com/.../0.0.2/LICENSE returns HTTP 404, so this MIT grant postdates
+    the vendored 0.0.2 tag and cannot be relied on for these files
+  revision: 0.0.2
+  retrieved_at: '2026-08-09'
+  derived_from_source_id: sources/ac-sdl1/assembly_well_cartridge v44.step
+  conversion_tool: tools/cad_to_usd.py (cascadio==0.1.1, trimesh==5.0.0, OpenUSD 26.05)
+  conversion_tolerance: 0.05,0.5
+- id: sources/ac-sdl1/assembly_cleaning_cartridge v15.step
+  retrieval_uri: https://zenodo.org/api/records/15575908/files/AccelerationConsortium/SDL1_OpenTron_electrodeposition-0.0.2.zip/content
+  sha256: 946172c09e98043d8d78807fc21c57517cbcd2653bc0fc6ffef5d16de44580f7
+  admission: admitted
+  authority_id: dynamical-v0.1-release-authority
+  license_ref: zenodo-record-metadata
+  license_evidence: 'GET https://zenodo.org/api/records/15575908 (Zenodo record for tag 0.0.2, re-verified
+    live 2026-08-09) -> metadata.license = {"id": "cc-by-4.0"}'
+  conflict_notes:
+  - 'the vendored archive (sha256 253a751531a83a62f3dc028dc4909069d23fe648da89339badf78a1fd00e986c) contains
+    no LICENSE/COPYING file and no ''license'' or ''copyright'' string anywhere in its 174 members (grep
+    -rli ''license|copyright'' over the full extraction: zero matches)'
+  - 'Zenodo record 15575908 (tag 0.0.2) metadata.license = {''id'': ''cc-by-4.0''}: a versioned CC BY
+    4.0 slug, but it is asserted only by the Zenodo platform''s own record metadata -- it is not an SPDX
+    license identifier field and is not evidenced anywhere inside the archive''s own contents'
+  - GitHub AccelerationConsortium/SDL1_OpenTron_electrodeposition main (checked 2026-08-09) now carries
+    LICENSE=MIT, copyright Technical University of Denmark 2025 (api.github.com/repos/AccelerationConsortium/SDL1_OpenTron_electrodeposition/license
+    -> spdx_id MIT); raw.githubusercontent.com/.../0.0.2/LICENSE returns HTTP 404, so this MIT grant postdates
+    the vendored 0.0.2 tag and cannot be relied on for these files
+  revision: 0.0.2
+  retrieved_at: '2026-08-09'
+- id: assets/assembly-cleaning-cartridge-v15.usdc
+  retrieval_uri: https://zenodo.org/api/records/15575908/files/AccelerationConsortium/SDL1_OpenTron_electrodeposition-0.0.2.zip/content
+  sha256: 55233d6edc475aa0f080dba11c376c8c866b8fcfa0bfe534c0c08fd1fd9b08f4
+  admission: admitted
+  authority_id: dynamical-v0.1-release-authority
+  license_ref: zenodo-record-metadata
+  license_evidence: 'GET https://zenodo.org/api/records/15575908 (Zenodo record for tag 0.0.2, re-verified
+    live 2026-08-09) -> metadata.license = {"id": "cc-by-4.0"}'
+  conflict_notes:
+  - 'the vendored archive (sha256 253a751531a83a62f3dc028dc4909069d23fe648da89339badf78a1fd00e986c) contains
+    no LICENSE/COPYING file and no ''license'' or ''copyright'' string anywhere in its 174 members (grep
+    -rli ''license|copyright'' over the full extraction: zero matches)'
+  - 'Zenodo record 15575908 (tag 0.0.2) metadata.license = {''id'': ''cc-by-4.0''}: a versioned CC BY
+    4.0 slug, but it is asserted only by the Zenodo platform''s own record metadata -- it is not an SPDX
+    license identifier field and is not evidenced anywhere inside the archive''s own contents'
+  - GitHub AccelerationConsortium/SDL1_OpenTron_electrodeposition main (checked 2026-08-09) now carries
+    LICENSE=MIT, copyright Technical University of Denmark 2025 (api.github.com/repos/AccelerationConsortium/SDL1_OpenTron_electrodeposition/license
+    -> spdx_id MIT); raw.githubusercontent.com/.../0.0.2/LICENSE returns HTTP 404, so this MIT grant postdates
+    the vendored 0.0.2 tag and cannot be relied on for these files
+  revision: 0.0.2
+  retrieved_at: '2026-08-09'
+  derived_from_source_id: sources/ac-sdl1/assembly_cleaning_cartridge v15.step
+  conversion_tool: tools/cad_to_usd.py (cascadio==0.1.1, trimesh==5.0.0, OpenUSD 26.05)
+  conversion_tolerance: 0.05,0.5
+- id: sources/ac-sdl1/tool_cartridge_v7.step
+  retrieval_uri: https://zenodo.org/api/records/15575908/files/AccelerationConsortium/SDL1_OpenTron_electrodeposition-0.0.2.zip/content
+  sha256: 069e91b3044b010b4ce14fcd7345e022d6d57ea5bb3a6e0076f4b2e92db505f8
+  admission: admitted
+  authority_id: dynamical-v0.1-release-authority
+  license_ref: zenodo-record-metadata
+  license_evidence: 'GET https://zenodo.org/api/records/15575908 (Zenodo record for tag 0.0.2, re-verified
+    live 2026-08-09) -> metadata.license = {"id": "cc-by-4.0"}'
+  conflict_notes:
+  - 'the vendored archive (sha256 253a751531a83a62f3dc028dc4909069d23fe648da89339badf78a1fd00e986c) contains
+    no LICENSE/COPYING file and no ''license'' or ''copyright'' string anywhere in its 174 members (grep
+    -rli ''license|copyright'' over the full extraction: zero matches)'
+  - 'Zenodo record 15575908 (tag 0.0.2) metadata.license = {''id'': ''cc-by-4.0''}: a versioned CC BY
+    4.0 slug, but it is asserted only by the Zenodo platform''s own record metadata -- it is not an SPDX
+    license identifier field and is not evidenced anywhere inside the archive''s own contents'
+  - GitHub AccelerationConsortium/SDL1_OpenTron_electrodeposition main (checked 2026-08-09) now carries
+    LICENSE=MIT, copyright Technical University of Denmark 2025 (api.github.com/repos/AccelerationConsortium/SDL1_OpenTron_electrodeposition/license
+    -> spdx_id MIT); raw.githubusercontent.com/.../0.0.2/LICENSE returns HTTP 404, so this MIT grant postdates
+    the vendored 0.0.2 tag and cannot be relied on for these files
+  revision: 0.0.2
+  retrieved_at: '2026-08-09'
+- id: assets/tool-cartridge-v7.usdc
+  retrieval_uri: https://zenodo.org/api/records/15575908/files/AccelerationConsortium/SDL1_OpenTron_electrodeposition-0.0.2.zip/content
+  sha256: 8228f67814e022e2aea8338f052694b396fe20e98e6317a1aaf7fe346b74b0b4
+  admission: admitted
+  authority_id: dynamical-v0.1-release-authority
+  license_ref: zenodo-record-metadata
+  license_evidence: 'GET https://zenodo.org/api/records/15575908 (Zenodo record for tag 0.0.2, re-verified
+    live 2026-08-09) -> metadata.license = {"id": "cc-by-4.0"}'
+  conflict_notes:
+  - 'the vendored archive (sha256 253a751531a83a62f3dc028dc4909069d23fe648da89339badf78a1fd00e986c) contains
+    no LICENSE/COPYING file and no ''license'' or ''copyright'' string anywhere in its 174 members (grep
+    -rli ''license|copyright'' over the full extraction: zero matches)'
+  - 'Zenodo record 15575908 (tag 0.0.2) metadata.license = {''id'': ''cc-by-4.0''}: a versioned CC BY
+    4.0 slug, but it is asserted only by the Zenodo platform''s own record metadata -- it is not an SPDX
+    license identifier field and is not evidenced anywhere inside the archive''s own contents'
+  - GitHub AccelerationConsortium/SDL1_OpenTron_electrodeposition main (checked 2026-08-09) now carries
+    LICENSE=MIT, copyright Technical University of Denmark 2025 (api.github.com/repos/AccelerationConsortium/SDL1_OpenTron_electrodeposition/license
+    -> spdx_id MIT); raw.githubusercontent.com/.../0.0.2/LICENSE returns HTTP 404, so this MIT grant postdates
+    the vendored 0.0.2 tag and cannot be relied on for these files
+  revision: 0.0.2
+  retrieved_at: '2026-08-09'
+  derived_from_source_id: sources/ac-sdl1/tool_cartridge_v7.step
+  conversion_tool: tools/cad_to_usd.py (cascadio==0.1.1, trimesh==5.0.0, OpenUSD 26.05)
+  conversion_tolerance: 0.05,0.5
+- id: sources/ac-sdl1/1_well_catridge_ultrasound_mount v5.step
+  retrieval_uri: https://zenodo.org/api/records/15575908/files/AccelerationConsortium/SDL1_OpenTron_electrodeposition-0.0.2.zip/content
+  sha256: d5fb7976ac35bfe13578eb3ae6bff92505859c7d1f7ad31a41a9f2595c21d638
+  admission: admitted
+  authority_id: dynamical-v0.1-release-authority
+  license_ref: zenodo-record-metadata
+  license_evidence: 'GET https://zenodo.org/api/records/15575908 (Zenodo record for tag 0.0.2, re-verified
+    live 2026-08-09) -> metadata.license = {"id": "cc-by-4.0"}'
+  conflict_notes:
+  - 'the vendored archive (sha256 253a751531a83a62f3dc028dc4909069d23fe648da89339badf78a1fd00e986c) contains
+    no LICENSE/COPYING file and no ''license'' or ''copyright'' string anywhere in its 174 members (grep
+    -rli ''license|copyright'' over the full extraction: zero matches)'
+  - 'Zenodo record 15575908 (tag 0.0.2) metadata.license = {''id'': ''cc-by-4.0''}: a versioned CC BY
+    4.0 slug, but it is asserted only by the Zenodo platform''s own record metadata -- it is not an SPDX
+    license identifier field and is not evidenced anywhere inside the archive''s own contents'
+  - GitHub AccelerationConsortium/SDL1_OpenTron_electrodeposition main (checked 2026-08-09) now carries
+    LICENSE=MIT, copyright Technical University of Denmark 2025 (api.github.com/repos/AccelerationConsortium/SDL1_OpenTron_electrodeposition/license
+    -> spdx_id MIT); raw.githubusercontent.com/.../0.0.2/LICENSE returns HTTP 404, so this MIT grant postdates
+    the vendored 0.0.2 tag and cannot be relied on for these files
+  revision: 0.0.2
+  retrieved_at: '2026-08-09'
+- id: assets/1-well-cartridge-ultrasound-mount-v5.usdc
+  retrieval_uri: https://zenodo.org/api/records/15575908/files/AccelerationConsortium/SDL1_OpenTron_electrodeposition-0.0.2.zip/content
+  sha256: 71eb42b9913abbdb190a52b07c5a2e79cfa2f2b5c41e270997c1229591744a29
+  admission: admitted
+  authority_id: dynamical-v0.1-release-authority
+  license_ref: zenodo-record-metadata
+  license_evidence: 'GET https://zenodo.org/api/records/15575908 (Zenodo record for tag 0.0.2, re-verified
+    live 2026-08-09) -> metadata.license = {"id": "cc-by-4.0"}'
+  conflict_notes:
+  - 'the vendored archive (sha256 253a751531a83a62f3dc028dc4909069d23fe648da89339badf78a1fd00e986c) contains
+    no LICENSE/COPYING file and no ''license'' or ''copyright'' string anywhere in its 174 members (grep
+    -rli ''license|copyright'' over the full extraction: zero matches)'
+  - 'Zenodo record 15575908 (tag 0.0.2) metadata.license = {''id'': ''cc-by-4.0''}: a versioned CC BY
+    4.0 slug, but it is asserted only by the Zenodo platform''s own record metadata -- it is not an SPDX
+    license identifier field and is not evidenced anywhere inside the archive''s own contents'
+  - GitHub AccelerationConsortium/SDL1_OpenTron_electrodeposition main (checked 2026-08-09) now carries
+    LICENSE=MIT, copyright Technical University of Denmark 2025 (api.github.com/repos/AccelerationConsortium/SDL1_OpenTron_electrodeposition/license
+    -> spdx_id MIT); raw.githubusercontent.com/.../0.0.2/LICENSE returns HTTP 404, so this MIT grant postdates
+    the vendored 0.0.2 tag and cannot be relied on for these files
+  revision: 0.0.2
+  retrieved_at: '2026-08-09'
+  derived_from_source_id: sources/ac-sdl1/1_well_catridge_ultrasound_mount v5.step
+  conversion_tool: tools/cad_to_usd.py (cascadio==0.1.1, trimesh==5.0.0, OpenUSD 26.05)
+  conversion_tolerance: 0.05,0.5
+- id: sources/ac-sdl1/vial_rack v3.step
+  retrieval_uri: https://zenodo.org/api/records/15575908/files/AccelerationConsortium/SDL1_OpenTron_electrodeposition-0.0.2.zip/content
+  sha256: 487f6b026999e20c592456713b90c702a13fa159a1268a8024c4e2dd85544821
+  admission: admitted
+  authority_id: dynamical-v0.1-release-authority
+  license_ref: zenodo-record-metadata
+  license_evidence: 'GET https://zenodo.org/api/records/15575908 (Zenodo record for tag 0.0.2, re-verified
+    live 2026-08-09) -> metadata.license = {"id": "cc-by-4.0"}'
+  conflict_notes:
+  - 'the vendored archive (sha256 253a751531a83a62f3dc028dc4909069d23fe648da89339badf78a1fd00e986c) contains
+    no LICENSE/COPYING file and no ''license'' or ''copyright'' string anywhere in its 174 members (grep
+    -rli ''license|copyright'' over the full extraction: zero matches)'
+  - 'Zenodo record 15575908 (tag 0.0.2) metadata.license = {''id'': ''cc-by-4.0''}: a versioned CC BY
+    4.0 slug, but it is asserted only by the Zenodo platform''s own record metadata -- it is not an SPDX
+    license identifier field and is not evidenced anywhere inside the archive''s own contents'
+  - GitHub AccelerationConsortium/SDL1_OpenTron_electrodeposition main (checked 2026-08-09) now carries
+    LICENSE=MIT, copyright Technical University of Denmark 2025 (api.github.com/repos/AccelerationConsortium/SDL1_OpenTron_electrodeposition/license
+    -> spdx_id MIT); raw.githubusercontent.com/.../0.0.2/LICENSE returns HTTP 404, so this MIT grant postdates
+    the vendored 0.0.2 tag and cannot be relied on for these files
+  revision: 0.0.2
+  retrieved_at: '2026-08-09'
+- id: assets/vial-rack-v3.usdc
+  retrieval_uri: https://zenodo.org/api/records/15575908/files/AccelerationConsortium/SDL1_OpenTron_electrodeposition-0.0.2.zip/content
+  sha256: 97008f3ac8dd1503fd69466879241d5a40fbcbfde84e4e6bfadb3d1dec45cf72
+  admission: admitted
+  authority_id: dynamical-v0.1-release-authority
+  license_ref: zenodo-record-metadata
+  license_evidence: 'GET https://zenodo.org/api/records/15575908 (Zenodo record for tag 0.0.2, re-verified
+    live 2026-08-09) -> metadata.license = {"id": "cc-by-4.0"}'
+  conflict_notes:
+  - 'the vendored archive (sha256 253a751531a83a62f3dc028dc4909069d23fe648da89339badf78a1fd00e986c) contains
+    no LICENSE/COPYING file and no ''license'' or ''copyright'' string anywhere in its 174 members (grep
+    -rli ''license|copyright'' over the full extraction: zero matches)'
+  - 'Zenodo record 15575908 (tag 0.0.2) metadata.license = {''id'': ''cc-by-4.0''}: a versioned CC BY
+    4.0 slug, but it is asserted only by the Zenodo platform''s own record metadata -- it is not an SPDX
+    license identifier field and is not evidenced anywhere inside the archive''s own contents'
+  - GitHub AccelerationConsortium/SDL1_OpenTron_electrodeposition main (checked 2026-08-09) now carries
+    LICENSE=MIT, copyright Technical University of Denmark 2025 (api.github.com/repos/AccelerationConsortium/SDL1_OpenTron_electrodeposition/license
+    -> spdx_id MIT); raw.githubusercontent.com/.../0.0.2/LICENSE returns HTTP 404, so this MIT grant postdates
+    the vendored 0.0.2 tag and cannot be relied on for these files
+  revision: 0.0.2
+  retrieved_at: '2026-08-09'
+  derived_from_source_id: sources/ac-sdl1/vial_rack v3.step
+  conversion_tool: tools/cad_to_usd.py (cascadio==0.1.1, trimesh==5.0.0, OpenUSD 26.05)
+  conversion_tolerance: 0.05,0.5
+- id: sources/ac-sdl1/nickel_electrode v30.step
+  retrieval_uri: https://zenodo.org/api/records/15575908/files/AccelerationConsortium/SDL1_OpenTron_electrodeposition-0.0.2.zip/content
+  sha256: 414060fce1008aaf0462ec92238cb9733499ee197df6af3fe554d06808ccf371
+  admission: admitted
+  authority_id: dynamical-v0.1-release-authority
+  license_ref: zenodo-record-metadata
+  license_evidence: 'GET https://zenodo.org/api/records/15575908 (Zenodo record for tag 0.0.2, re-verified
+    live 2026-08-09) -> metadata.license = {"id": "cc-by-4.0"}'
+  conflict_notes:
+  - 'the vendored archive (sha256 253a751531a83a62f3dc028dc4909069d23fe648da89339badf78a1fd00e986c) contains
+    no LICENSE/COPYING file and no ''license'' or ''copyright'' string anywhere in its 174 members (grep
+    -rli ''license|copyright'' over the full extraction: zero matches)'
+  - 'Zenodo record 15575908 (tag 0.0.2) metadata.license = {''id'': ''cc-by-4.0''}: a versioned CC BY
+    4.0 slug, but it is asserted only by the Zenodo platform''s own record metadata -- it is not an SPDX
+    license identifier field and is not evidenced anywhere inside the archive''s own contents'
+  - GitHub AccelerationConsortium/SDL1_OpenTron_electrodeposition main (checked 2026-08-09) now carries
+    LICENSE=MIT, copyright Technical University of Denmark 2025 (api.github.com/repos/AccelerationConsortium/SDL1_OpenTron_electrodeposition/license
+    -> spdx_id MIT); raw.githubusercontent.com/.../0.0.2/LICENSE returns HTTP 404, so this MIT grant postdates
+    the vendored 0.0.2 tag and cannot be relied on for these files
+  revision: 0.0.2
+  retrieved_at: '2026-08-09'
+- id: assets/nickel-electrode-v30.usdc
+  retrieval_uri: https://zenodo.org/api/records/15575908/files/AccelerationConsortium/SDL1_OpenTron_electrodeposition-0.0.2.zip/content
+  sha256: e7def9302f0f192bfa56cd4eb07f2de593819b5f465b99d907f3081a5b715c42
+  admission: admitted
+  authority_id: dynamical-v0.1-release-authority
+  license_ref: zenodo-record-metadata
+  license_evidence: 'GET https://zenodo.org/api/records/15575908 (Zenodo record for tag 0.0.2, re-verified
+    live 2026-08-09) -> metadata.license = {"id": "cc-by-4.0"}'
+  conflict_notes:
+  - 'the vendored archive (sha256 253a751531a83a62f3dc028dc4909069d23fe648da89339badf78a1fd00e986c) contains
+    no LICENSE/COPYING file and no ''license'' or ''copyright'' string anywhere in its 174 members (grep
+    -rli ''license|copyright'' over the full extraction: zero matches)'
+  - 'Zenodo record 15575908 (tag 0.0.2) metadata.license = {''id'': ''cc-by-4.0''}: a versioned CC BY
+    4.0 slug, but it is asserted only by the Zenodo platform''s own record metadata -- it is not an SPDX
+    license identifier field and is not evidenced anywhere inside the archive''s own contents'
+  - GitHub AccelerationConsortium/SDL1_OpenTron_electrodeposition main (checked 2026-08-09) now carries
+    LICENSE=MIT, copyright Technical University of Denmark 2025 (api.github.com/repos/AccelerationConsortium/SDL1_OpenTron_electrodeposition/license
+    -> spdx_id MIT); raw.githubusercontent.com/.../0.0.2/LICENSE returns HTTP 404, so this MIT grant postdates
+    the vendored 0.0.2 tag and cannot be relied on for these files
+  revision: 0.0.2
+  retrieved_at: '2026-08-09'
+  derived_from_source_id: sources/ac-sdl1/nickel_electrode v30.step
+  conversion_tool: tools/cad_to_usd.py (cascadio==0.1.1, trimesh==5.0.0, OpenUSD 26.05)
+  conversion_tolerance: 0.05,0.5
+- id: sources/ac-sdl1/platinum_electrode v46.step
+  retrieval_uri: https://zenodo.org/api/records/15575908/files/AccelerationConsortium/SDL1_OpenTron_electrodeposition-0.0.2.zip/content
+  sha256: 398ceed8aadb041b344a43eaf3def143bd5cce83eae1069448f609aaf621341b
+  admission: admitted
+  authority_id: dynamical-v0.1-release-authority
+  license_ref: zenodo-record-metadata
+  license_evidence: 'GET https://zenodo.org/api/records/15575908 (Zenodo record for tag 0.0.2, re-verified
+    live 2026-08-09) -> metadata.license = {"id": "cc-by-4.0"}'
+  conflict_notes:
+  - 'the vendored archive (sha256 253a751531a83a62f3dc028dc4909069d23fe648da89339badf78a1fd00e986c) contains
+    no LICENSE/COPYING file and no ''license'' or ''copyright'' string anywhere in its 174 members (grep
+    -rli ''license|copyright'' over the full extraction: zero matches)'
+  - 'Zenodo record 15575908 (tag 0.0.2) metadata.license = {''id'': ''cc-by-4.0''}: a versioned CC BY
+    4.0 slug, but it is asserted only by the Zenodo platform''s own record metadata -- it is not an SPDX
+    license identifier field and is not evidenced anywhere inside the archive''s own contents'
+  - GitHub AccelerationConsortium/SDL1_OpenTron_electrodeposition main (checked 2026-08-09) now carries
+    LICENSE=MIT, copyright Technical University of Denmark 2025 (api.github.com/repos/AccelerationConsortium/SDL1_OpenTron_electrodeposition/license
+    -> spdx_id MIT); raw.githubusercontent.com/.../0.0.2/LICENSE returns HTTP 404, so this MIT grant postdates
+    the vendored 0.0.2 tag and cannot be relied on for these files
+  revision: 0.0.2
+  retrieved_at: '2026-08-09'
+- id: assets/platinum-electrode-v46.usdc
+  retrieval_uri: https://zenodo.org/api/records/15575908/files/AccelerationConsortium/SDL1_OpenTron_electrodeposition-0.0.2.zip/content
+  sha256: b790b51684c271112554995e38a9ae455fbed632a0e4e1b11158cd801d779a7f
+  admission: admitted
+  authority_id: dynamical-v0.1-release-authority
+  license_ref: zenodo-record-metadata
+  license_evidence: 'GET https://zenodo.org/api/records/15575908 (Zenodo record for tag 0.0.2, re-verified
+    live 2026-08-09) -> metadata.license = {"id": "cc-by-4.0"}'
+  conflict_notes:
+  - 'the vendored archive (sha256 253a751531a83a62f3dc028dc4909069d23fe648da89339badf78a1fd00e986c) contains
+    no LICENSE/COPYING file and no ''license'' or ''copyright'' string anywhere in its 174 members (grep
+    -rli ''license|copyright'' over the full extraction: zero matches)'
+  - 'Zenodo record 15575908 (tag 0.0.2) metadata.license = {''id'': ''cc-by-4.0''}: a versioned CC BY
+    4.0 slug, but it is asserted only by the Zenodo platform''s own record metadata -- it is not an SPDX
+    license identifier field and is not evidenced anywhere inside the archive''s own contents'
+  - GitHub AccelerationConsortium/SDL1_OpenTron_electrodeposition main (checked 2026-08-09) now carries
+    LICENSE=MIT, copyright Technical University of Denmark 2025 (api.github.com/repos/AccelerationConsortium/SDL1_OpenTron_electrodeposition/license
+    -> spdx_id MIT); raw.githubusercontent.com/.../0.0.2/LICENSE returns HTTP 404, so this MIT grant postdates
+    the vendored 0.0.2 tag and cannot be relied on for these files
+  revision: 0.0.2
+  retrieved_at: '2026-08-09'
+  derived_from_source_id: sources/ac-sdl1/platinum_electrode v46.step
+  conversion_tool: tools/cad_to_usd.py (cascadio==0.1.1, trimesh==5.0.0, OpenUSD 26.05)
+  conversion_tolerance: 0.05,0.5

@@ -1,0 +1,30 @@
+--- sdl2-v1.2-20261026/arms/frontier/openrouter_transport.mjs
++++ sdl2-v1.3-20261028/arms/frontier/openrouter_transport.mjs
+@@ -1,4 +1,6 @@
+-/** One OpenRouter route for every frontier model of the SDL-2 release (Jarrod, 2026-10-26: one key, one billing, one
++/** v1.3 copy (arms/frontier/port_transport.py; diff in openrouter_transport.diff): admits z-ai/glm-5.3-flash (D14) and
++ * reads v1.2's PINs and snapshots read-only.
++ * One OpenRouter route for every frontier model of the SDL-2 release (Jarrod, 2026-10-26: one key, one billing, one
+  * provider interface). pi140's vision_transport.mjs is unchanged and carries every request; its modelConfig admits a fixed
+  * list of model ids, so this module builds the config for the release's models the same way, from a PIN record and frozen
+  * OpenRouter snapshots:
+@@ -17,12 +19,14 @@
+ export * from '../../../material-route-swarm-design-20261019/runtime/pi140/vision_transport.mjs';
+ 
+ const HERE = path.dirname(fileURLToPath(import.meta.url));
++const V12_PROVIDERS = path.join(chat.REPO, 'artifacts/studies/sdl2-v1.2-20261026/arms/frontier/providers');   // v1.3: v1.2's PINs and frozen snapshots, read-only
+ export const PIN_DIRECTORIES = {
+-  'anthropic/claude-opus-5.5': path.join(HERE, 'providers'),
+-  'anthropic/claude-sonnet-5.5': path.join(HERE, 'providers'),
+-  'openai/gpt-6-astra': path.join(HERE, 'providers'),
+-  'x-ai/grok-4.7': path.join(HERE, 'providers'),
+-  'deepseek/deepseek-v4.1-flash-1017': path.join(HERE, 'providers'),
++  'anthropic/claude-opus-5.5': V12_PROVIDERS,
++  'anthropic/claude-sonnet-5.5': V12_PROVIDERS,
++  'openai/gpt-6-astra': V12_PROVIDERS,
++  'x-ai/grok-4.7': V12_PROVIDERS,
++  'deepseek/deepseek-v4.1-flash-1017': V12_PROVIDERS,
++  'z-ai/glm-5.3-flash': V12_PROVIDERS,   // v1.3 board (D14); PIN recorded Oct 26 (Z.AI, fp8)
+   'google/gemini-4-argon': path.join(chat.REPO, 'artifacts/studies/engine-release-20261008/v2-build/providers-gemini4-argon'),
+ };
+ export const RELEASE_MODELS = [...Object.keys(PIN_DIRECTORIES), 'qwen/qwen3.8-max-0902'];

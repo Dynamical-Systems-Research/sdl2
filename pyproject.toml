@@ -1,0 +1,19 @@
+[project]
+name = "sdl2"
+version = "1.0.0"
+description = "SDL-2: an evaluation of AI agents deciding, from their own experiments, whether a process reliably meets a requirement"
+readme = "README.md"
+license = "Apache-2.0"
+requires-python = ">=3.13,<3.14"
+# Versions used to grade the leaderboard (the frozen grading environment, CPython 3.13.12).
+dependencies = ["numpy==2.5.3", "scipy==1.18.1", "zstandard>=0.23"]
+
+[project.scripts]
+sdl2 = "sdl2.__main__:main"
+
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["sdl2"]

@@ -1,0 +1,1197 @@
+from __future__ import annotations
+
+import hashlib
+import json
+import shlex
+import subprocess
+import sys
+from pathlib import Path
+
+import pytest
+import yaml
+from _fixtures import NO_PREFLIGHT, write_reference_requirement
+
+from dynamical.cli import DEFAULT_REGISTRY, main
+from dynamical.compiler import compile_facility
+from dynamical.composition import compose_files, write_composition_result
+
+REPOSITORY = Path(__file__).resolve().parents[1]
+REFERENCE_LAB = REPOSITORY / "dynamical" / "bundle" / "reference-lab"
+MANIFEST = REFERENCE_LAB / "facility.yaml"
+FASTCAT_LAB = REFERENCE_LAB.parent / "fastcat"
+
+
+def _write_oer_requirement(path: Path, *, lab: Path) -> Path:
+    """Request the attacked provider's actual operation and supported current point."""
+
+    operation_id = "measure-oer"
+
+    requirement = {
+        "document_type": "dynamical.campaign-requirement",
+        "schema_version": "0.1.0",
+        "requirement_id": "forged-oer-measure",
+        "objective": {
+            "id": "oer-decision",
+            "statement": "Estimate OER overpotential.",
+            "decision": "Decide if OER performance merits a physical run.",
+            "proof_requirements": [
+                {
+                    "id": "oer-proof",
+                    "operation_id": operation_id,
+                    "output_port_ids": ["overpotential_v"],
+                    "minimum_evidence_class": "simulator",
+                    "acceptance_rule": "overpotential_v is recorded",
+                    "independent_verification_required": True,
+                }
+            ],
+        },
+        "inputs": [
+            {
+                "id": "campaign.sample-id",
+                "state_type": "sample_state",
+                "unit": "1",
+                "value": "sample-nickel-01",
+            }
+        ],
+        "steps": [
+            {
+                "step_id": "measure",
+                "operation_id": operation_id,
+                "minimum_evidence_class": "simulator",
+                "parameters": (
+                    [
+                        {
+                            "name": "protocol_id",
+                            "value_type": "string",
+                            "unit": "1",
+                            "value": "sdl1-oer-2c5a911",
+                        }
+                    ]
+                    if lab == REFERENCE_LAB
+                    else [
+                        {
+                            "name": "current_density_a_cm2",
+                            "value_type": "number",
+                            "unit": "A/cm^2",
+                            "value": 0.020 if lab == REFERENCE_LAB else 0.010,
+                        }
+                    ]
+                ),
+                "input_bindings": [
+                    {
+                        "target_port_id": "sample.state",
+                        "source_kind": "campaign_input",
+                        "source_id": "campaign.sample-id",
+                    }
+                ],
+                "depends_on": [],
+                "required_policy_tags": [],
+            }
+        ],
+        "max_cost_usd": 10.0,
+        "max_duration_s": 2000.0,
+    }
+    path.write_text(yaml.safe_dump(requirement, sort_keys=False), encoding="utf-8")
+    return path
+
+
+def test_public_help_has_exactly_six_agent_commands() -> None:
+    completed = subprocess.run(
+        [sys.executable, "-m", "dynamical.cli", "--help"],
+        cwd=REPOSITORY,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    assert completed.returncode == 0
+    usage = completed.stdout
+    assert "{capabilities,compile,compose,preflight,run,validate}" in usage
+    assert "dynamical-calibrate" not in usage
+    assert "counterfactual" not in usage
+
+
+def test_each_command_has_one_copyable_example() -> None:
+    help_by_command = {}
+    for command in ("capabilities", "preflight", "compose", "compile", "run", "validate"):
+        completed = subprocess.run(
+            [sys.executable, "-m", "dynamical.cli", command, "--help"],
+            cwd=REPOSITORY,
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+        assert completed.returncode == 0
+        assert f"dynamical {command}" in completed.stdout
+        help_by_command[command] = completed.stdout
+
+    assert "dynamical capabilities --json" not in help_by_command["capabilities"]
+    assert (
+        "dynamical capabilities --operation <operation-id> --json"
+        in help_by_command["capabilities"]
+    )
+    assert "dynamical compose --schema" in help_by_command["compose"]
+    assert "--preflight preflight.json" in help_by_command["compose"]
+    assert (
+        "dynamical compose requirement.yaml -o composition.json" not in help_by_command["compose"]
+    )
+    assert "requirement_id: example-requirement" not in help_by_command["compose"]
+    assert (
+        "dynamical preflight mapping.json --requirement requirement.yaml"
+        in help_by_command["preflight"]
+    )
+    assert "self-test" not in help_by_command["preflight"]
+    assert "Campaign requirements are compose inputs" in help_by_command["validate"]
+
+
+def test_capability_index_is_compact_and_detail_is_complete(capsys) -> None:
+    assert main(["capabilities", "--json"]) == 0
+    output = capsys.readouterr().out
+    assert "\n" not in output.rstrip("\n")
+    index = json.loads(output)
+    assert index["schema_version"] == "dynamical.capability-index.v1"
+    assert index["registry_role"] == "installed_authority"
+    assert index["execution_status"] == "not_executed"
+    assert index["authority_anchor"] == "installed_bundle"
+    assert index["validation_reasons"] == []
+    assert len(index["registry_sha256"]) == 64
+    assert {item["operation_id"] for item in index["operations"]} >= {
+        "dispense-electrolyte",
+        "measure-oer",
+    }
+    assert "capabilities" not in index
+
+    assert (
+        main(
+            [
+                "capabilities",
+                "--operation",
+                "measure-oer",
+                "--json",
+            ]
+        )
+        == 0
+    )
+    detail = json.loads(capsys.readouterr().out)
+    assert detail["operation"]["operation_id"] == "measure-oer"
+    physical = next(item for item in detail["providers"] if item["evidence_class"] == "physical")
+    assert physical["admission"]["status"] == "pending"
+    assert physical["availability"]["available"] is False
+
+
+def test_compose_receipt_is_compact_and_saved_sources_are_self_contained(
+    tmp_path: Path, capsys
+) -> None:
+    requirement = write_reference_requirement(tmp_path / "requirement.yaml")
+    composition = tmp_path / "composition.json"
+
+    assert main(["compose", str(requirement), *NO_PREFLIGHT, "-o", str(composition)]) == 0
+    receipt_output = capsys.readouterr().out
+    assert "\n" not in receipt_output.rstrip("\n")
+    receipt = json.loads(receipt_output)
+    saved = json.loads(composition.read_text(encoding="utf-8"))
+    assert receipt["status"] == "COMPILED"
+    assert receipt["composition_sha256"] == saved["composition_sha256"]
+    assert saved["sources"]["requirement"]["requirement_id"] == (
+        "electrodeposition-conditioning-proof"
+    )
+    assert saved["sources"]["registry"]["registry_id"].startswith("dynamical-")
+    assert saved["sources"]["facility"]["facility"]["id"] == ("ac-electrodeposition-cell")
+    assert saved["sources"]["default_target"] == "openusd"
+    assert main(["validate", str(composition), "--json"]) == 0
+    validation = json.loads(capsys.readouterr().out)
+    assert validation["execution_status"] == "not_executable"
+    assert validation["authority_anchor"] == "not_evaluated"
+
+
+def test_hold_receipt_has_reasons_and_no_compile_instruction(tmp_path: Path, capsys) -> None:
+    requirement = yaml.safe_load(
+        write_reference_requirement(tmp_path / "requirement.yaml").read_text(encoding="utf-8")
+    )
+    requirement["steps"][0]["minimum_evidence_class"] = "physical"
+    hold_requirement = tmp_path / "physical.yaml"
+    hold_requirement.write_text(yaml.safe_dump(requirement, sort_keys=False), encoding="utf-8")
+
+    composition = tmp_path / "hold.json"
+    assert main(["compose", str(hold_requirement), *NO_PREFLIGHT, "-o", str(composition)]) == 1
+    receipt = json.loads(capsys.readouterr().out)
+    assert receipt["status"] == "HOLD"
+    assert receipt["reason_codes"]
+    assert receipt["validation_reasons"]
+    assert receipt["next_command"].startswith("dynamical capabilities --facility")
+
+    assert main(["validate", str(composition), "--json"]) == 0
+    validation = json.loads(capsys.readouterr().out)
+    assert validation["execution_status"] == "blocked"
+    assert validation["validation_reasons"] == receipt["validation_reasons"]
+
+    assert main(["validate", str(composition)]) == 0
+    assert capsys.readouterr().out == (
+        f"VALID: {composition} [kind=composition_result status=HOLD execution_status=blocked]\n"
+    )
+
+
+def test_saved_composition_compiles_runs_and_validates_without_extra_flags(
+    tmp_path: Path, capsys
+) -> None:
+    requirement = write_reference_requirement(tmp_path / "requirement.yaml")
+    composition = tmp_path / "composition.json"
+    compiled = tmp_path / "compiled"
+    simulated = tmp_path / "simulate.ndjson"
+    replayed = tmp_path / "replay.ndjson"
+
+    assert main(["compose", str(requirement), *NO_PREFLIGHT, "-o", str(composition)]) == 0
+    capsys.readouterr()
+    assert main(["compile", str(composition), "-o", str(compiled)]) == 0
+    compile_output = capsys.readouterr().out
+    assert "\n" not in compile_output.rstrip("\n")
+    compile_receipt = json.loads(compile_output)
+    assert compile_receipt["target"] == "openusd"
+    assert compile_receipt["composition_sha256"] is not None
+
+    assert main(["validate", str(compiled), "--json"]) == 0
+    assert json.loads(capsys.readouterr().out)["valid"] is True
+
+    assert main(["run", str(compiled), "-o", str(simulated)]) == 0
+    simulation_receipt = json.loads(capsys.readouterr().out)
+    assert simulation_receipt["mode"] == "simulate"
+    assert simulation_receipt["embodied_evidence_bound"] is False
+    assert simulation_receipt["authority_anchor"] == "installed_bundle"
+    assert simulation_receipt["validation_reasons"] == []
+
+    assert main(["run", str(simulated), "--mode", "replay", "-o", str(replayed)]) == 0
+    replay_receipt = json.loads(capsys.readouterr().out)
+    assert replay_receipt["mode"] == "replay"
+    assert replay_receipt["source_trace_sha256"] == simulation_receipt["trace_sha256"]
+
+    for trace in (simulated, replayed):
+        assert main(["validate", str(trace), "--json"]) == 0
+        assert json.loads(capsys.readouterr().out)["valid"] is True
+
+
+def test_public_examples_use_their_own_facility_and_preserve_fastcat_provenance(
+    tmp_path: Path, capsys
+) -> None:
+    def sha256(path: Path) -> str:
+        return hashlib.sha256(path.read_bytes()).hexdigest()
+
+    report_path = FASTCAT_LAB / "calibration" / "fastcat-oer" / "calibration_report.json"
+    report = json.loads(report_path.read_text(encoding="utf-8"))
+    facility = yaml.safe_load((FASTCAT_LAB / "facility.yaml").read_text(encoding="utf-8"))
+    adapter_hashes = {
+        name: sha256(REPOSITORY / "dynamical" / "instruments" / name)
+        for name in report["adapter_sha256"]
+    }
+    assert report["adapter_sha256"] == adapter_hashes
+    assert {
+        Path(item["implementation_ref"]).name: item["implementation_sha256"]
+        for item in facility["model_bindings"]
+        if Path(item["implementation_ref"]).name in adapter_hashes
+    } == adapter_hashes
+
+    calibration = next(
+        item for item in facility["calibration_evidence"] if item["id"] == "fastcat-oer-e10"
+    )
+    assert calibration["split_rule_sha256"] == sha256(report_path)
+    assert calibration["fit_artifact_sha256"] == sha256(
+        FASTCAT_LAB / calibration["fit_artifact_ref"]
+    )
+
+    assert sha256(REPOSITORY / "examples/fastcat-oer/candidate-set.yaml") == (
+        "cc78580a0e614d11b5e8d48cc085897c83d9cf133e0acc16c47ed69cafb304ca"
+    )
+    for example, facility_alias, operation_ids in (
+        ("quickstart", "sdl1", ["condition-ultrasonic"]),
+        ("fastcat-oer", "fastcat", ["deposit-chemical-bath", "measure-oer"]),
+    ):
+        composition = tmp_path / f"{example}.json"
+        requirement = REPOSITORY / "examples" / example / "requirement.yaml"
+        assert (
+            main(
+                [
+                    "compose",
+                    str(requirement),
+                    "--facility",
+                    facility_alias,
+                    *NO_PREFLIGHT,
+                    "-o",
+                    str(composition),
+                ]
+            )
+            == 0
+        )
+        assert json.loads(capsys.readouterr().out)["status"] == "COMPILED"
+        selected = json.loads(composition.read_text())["virtual_sdl"]["operation_bindings"]
+        assert [binding["operation_id"] for binding in selected] == operation_ids
+        world, trace = tmp_path / f"{example}-world", tmp_path / f"{example}.ndjson"
+        assert main(["compile", str(composition), "-o", str(world)]) == 0
+        capsys.readouterr()
+        assert main(["run", str(world), "-o", str(trace)]) == 0
+        capsys.readouterr()
+        assert main(["validate", str(trace), "--json"]) == 0
+        assert json.loads(capsys.readouterr().out)["valid"] is True
+        wrong_facility = "sdl1" if facility_alias == "fastcat" else "fastcat"
+        assert main(["compose", str(requirement), "--facility", wrong_facility, *NO_PREFLIGHT]) == 1
+        assert json.loads(capsys.readouterr().out)["status"] == "HOLD"
+
+    onboarding = REPOSITORY / "examples" / "provider-onboarding"
+    registry = onboarding / "registry.pending.yaml"
+    inspect_args = [
+        "capabilities",
+        "--registry",
+        str(registry),
+        "--operation",
+        "estimate-band-gap",
+        "--json",
+    ]
+    assert main(inspect_args) == 0
+    proposal = json.loads(capsys.readouterr().out)
+    assert proposal["registry_role"] == "proposal"
+    assert proposal["providers"][0]["admission"]["status"] == "pending"
+    hold_output = tmp_path / "onboarding-composition.json"
+    hold_args = [
+        "compose",
+        str(onboarding / "requirement.yaml"),
+        *NO_PREFLIGHT,
+        "--registry",
+        str(registry),
+        "-o",
+        str(hold_output),
+    ]
+    assert main(hold_args) == 1
+    hold = json.loads(capsys.readouterr().out)
+    assert hold["status"] == "HOLD"
+    assert hold["reason_codes"] == ["AUTHORITY_UNRECOGNIZED"]
+    assert not hold_output.exists()
+
+
+def test_saved_composition_tampering_fails_closed(tmp_path: Path, capsys) -> None:
+    requirement = write_reference_requirement(tmp_path / "requirement.yaml")
+    composition = tmp_path / "composition.json"
+    assert main(["compose", str(requirement), *NO_PREFLIGHT, "-o", str(composition)]) == 0
+    capsys.readouterr()
+
+    saved = json.loads(composition.read_text(encoding="utf-8"))
+    saved["sources"]["registry"]["providers"][0]["admission"]["status"] = "pending"
+    composition.write_text(json.dumps(saved), encoding="utf-8")
+    assert main(["compile", str(composition), "-o", str(tmp_path / "compiled")]) == 2
+    error = capsys.readouterr().err
+    assert "source hash" in error or "resolution hash" in error
+
+
+def test_coordinated_authority_rehash_fails_closed(tmp_path: Path, capsys) -> None:
+    requirement = write_reference_requirement(tmp_path / "requirement.yaml")
+    registry = yaml.safe_load((REFERENCE_LAB / "registry.yaml").read_text(encoding="utf-8"))
+    registry["providers"][0]["admission"]["authority_id"] = "agent-authored-authority"
+    forged_registry = tmp_path / "registry.yaml"
+    forged_registry.write_text(yaml.safe_dump(registry), encoding="utf-8")
+
+    facility = yaml.safe_load(MANIFEST.read_text(encoding="utf-8"))
+    facility["adapter_bindings"][0]["configuration"]["task_id"] = "Agent-Authored-Task"
+    forged_facility = tmp_path / "facility.yaml"
+    forged_facility.write_text(yaml.safe_dump(facility), encoding="utf-8")
+
+    composition = tmp_path / "composition.json"
+    write_composition_result(
+        composition,
+        compose_files(requirement, forged_registry, forged_facility),
+    )
+
+    compile_rc = main(["compile", str(composition), "-o", str(tmp_path / "compiled")])
+    receipt = json.loads(capsys.readouterr().out)
+    assert compile_rc == 1
+    assert receipt["status"] == "HOLD"
+    assert "AUTHORITY_MODIFIED" in receipt["reason_codes"]
+    assert "AUTHORITY_UNRECOGNIZED" in receipt["reason_codes"]
+    assert not (tmp_path / "compiled").exists()
+
+
+@pytest.mark.parametrize(
+    "lab,forged_id", [(REFERENCE_LAB, "ac-sdl1-oer-protocol"), (FASTCAT_LAB, "ac-oer-twin")]
+)
+def test_self_admitted_physical_provider_is_demoted_not_trusted(
+    tmp_path: Path, capsys, lab: Path, forged_id: str
+) -> None:
+    """Attack repro: an agent flips the targeted OER provider to ``evidence_class:
+    physical`` in its own registry and passes that forged registry to both
+    ``compose`` and ``compile``.
+
+    Before the fix this composes (COMPILED), compiles, runs, and validates,
+    producing a simulator's output masquerading as ``evidence_class: physical``
+    with ``uncertainty.kind: measured``. After the fix, compose demotes the
+    self-admitted claim -- visibly, via a legible ``PROVIDER_SELF_ADMITTED``
+    reason -- and compile independently refuses the forged authority too, so no
+    compiled world, run, or validated trace is ever reachable.
+    """
+
+    registry = yaml.safe_load((lab / "registry.yaml").read_text(encoding="utf-8"))
+    for provider in registry["providers"]:
+        if provider["provider_id"] == forged_id:
+            provider["evidence_class"] = "physical"
+            provider["validity_envelope"].append(
+                {
+                    "subject_kind": "input",
+                    "subject_id": "sample.state",
+                    "value_type": "sample_state",
+                    "unit": "1",
+                    "enum": ["sample-nickel-01"],
+                }
+            )
+    forged_registry = tmp_path / "registry.yaml"
+    forged_registry.write_text(yaml.safe_dump(registry, sort_keys=False), encoding="utf-8")
+
+    unchecked_requirement = write_reference_requirement(tmp_path / "unchecked-requirement.yaml")
+    if lab == FASTCAT_LAB:
+        from test_restore import _child_requirement
+
+        unchecked_requirement.write_text(
+            yaml.safe_dump(_child_requirement("unchecked-bath", counterfactual=True)),
+            encoding="utf-8",
+        )
+    unchecked = compose_files(unchecked_requirement, forged_registry, lab / "facility.yaml")
+    assert unchecked.status == "COMPILED"
+    api_world = tmp_path / "api-registry-proposal-world"
+    api_result = compile_facility(
+        lab / "facility.yaml",
+        "openusd",
+        api_world,
+        composition_result=unchecked,
+    )
+    assert api_result.authority_anchor == "unverified_proposal"
+    assert api_result.execution_status == "not_executable"
+    assert main(["run", str(api_world), "-o", str(tmp_path / "api-registry-trace.ndjson")]) == 2
+    assert "validation-only" in capsys.readouterr().err
+
+    assert (
+        main(
+            [
+                "capabilities",
+                "--facility",
+                str(lab / "facility.yaml"),
+                "--registry",
+                str(forged_registry),
+                "--json",
+            ]
+        )
+        == 0
+    )
+    inspected = json.loads(capsys.readouterr().out)
+    assert inspected["registry_role"] == "proposal"
+    provider = next(
+        item
+        for operation in inspected["operations"]
+        for item in operation["providers"]
+        if item["provider_id"] == forged_id
+    )
+    assert provider["admission"] == "pending"
+    assert provider["proposed_admission"] == "admitted"
+    assert any(item["code"] == "PROVIDER_SELF_ADMITTED" for item in inspected["validation_reasons"])
+
+    requirement_path = _write_oer_requirement(tmp_path / "requirement.yaml", lab=lab)
+    composition_path = tmp_path / "composition.json"
+    compose_rc = main(
+        [
+            "compose",
+            str(requirement_path),
+            *NO_PREFLIGHT,
+            "--facility",
+            str(lab / "facility.yaml"),
+            "--registry",
+            str(forged_registry),
+            "-o",
+            str(composition_path),
+        ]
+    )
+    receipt = json.loads(capsys.readouterr().out)
+    assert compose_rc == 1
+    assert receipt["status"] == "HOLD"
+    assert "PROVIDER_NOT_ADMITTED" in receipt["reason_codes"]
+    untrusted = receipt["untrusted_admissions"]
+    assert any(
+        item["code"] == "PROVIDER_SELF_ADMITTED" and item["provider_id"] == forged_id
+        for item in untrusted
+    )
+
+    compiled_dir = tmp_path / "compiled"
+    compile_rc = main(["compile", str(composition_path), "-o", str(compiled_dir)])
+    capsys.readouterr()
+    assert compile_rc != 0
+    assert not compiled_dir.exists()
+
+
+@pytest.mark.parametrize(
+    "lab,forged_id", [(REFERENCE_LAB, "ac-sdl1-oer-protocol"), (FASTCAT_LAB, "ac-oer-twin")]
+)
+def test_known_provider_with_modified_safety_fields_is_not_trusted(
+    tmp_path: Path, capsys, lab: Path, forged_id: str
+) -> None:
+    """Named authority attack: a known, installed provider identity whose
+    safety-bearing fields were changed must never compose or compile as
+    admitted. The identity tuple still matches the installed record, so only
+    a full authority-record comparison catches it."""
+
+    registry = yaml.safe_load((lab / "registry.yaml").read_text(encoding="utf-8"))
+    for provider in registry["providers"]:
+        if provider["provider_id"] == forged_id:
+            provider["policy"]["policy_tags"].append("forged-safety-policy")
+    forged_registry = tmp_path / "registry.yaml"
+    forged_registry.write_text(yaml.safe_dump(registry, sort_keys=False), encoding="utf-8")
+
+    requirement_path = _write_oer_requirement(tmp_path / "requirement.yaml", lab=lab)
+    composition_path = tmp_path / "composition.json"
+    compose_rc = main(
+        [
+            "compose",
+            str(requirement_path),
+            *NO_PREFLIGHT,
+            "--facility",
+            str(lab / "facility.yaml"),
+            "--registry",
+            str(forged_registry),
+            "-o",
+            str(composition_path),
+        ]
+    )
+    receipt = json.loads(capsys.readouterr().out)
+    assert compose_rc == 1
+    assert receipt["status"] == "HOLD"
+    assert "PROVIDER_NOT_ADMITTED" in receipt["reason_codes"]
+    assert any(
+        item["code"] == "PROVIDER_AUTHORITY_MODIFIED" and item["provider_id"] == forged_id
+        for item in receipt["untrusted_admissions"]
+    )
+
+    compiled_dir = tmp_path / "compiled"
+    compile_rc = main(["compile", str(composition_path), "-o", str(compiled_dir)])
+    receipt = json.loads(capsys.readouterr().out)
+    assert compile_rc == 1
+    assert receipt["status"] == "HOLD"
+    assert not compiled_dir.exists()
+
+
+def test_modified_model_hash_in_agent_facility_is_refused(tmp_path: Path, capsys) -> None:
+    """Named authority attack: modified model code with a matching
+    agent-authored facility hash. The declared implementation hash is an
+    authority record; an agent facility that redeclares it differs from the
+    installed authority and holds at compose and at compile."""
+
+    facility = yaml.safe_load(MANIFEST.read_text(encoding="utf-8"))
+    for binding in facility["model_bindings"]:
+        if binding["id"] == "ac-sdl1-oer-model":
+            binding["implementation_sha256"] = "0" * 64
+    forged_facility = tmp_path / "facility.yaml"
+    forged_facility.write_text(yaml.safe_dump(facility, sort_keys=False), encoding="utf-8")
+
+    requirement_path = write_reference_requirement(tmp_path / "requirement.yaml")
+    compose_rc = main(
+        ["compose", str(requirement_path), "--facility", str(forged_facility), *NO_PREFLIGHT]
+    )
+    receipt = json.loads(capsys.readouterr().out)
+    assert compose_rc == 1
+    assert receipt["status"] == "HOLD"
+    assert receipt["reason_codes"] == ["AUTHORITY_MODIFIED"]
+    assert any("facility document" in item["detail"] for item in receipt["validation_reasons"])
+
+    composition_path = tmp_path / "composition.json"
+    write_composition_result(
+        composition_path,
+        compose_files(requirement_path, DEFAULT_REGISTRY, forged_facility),
+    )
+    compiled_dir = tmp_path / "compiled"
+    compile_rc = main(["compile", str(composition_path), "-o", str(compiled_dir)])
+    receipt = json.loads(capsys.readouterr().out)
+    assert compile_rc == 1
+    assert receipt["status"] == "HOLD"
+    assert "AUTHORITY_MODIFIED" in receipt["reason_codes"]
+    assert not compiled_dir.exists()
+
+
+def test_stripped_proof_requirements_fail_validation_and_replay(tmp_path: Path, capsys) -> None:
+    """Named authority attack: a trace cannot remove or redefine its required
+    proof outputs. Stripping proof requirements from campaign_start must fail
+    both standalone validation and replay."""
+
+    requirement = write_reference_requirement(tmp_path / "requirement.yaml")
+    composition = tmp_path / "composition.json"
+    compiled = tmp_path / "compiled"
+    trace = tmp_path / "trace.ndjson"
+    assert main(["compose", str(requirement), *NO_PREFLIGHT, "-o", str(composition)]) == 0
+    capsys.readouterr()
+    assert main(["compile", str(composition), "-o", str(compiled)]) == 0
+    capsys.readouterr()
+    assert main(["run", str(compiled), "-o", str(trace)]) == 0
+    capsys.readouterr()
+
+    lines = trace.read_text(encoding="utf-8").splitlines()
+    start = json.loads(lines[0])
+    start["provenance"]["proof_requirements"] = []
+    lines[0] = json.dumps(start, sort_keys=True, separators=(",", ":"))
+    tampered = tmp_path / "tampered.ndjson"
+    tampered.write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+    assert main(["validate", str(tampered), "--json"]) == 1
+    report = json.loads(capsys.readouterr().out)
+    assert report["valid"] is False
+    assert any(
+        reason.get("code") == "PROOF_CONTRACT_MISMATCH"
+        for reason in report.get("validation_reasons", [])
+    )
+
+    replayed = tmp_path / "replay.ndjson"
+    assert main(["run", str(tampered), "--mode", "replay", "-o", str(replayed)]) != 0
+
+
+def test_injected_material_state_holds_at_compile(tmp_path: Path, capsys) -> None:
+    """A fabricated facility record outside the installed authority is a
+    proposal, even in a section (material_states) the agent may otherwise
+    leave empty: it seeds scientific conditions and must not compile silently.
+    An agent-supplied facility that injects a material_states record holds at
+    compile with a typed AUTHORITY_MODIFIED reason."""
+
+    facility = yaml.safe_load(MANIFEST.read_text(encoding="utf-8"))
+    facility["material_states"] = [
+        {
+            "id": "forged-material",
+            "container_asset_id": "ot2-test-plate",
+            "initial_channels": [
+                {"channel_id": "forged.injected_channel", "value": 1.0, "unit": "1"}
+            ],
+        }
+    ]
+    forged_facility = tmp_path / "facility.yaml"
+    forged_facility.write_text(yaml.safe_dump(facility, sort_keys=False), encoding="utf-8")
+
+    requirement = write_reference_requirement(tmp_path / "requirement.yaml")
+    composition_path = tmp_path / "composition.json"
+    write_composition_result(
+        composition_path, compose_files(requirement, DEFAULT_REGISTRY, forged_facility)
+    )
+
+    compiled_dir = tmp_path / "compiled"
+    compile_rc = main(["compile", str(composition_path), "-o", str(compiled_dir)])
+    receipt = json.loads(capsys.readouterr().out)
+    assert compile_rc == 1
+    assert receipt["status"] == "HOLD"
+    assert "AUTHORITY_MODIFIED" in receipt["reason_codes"]
+    assert any("facility document" in item["detail"] for item in receipt["validation_reasons"])
+    assert not compiled_dir.exists()
+
+
+def test_run_defaults_to_simulate_and_manifest_compile_requires_target(
+    tmp_path: Path, capsys
+) -> None:
+    assert main(["compile", str(MANIFEST)]) == 2
+    assert "requires --target" in capsys.readouterr().err
+
+    compiled = tmp_path / "manifest-world"
+    assert main(["compile", str(MANIFEST), "--target", "openusd", "-o", str(compiled)]) == 0
+    receipt = json.loads(capsys.readouterr().out)
+    assert receipt["execution_status"] == "not_executable"
+    assert receipt["authority_anchor"] == "installed_bundle"
+    assert receipt["next_command"] == f"dynamical validate {compiled} --json"
+    trace = tmp_path / "trace.ndjson"
+    assert main(["run", str(compiled), "-o", str(trace)]) == 2
+    assert "validation-only" in capsys.readouterr().err
+    assert not trace.exists()
+
+
+def test_modified_claim_boundary_is_a_proposal(tmp_path: Path, capsys) -> None:
+    facility = yaml.safe_load(MANIFEST.read_text(encoding="utf-8"))
+    facility["facility"]["claim_boundary"] = ["Agent-authored authority claim."]
+    proposed_facility = tmp_path / "facility.yaml"
+    proposed_facility.write_text(yaml.safe_dump(facility, sort_keys=False), encoding="utf-8")
+
+    requirement = write_reference_requirement(tmp_path / "requirement.yaml")
+    composition = tmp_path / "composition.json"
+    assert (
+        main(
+            [
+                "compose",
+                str(requirement),
+                *NO_PREFLIGHT,
+                "--facility",
+                str(proposed_facility),
+                "-o",
+                str(composition),
+            ]
+        )
+        == 1
+    )
+    receipt = json.loads(capsys.readouterr().out)
+    assert receipt["status"] == "HOLD"
+    assert receipt["authority_anchor"] == "installed_bundle"
+    assert "Agent-authored authority claim." not in receipt["claim_boundary"]
+    assert "AUTHORITY_MODIFIED" in receipt["reason_codes"]
+    assert not composition.exists()
+
+    compiled = tmp_path / "proposal-world"
+    assert (
+        main(
+            [
+                "compile",
+                str(proposed_facility),
+                "--target",
+                "openusd",
+                "-o",
+                str(compiled),
+            ]
+        )
+        == 0
+    )
+    compile_receipt = json.loads(capsys.readouterr().out)
+    assert compile_receipt["execution_status"] == "not_executable"
+    assert compile_receipt["authority_anchor"] == "unverified_proposal"
+    assert "Agent-authored authority claim." not in compile_receipt["claim_boundary"]
+    evidence_report = json.loads((compiled / "evidence_report.json").read_text(encoding="utf-8"))
+    assert evidence_report["authority_anchor"] == "unverified_proposal"
+    assert "Agent-authored authority claim." not in evidence_report["claim_boundary"]
+    assert main(["validate", str(compiled), "--json"]) == 0
+    validation = json.loads(capsys.readouterr().out)
+    assert validation["authority_anchor"] == "unverified_proposal"
+    assert validation["execution_status"] == "not_executable"
+    assert "Agent-authored authority claim." not in validation["claim_boundary"]
+
+    unchecked = compose_files(requirement, DEFAULT_REGISTRY, proposed_facility)
+    assert unchecked.status == "COMPILED"
+    api_world = tmp_path / "api-proposal-world"
+    api_result = compile_facility(
+        proposed_facility,
+        "openusd",
+        api_world,
+        composition_result=unchecked,
+    )
+    assert api_result.authority_anchor == "unverified_proposal"
+    assert api_result.execution_status == "not_executable"
+    assert main(["run", str(api_world), "-o", str(tmp_path / "api-trace.ndjson")]) == 2
+    assert "validation-only" in capsys.readouterr().err
+
+
+def test_missing_cli_inputs_name_the_absent_path(tmp_path: Path, capsys) -> None:
+    absent = tmp_path / "absent.json"
+    cases = (
+        (["compose", str(absent)], "campaign requirement does not exist"),
+        (["compile", str(absent)], "compile input does not exist"),
+        (["run", str(absent)], "run input does not exist"),
+        (["validate", str(absent)], "validation input does not exist"),
+    )
+    for arguments, expected in cases:
+        assert main(arguments) == 2
+        error = capsys.readouterr().err
+        assert expected in error
+        assert str(absent) in error
+
+    malformed = tmp_path / "malformed.yaml"
+    malformed.write_text("facility: [unterminated\n", encoding="utf-8")
+    for arguments in (
+        ["capabilities", "--registry", str(malformed), "--json"],
+        ["compile", str(malformed), "--target", "openusd"],
+    ):
+        assert main(arguments) == 2
+        error = capsys.readouterr().err
+        assert "malformed YAML" in error
+        assert "Traceback" not in error
+
+
+def test_known_document_types_name_the_correct_command(tmp_path: Path, capsys) -> None:
+    requirement = write_reference_requirement(tmp_path / "requirement.yaml")
+    cases = (
+        (
+            ["validate", str(requirement), "--json"],
+            f"Example: dynamical compose {requirement} -o composition.json",
+        ),
+        (
+            ["compile", str(requirement), "--target", "openusd"],
+            f"Example: dynamical compose {requirement} -o composition.json",
+        ),
+        (
+            ["compose", str(MANIFEST)],
+            f"Example: dynamical compile {MANIFEST} --target openusd -o compiled-world",
+        ),
+    )
+    for arguments, expected in cases:
+        assert main(arguments) == 2
+        error = capsys.readouterr().err
+        assert expected in error
+        assert len(error.splitlines()) == 2
+        assert "validation errors for" not in error
+
+
+def test_registry_sha256_is_recomputable_from_the_emitted_bytes(capsys):
+    main(["capabilities", "--json"])
+    payload = json.loads(capsys.readouterr().out)
+    declared = payload.pop("registry_sha256")
+    recomputed = hashlib.sha256(
+        json.dumps(payload, sort_keys=True, separators=(",", ":")).encode()
+    ).hexdigest()
+    assert recomputed == declared
+
+
+def test_operation_filter_is_honoured_without_json(capsys):
+    main(["capabilities", "--operation", "measure-oer"])
+    out = capsys.readouterr().out
+    assert "measure-oer" in out
+    assert "dispense-electrolyte" not in out
+
+
+def test_index_carries_everything_needed_to_avoid_a_hold(capsys):
+    main(["capabilities", "--json"])
+    operation = json.loads(capsys.readouterr().out)["operations"][0]
+    provider = operation["providers"][0]
+    assert {"policy", "cost", "duration", "validity_envelope"} <= set(provider)
+
+
+def test_compose_fails_closed_without_a_preflight_receipt(tmp_path: Path, capsys) -> None:
+    """A new campaign has no composition without a frozen starting state. The error
+    names the preflight verb as the next command; the waiver needs a recorded reason."""
+
+    requirement = write_reference_requirement(tmp_path / "requirement.yaml")
+    composition = tmp_path / "composition.json"
+
+    assert main(["compose", str(requirement), "-o", str(composition)]) == 2
+    error = capsys.readouterr().err
+    assert "compose requires a READY preflight receipt" in error
+    assert f"Example: dynamical compose {requirement} --preflight preflight.json" in error
+    assert f"Next: dynamical preflight mapping.json --requirement {requirement}" in error
+    assert not composition.exists()
+
+    assert main(["compose", str(requirement)]) == 2
+    assert "Next: dynamical preflight" in capsys.readouterr().err
+
+    assert main(["compose", str(requirement), "--no-preflight", "-o", str(composition)]) == 2
+    assert "--no-preflight requires --reason" in capsys.readouterr().err
+    assert not composition.exists()
+
+    assert main(["compose", str(requirement), "--reason", "why", "-o", str(composition)]) == 2
+    assert "--reason is accepted only with --no-preflight" in capsys.readouterr().err
+
+    receipt = tmp_path / "preflight.json"
+    receipt.write_text("{}", encoding="utf-8")
+    assert (
+        main(
+            [
+                "compose",
+                str(requirement),
+                "--preflight",
+                str(receipt),
+                *NO_PREFLIGHT,
+                "-o",
+                str(composition),
+            ]
+        )
+        == 2
+    )
+    assert "cannot be combined" in capsys.readouterr().err
+
+    assert main(["compose", "--schema", *NO_PREFLIGHT]) == 2
+    assert "Example: dynamical compose --schema" in capsys.readouterr().err
+
+    # A wrong document type is reported as such, ahead of the preflight gate.
+    assert main(["compose", str(MANIFEST), "--facility", "sdl1"]) == 2
+    assert "Example: dynamical compile" in capsys.readouterr().err
+
+
+def test_preflight_waiver_is_recorded_in_the_compose_receipt(tmp_path: Path, capsys) -> None:
+    requirement = write_reference_requirement(tmp_path / "requirement.yaml")
+    composition = tmp_path / "composition.json"
+
+    assert main(["compose", str(requirement), *NO_PREFLIGHT, "-o", str(composition)]) == 0
+    receipt = json.loads(capsys.readouterr().out)
+    assert receipt["status"] == "COMPILED"
+    assert receipt["preflight_skipped"] == {"reason": NO_PREFLIGHT[-1]}
+    assert "preflight" not in receipt
+    assert receipt["next_command"] == f"dynamical compile {composition} -o compiled-world"
+    saved = json.loads(composition.read_text(encoding="utf-8"))
+    assert saved["sources"].get("preflight") is None
+    # The waiver is part of the artifact, not only of the stdout receipt.
+    assert saved["sources"]["preflight_skip"] == {"reason": NO_PREFLIGHT[-1]}
+    assert main(["validate", str(composition), "--json"]) == 0
+    assert json.loads(capsys.readouterr().out)["valid"] is True
+
+    assert main(["compose", str(requirement), *NO_PREFLIGHT]) == 0
+    payload = json.loads(capsys.readouterr().out)
+    assert payload["preflight_skipped"] == {"reason": NO_PREFLIGHT[-1]}
+
+
+def test_receipt_chain_names_the_next_command_at_every_step(
+    tmp_path: Path, capsys, monkeypatch
+) -> None:
+    """From the preflight receipt to the validated replay, every receipt carries the
+    exact next command, and running each one as written completes the campaign."""
+
+    from _fixtures import write_reference_mapping
+
+    monkeypatch.chdir(tmp_path)
+    write_reference_requirement(tmp_path / "requirement.yaml")
+    write_reference_mapping(tmp_path)
+
+    def run(command: str) -> dict:
+        arguments = shlex.split(command)
+        assert arguments[0] == "dynamical"
+        assert main(arguments[1:]) == 0
+        receipt = json.loads(capsys.readouterr().out)
+        # A receipt command is either fully resolved or absent; never a template.
+        for key, value in receipt.items():
+            if key.endswith("_command"):
+                assert "<" not in value and ">" not in value, (key, value)
+        return receipt
+
+    preflight = run(
+        "dynamical preflight mapping.json --requirement requirement.yaml -o preflight.json"
+    )
+    assert preflight["status"] == "READY"
+    composed = run(preflight["next_command"])
+    assert composed["status"] == "COMPILED"
+    assert composed["preflight"]["state_id"] == preflight["state_id"]
+    compiled = run(composed["next_command"])
+    assert compiled["execution_status"] == "ready"
+    simulated = run(compiled["next_command"])
+    assert simulated["mode"] == "simulate"
+    assert simulated["next_command"] == "dynamical validate trace.ndjson --json"
+    validated = run(simulated["next_command"])
+    assert validated["valid"] is True
+    assert validated["next_command"] == (
+        "dynamical run trace.ndjson --mode replay -o trace.replay.ndjson"
+    )
+    # Without the branch worlds, validate names the restore point as data, not as a
+    # command it cannot complete.
+    assert "branch_command" not in validated
+    events = [json.loads(line) for line in Path("trace.ndjson").read_text().splitlines()]
+    last_observation = [e for e in events if e["event_type"] == "observation"][-1]
+    assert validated["last_observation_event_id"] == last_observation["event_id"]
+    assert validated["world_sha256"] == compiled["world_sha256"]
+    assert validated["core_ir_sha256"] == compiled["core_ir_sha256"]
+    replayed = run(validated["next_command"])
+    assert replayed["mode"] == "replay"
+    assert replayed["next_command"] == "dynamical validate trace.replay.ndjson --json"
+    replay_validated = run(replayed["next_command"])
+    assert replay_validated["valid"] is True
+    assert "next_command" not in replay_validated
+    assert "branch_command" not in replay_validated
+
+    # Validating the intermediate artifacts names their next step too.
+    assert run("dynamical validate composition.json --json")["next_command"] == (
+        "dynamical compile composition.json -o compiled-world"
+    )
+    assert run("dynamical validate compiled-world --json")["next_command"] == (
+        "dynamical run compiled-world -o trace.ndjson"
+    )
+    assert main(["validate", "trace.ndjson"]) == 0
+    text = capsys.readouterr().out
+    assert text.startswith("VALID: trace.ndjson")
+    assert "Next: dynamical run trace.ndjson --mode replay -o trace.replay.ndjson" in text
+
+    # The run receipt printed without -o names validate for the default output.
+    assert main(["run", "compiled-world"]) == 0
+    full_receipt = json.loads(capsys.readouterr().out)
+    assert full_receipt["output"] == "run.simulate.ndjson"
+    assert full_receipt["next_command"] == "dynamical validate run.simulate.ndjson --json"
+    assert (tmp_path / "run.simulate.ndjson").is_file()
+
+
+def test_branch_command_is_fully_resolved_or_absent(tmp_path: Path, capsys, monkeypatch) -> None:
+    """validate names a branch only when every component is verified, including the
+    restore check the named command would perform. The SDL1 reference trace
+    records custody without complete sample state, so it is not a restore source:
+    the answer is an exit-2 error with restore's reason, never a template."""
+
+    monkeypatch.chdir(tmp_path)
+    requirement = write_reference_requirement(tmp_path / "requirement.yaml")
+    assert main(["compose", str(requirement), *NO_PREFLIGHT, "-o", "composition.json"]) == 0
+    capsys.readouterr()
+    for world in ("parent-world", "child-world"):
+        assert main(["compile", "composition.json", "-o", world]) == 0
+        capsys.readouterr()
+    assert main(["run", "parent-world", "-o", "parent.ndjson"]) == 0
+    capsys.readouterr()
+
+    # One flag without the other never emits a partial branch.
+    assert main(["validate", "parent.ndjson", "--json", "--compiled-world", "parent-world"]) == 2
+    error = capsys.readouterr().err
+    assert "must appear together" in error
+    assert "Example: dynamical validate parent.ndjson --json --compiled-world" in error
+
+    branch_args = ["validate", "parent.ndjson", "--json", "--compiled-world", "parent-world"]
+    assert main([*branch_args, "--child-world", "absent-world"]) == 2
+    assert "child world is not a compiled world: absent-world" in capsys.readouterr().err
+
+    assert main(["compile", str(MANIFEST), "--target", "openusd", "-o", "other-world"]) == 0
+    capsys.readouterr()
+    assert main([*branch_args[:-1], "other-world", "--child-world", "child-world"]) == 2
+    assert "compiled world does not match the trace: other-world" in capsys.readouterr().err
+
+    # Every cheap check passes, and restore's own preflight still refuses this
+    # trace; the receipt carries the refusal, not a command that would fail.
+    assert main([*branch_args, "--child-world", "child-world"]) == 2
+    error = capsys.readouterr().err
+    assert "branch from parent.ndjson at " in error
+    assert "custody without complete sample state" in error
+
+    assert main(["run", "parent.ndjson", "--mode", "replay", "-o", "replay.ndjson"]) == 0
+    capsys.readouterr()
+    for artifact in ("replay.ndjson", "composition.json", "parent-world"):
+        args = ["validate", artifact, "--json", "--compiled-world", "parent-world"]
+        assert main([*args, "--child-world", "child-world"]) == 2
+        assert "apply to a valid simulate trace" in capsys.readouterr().err
+
+
+def test_hold_recovery_with_a_stale_receipt_names_a_rebind_not_a_reuse(
+    tmp_path: Path, capsys, monkeypatch
+) -> None:
+    """A receipt bound to the wrong facility cannot compose against the right one;
+    the HOLD recovery must freeze the same map against the declared facility, not
+    hand back the stale receipt with a switched --facility."""
+
+    from _fixtures import write_reference_mapping
+
+    monkeypatch.chdir(tmp_path)
+    Path("fc-req.yaml").write_bytes(
+        (REPOSITORY / "examples" / "fastcat-oer" / "requirement.yaml").read_bytes()
+    )
+    write_reference_mapping(tmp_path)
+    preflight = ["preflight", "mapping.json", "--requirement", "fc-req.yaml"]
+    assert main([*preflight, "--facility", "sdl1", "-o", "sdl1bound.json"]) == 0
+    capsys.readouterr()
+    stale = Path("sdl1bound.json").read_bytes()
+
+    compose = ["compose", "fc-req.yaml", "--preflight", "sdl1bound.json", "--facility", "sdl1"]
+    assert main([*compose, "-o", "composition.json"]) == 1
+    hold = json.loads(capsys.readouterr().out)
+    assert hold["status"] == "HOLD"
+    recovery = shlex.split(hold["next_command"])
+    assert recovery[:2] == ["dynamical", "preflight"]
+    assert "--preflight" not in recovery
+    assert recovery[recovery.index("--facility") + 1] == "fastcat"
+    assert recovery[-2:] == ["-o", "sdl1bound.fastcat.json"]
+    # The map is named portably: relative to cwd, never by the absolute path of
+    # the machine that produced the receipt.
+    assert recovery[2] == "mapping.json"
+    assert not any(Path(item).is_absolute() for item in recovery[2:])
+    recorded = json.loads(stale)["mapping"]
+    assert recorded["path"] == "mapping.json"
+    assert recorded["sha256"] == hashlib.sha256(Path("mapping.json").read_bytes()).hexdigest()
+
+    # The recovery runs as written, and its own next command composes.
+    assert main(recovery[1:]) == 0
+    rebound = json.loads(capsys.readouterr().out)
+    assert rebound["status"] == "READY"
+    assert main(shlex.split(rebound["next_command"])[1:]) == 0
+    composed = json.loads(capsys.readouterr().out)
+    assert composed["status"] == "COMPILED"
+    assert composed["preflight"]["state_id"] == rebound["state_id"]
+    assert Path("sdl1bound.json").read_bytes() == stale
+
+    # A receipt that does not record its map gets the inspection hint, not a guess.
+    receipt = json.loads(stale)
+    del receipt["mapping"]
+    Path("unmapped.json").write_text(json.dumps(receipt), encoding="utf-8")
+    compose = ["compose", "fc-req.yaml", "--preflight", "unmapped.json", "--facility", "sdl1"]
+    assert main([*compose, "-o", "composition.json"]) == 1
+    hold = json.loads(capsys.readouterr().out)
+    assert hold["next_command"] == "dynamical capabilities --facility sdl1"
+    assert "--preflight" not in hold["next_command"]
+
+    # A map whose bytes no longer match the receipt's sha256 is detected, not reused.
+    Path("mapping.json").write_text(Path("mapping.json").read_text() + "\n", encoding="utf-8")
+    compose = ["compose", "fc-req.yaml", "--preflight", "sdl1bound.json", "--facility", "sdl1"]
+    assert main([*compose, "-o", "composition.json"]) == 1
+    hold = json.loads(capsys.readouterr().out)
+    assert hold["next_command"] == "dynamical capabilities --facility sdl1"
+
+    # A sibling source tree remains portable when the containing campaign moves.
+    outside = tmp_path.parent / f"{tmp_path.name}-outside"
+    outside.mkdir()
+    for name in ("mapping.json", "records.json"):
+        (outside / name).write_bytes((tmp_path / name).read_bytes())
+    assert (
+        main([*preflight[:1], str(outside / "mapping.json"), *preflight[2:], "-o", "far.json"]) == 0
+    )
+    capsys.readouterr()
+    assert json.loads(Path("far.json").read_text())["mapping"]["path"] == (
+        f"../{outside.name}/mapping.json"
+    )
+
+
+def test_waiver_persists_without_moving_content_hashes(tmp_path: Path, capsys) -> None:
+    """The persisted waiver enters resolution_sha256 (the artifact's identity) and
+    nothing else: the content hashes of a waived and a receipt-bound composition of
+    the same requirement are equal, and a composition without a waiver has no key."""
+
+    from _fixtures import write_reference_mapping
+    from pydantic import ValidationError
+
+    from dynamical.composition import CompositionSources, PreflightSkip
+
+    requirement = write_reference_requirement(tmp_path / "requirement.yaml")
+    mapping = write_reference_mapping(tmp_path)
+    receipt = tmp_path / "preflight.json"
+    assert (
+        main(["preflight", str(mapping), "--requirement", str(requirement), "-o", str(receipt)])
+        == 0
+    )
+    capsys.readouterr()
+    bound, waived = tmp_path / "bound.json", tmp_path / "waived.json"
+    assert main(["compose", str(requirement), "--preflight", str(receipt), "-o", str(bound)]) == 0
+    capsys.readouterr()
+    assert main(["compose", str(requirement), *NO_PREFLIGHT, "-o", str(waived)]) == 0
+    capsys.readouterr()
+    bound_doc = json.loads(bound.read_text(encoding="utf-8"))
+    waived_doc = json.loads(waived.read_text(encoding="utf-8"))
+
+    assert bound_doc["composition_sha256"] == waived_doc["composition_sha256"]
+    assert bound_doc["request_sha256"] == waived_doc["request_sha256"]
+    assert bound_doc["resolution_sha256"] != waived_doc["resolution_sha256"]
+    assert "preflight_skip" not in bound_doc["sources"]
+    assert "preflight" not in waived_doc["sources"]
+    assert waived_doc["sources"]["preflight_skip"] == {"reason": NO_PREFLIGHT[-1]}
+    assert main(["compile", str(waived), "-o", str(tmp_path / "waived-world")]) == 0
+    capsys.readouterr()
+
+    with pytest.raises(ValidationError):
+        PreflightSkip(reason="")
+    with pytest.raises(ValidationError, match="cannot both bind"):
+        CompositionSources.model_validate(
+            {**waived_doc["sources"], "preflight": bound_doc["sources"]["preflight"]}
+        )
+
+
+def test_replay_never_overwrites_its_source(tmp_path: Path, capsys, monkeypatch) -> None:
+    """A simulate trace named replay.ndjson is the trap: validate's replay command
+    must not name the source as its output, and replay must refuse the alias even
+    when asked directly, including through a symlink."""
+
+    from dynamical.campaign import CampaignValidationError
+    from dynamical.replay import replay_trace
+
+    monkeypatch.chdir(tmp_path)
+    requirement = write_reference_requirement(tmp_path / "requirement.yaml")
+    assert main(["compose", str(requirement), *NO_PREFLIGHT, "-o", "composition.json"]) == 0
+    capsys.readouterr()
+    assert main(["compile", "composition.json", "-o", "compiled-world"]) == 0
+    capsys.readouterr()
+    Path("sub").mkdir()
+    assert main(["run", "compiled-world", "-o", "sub/replay.ndjson"]) == 0
+    capsys.readouterr()
+    source = Path("sub/replay.ndjson")
+    before = source.read_bytes()
+
+    assert main(["validate", "sub/replay.ndjson", "--json"]) == 0
+    report = json.loads(capsys.readouterr().out)
+    assert report["next_command"] == (
+        "dynamical run sub/replay.ndjson --mode replay -o sub/replay.replay.ndjson"
+    )
+    assert main(shlex.split(report["next_command"])[1:]) == 0
+    capsys.readouterr()
+    assert source.read_bytes() == before
+    assert Path("sub/replay.replay.ndjson").is_file()
+
+    assert main(["run", "sub/replay.ndjson", "--mode", "replay", "-o", "sub/replay.ndjson"]) == 2
+    assert "aliases the source trace" in capsys.readouterr().err
+    assert source.read_bytes() == before
+
+    Path("sub/alias.ndjson").symlink_to("replay.ndjson")
+    assert main(["run", "sub/replay.ndjson", "--mode", "replay", "-o", "sub/alias.ndjson"]) == 2
+    assert "aliases the source trace" in capsys.readouterr().err
+    assert source.read_bytes() == before
+
+    with pytest.raises(CampaignValidationError, match="aliases the source trace"):
+        replay_trace(source, source)
+    assert source.read_bytes() == before

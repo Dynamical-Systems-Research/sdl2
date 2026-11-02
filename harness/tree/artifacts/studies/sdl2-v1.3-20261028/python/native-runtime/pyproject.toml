@@ -1,0 +1,75 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "dynamical-cli"
+version = "0.1.22"
+description = "Open-source interface for scientific agents to compose virtual laboratories, run adaptive campaigns, and request physical evidence under facility authority."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "Apache-2.0" }
+authors = [{ name = "Dynamical Systems Research" }]
+keywords = [
+  "materials research",
+  "physical autoresearch",
+  "self-driving laboratories",
+  "digital twins",
+  "OpenUSD",
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "License :: OSI Approved :: Apache Software License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Scientific/Engineering",
+]
+dependencies = [
+  "pydantic>=2.11,<3",
+  "PyYAML>=6.0,<7",
+]
+
+[project.urls]
+Homepage = "https://github.com/Dynamical-Systems-Research/dynamical-cli"
+Repository = "https://github.com/Dynamical-Systems-Research/dynamical-cli"
+Issues = "https://github.com/Dynamical-Systems-Research/dynamical-cli/issues"
+Documentation = "https://github.com/Dynamical-Systems-Research/dynamical-cli#readme"
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.3,<9",
+  "ruff>=0.12,<1",
+]
+
+[project.scripts]
+dynamical = "dynamical.cli:main"
+
+[tool.hatch.build.targets.sdist]
+# Ship the runtime, public contracts, and agent skills. Generated outputs,
+# raw upstream CAD, documentation assets, tools, and lockfiles stay out.
+only-include = [
+  "dynamical",
+  "skills",
+  "THIRD_PARTY_NOTICES.md",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["dynamical"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"THIRD_PARTY_NOTICES.md" = "dynamical/bundle/reference-lab/THIRD_PARTY_NOTICES.md"
+
+[tool.pytest.ini_options]
+addopts = "-ra"
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
