@@ -31,7 +31,7 @@ RHO_TD = 7.62
 ROUTE_850 = {"T_peak_C": 850.0, "heating_rate_C_per_min": 10.0, "dwell_min": 5.0, "P_MPa": 60.0,
              "pressure_mode": "cooling", "cooling_rate_C_per_min": 100.0, "load_ramp_min": 0.3, "degas": 1.0,
              "degas_completeness": 1.0}
-ROUTE_BASIS = ("RPI panel recipe (signed PSF / timeline: 850 C, 10 C/min, 300 s, nominal 60 MPa, load on cooling, "
+ROUTE_BASIS = ("RPI panel recipe (RPI planning timeline: 850 C, 10 C/min, 300 s, nominal 60 MPa, load on cooling, "
                "degassed 600 C); #7/#8 SPS logs were not released, so the delivered schedule is the panel plan, as for #6")
 OBS = [
     {"id": "rho-C-7-archimedes", "body": "#7", "density_g_cm3": 7.01, "method": "Archimedes",

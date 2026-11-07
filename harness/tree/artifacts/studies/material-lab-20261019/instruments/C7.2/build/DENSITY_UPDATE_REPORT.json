@@ -28,7 +28,7 @@
   "degas": 1.0,
   "degas_completeness": 1.0
  },
- "route_basis": "RPI panel recipe (signed PSF / timeline: 850 C, 10 C/min, 300 s, nominal 60 MPa, load on cooling, degassed 600 C); #7/#8 SPS logs were not released, so the delivered schedule is the panel plan, as for #6",
+ "route_basis": "RPI panel recipe (RPI planning timeline: 850 C, 10 C/min, 300 s, nominal 60 MPa, load on cooling, degassed 600 C); #7/#8 SPS logs were not released, so the delivered schedule is the panel plan, as for #6",
  "base_package_tool_version": "ndfeb-sps-physics-tool-20261018.7.0-dev",
  "base_posterior_sha256": "2ccd5fdc88f6c5b060cee25e384b31ff30fcc9d418bd4072a89a546027067421",
  "base_density_weights": {
