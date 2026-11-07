@@ -1,0 +1,14 @@
+{
+  "schema": "ndfeb-vision-provider-pin-v1",
+  "model_id": "z-ai/glm-5.3-flash",
+  "provider_kind": "openrouter",
+  "provider_tag": "z-ai/fp8",
+  "provider_name": "Z.AI",
+  "catalog_file": "artifacts/studies/bridge/arms/frontier/providers/openrouter_models.json",
+  "endpoints_file": "artifacts/studies/bridge/arms/frontier/providers/z-ai__glm-5.3-flash__endpoints.json",
+  "reasoning_request": {
+    "effort": "high"
+  },
+  "recorded_at": "2026-10-26T19:20:19Z",
+  "rationale": "Every frontier model of the SDL-2 release runs through OpenRouter on one key, for one billing, one credential and one provider interface. Pinned to the model's first-party endpoint, no fallbacks, data_collection deny, reasoning effort high. first-party FP8 endpoint."
+}

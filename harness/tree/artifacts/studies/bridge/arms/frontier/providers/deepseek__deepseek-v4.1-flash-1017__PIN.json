@@ -1,0 +1,14 @@
+{
+  "schema": "ndfeb-vision-provider-pin-v1",
+  "model_id": "deepseek/deepseek-v4.1-flash-1017",
+  "provider_kind": "openrouter",
+  "provider_tag": "deepinfra/fp8",
+  "provider_name": "DeepInfra",
+  "catalog_file": "artifacts/studies/bridge/arms/frontier/providers/openrouter_models.json",
+  "endpoints_file": "artifacts/studies/bridge/arms/frontier/providers/deepseek__deepseek-v4.1-flash-1017__endpoints.json",
+  "reasoning_request": {
+    "effort": "high"
+  },
+  "recorded_at": "2026-10-26T20:12:22Z",
+  "rationale": "DeepSeek V4.1 Flash 1017 runs through OpenRouter on the one key like every frontier model. Pinned to DeepInfra FP8 with reasoning effort high and no fallbacks, as the qualified 1017 PIN, whose check found that DeepSeek's own endpoint rejects data_collection deny; this record carries a fresh endpoint snapshot. The endpoint accepts temperature and tool_choice and caches implicitly, so no omit_sampling_controls and no cache_control."
+}

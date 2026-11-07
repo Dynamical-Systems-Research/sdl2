@@ -1,0 +1,180 @@
+{
+  "adapter_bindings": [
+    {
+      "adapter_id": "dynamical-openusd",
+      "adapter_version": "0.1.0",
+      "binding_schema_ref": "dynamical.openusd-target.v1",
+      "configuration": {
+        "material_policy": "UsdPreviewSurface",
+        "vendor_references": false
+      },
+      "id": "sps-openusd",
+      "subject_id": "dynamical-sps-computational",
+      "target": "openusd"
+    },
+    {
+      "adapter_id": "dynamical-replay",
+      "adapter_version": "0.1.0",
+      "binding_schema_ref": "dynamical.trace.v0.1",
+      "configuration": {
+        "preserve_observation_origin": true,
+        "trace_contract_version": "0.1.0"
+      },
+      "id": "sps-replay",
+      "subject_id": "dynamical-sps-computational",
+      "target": "replay"
+    }
+  ],
+  "asset_sources": [],
+  "assets": [
+    {
+      "asset_kind": "Visualization-only computational marker",
+      "collision": {
+        "enabled": false,
+        "shape": "none"
+      },
+      "geometry": {
+        "dimensions_m": {
+          "x": 0.1,
+          "y": 0.1,
+          "z": 0.1
+        },
+        "portable_primitive": "cube",
+        "representation": "execution_visualization_primitive"
+      },
+      "id": "sps-compute-marker",
+      "pose": {
+        "orientation": {
+          "w": 1.0,
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "position_m": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        }
+      },
+      "workstation_id": "ndfeb-sps-compute"
+    }
+  ],
+  "calibration_evidence": [],
+  "capabilities": [
+    {
+      "action_type": "process",
+      "echoed_parameter_bindings": {},
+      "id": "process-sps-batch",
+      "observation_channel_ids": [
+        "sps.response_sha256",
+        "sps.specimen_count"
+      ],
+      "parameters": [],
+      "postcondition_constraint_ids": [],
+      "precondition_constraint_ids": [],
+      "provider_id": "sps-compute-device",
+      "reported_output_port_ids": {
+        "sps.response_sha256": "response_sha256",
+        "sps.specimen_count": "specimen_count"
+      }
+    }
+  ],
+  "devices": [
+    {
+      "asset_id": "sps-compute-marker",
+      "capability_ids": [
+        "process-sps-batch"
+      ],
+      "id": "sps-compute-device",
+      "state_channels": [
+        {
+          "id": "sps.response_sha256",
+          "unit": "1",
+          "value_type": "string"
+        },
+        {
+          "id": "sps.specimen_count",
+          "unit": "1",
+          "value_type": "integer"
+        }
+      ]
+    }
+  ],
+  "document_type": "dynamical.facility",
+  "facility": {
+    "authoring_basis": "representative",
+    "claim_boundary": [
+      "Simulator only; no physical execution or calibrated-twin claim.",
+      "Full specimen histories and measurement provenance remain in the hashed delivery sidecar.",
+      "Selected source support and conditional assumptions are separate from RPI calibration.",
+      "Marker geometry is a visualization convention, not laboratory CAD."
+    ],
+    "id": "dynamical-sps-computational",
+    "name": "SPS computational workspace, not RPI hardware",
+    "source_refs": [
+      {
+        "role": "scientific-dependency-lock",
+        "sha256": "5d136eba3ec5fc41236e907c97776d1a35dc069750144b4563366a8ec76bbe2f",
+        "uri": "package:dynamical/bundle/ndfeb-sps/dependency_lock.json"
+      }
+    ],
+    "workstation_ids": [
+      "ndfeb-sps-compute"
+    ]
+  },
+  "model_bindings": [
+    {
+      "calibration_evidence_ids": [],
+      "id": "ndfeb-sps-simulator-model",
+      "implementation_ref": "dynamical/instruments/ndfeb_sps.py",
+      "implementation_sha256": "2d850b56d99fd12ac94a3c9f0951a1c22a971c1062718cea298361f89eeaf668",
+      "input_channel_map": {},
+      "output_channel_map": {},
+      "parameter_map": {
+        "dependency-lock-sha256": "5d136eba3ec5fc41236e907c97776d1a35dc069750144b4563366a8ec76bbe2f",
+        "evidence-class": "simulator"
+      },
+      "update_interval_s": 1.0
+    }
+  ],
+  "provider_admission_bindings": [
+    {
+      "adapter_links": [
+        {
+          "adapter_id": "dynamical-ndfeb-sps-python",
+          "adapter_version": "0.1.0",
+          "endpoint_ref": "ndfeb-sps-simulator-model",
+          "implementation_sha256": "2d850b56d99fd12ac94a3c9f0951a1c22a971c1062718cea298361f89eeaf668"
+        }
+      ],
+      "endpoint_id": "ndfeb-sps-simulator-model",
+      "evidence_classes": [
+        "simulator"
+      ],
+      "facility_ids": [
+        "ndfeb-sps-compute"
+      ],
+      "id": "pending-process-sps-batch",
+      "operation_id": "process-sps-batch",
+      "policy_tags": [
+        "simulation-only",
+        "source-supported-and-explicit-conditional",
+        "no-physical-authority"
+      ],
+      "provider_id": "ndfeb-sps-simulator",
+      "required_approval_ids": [],
+      "safety_limit_ids": [],
+      "validity_envelope": []
+    }
+  ],
+  "schema_version": "0.1.0",
+  "workstations": [
+    {
+      "facility_id": "dynamical-sps-computational",
+      "id": "ndfeb-sps-compute",
+      "member_asset_ids": [
+        "sps-compute-marker"
+      ]
+    }
+  ]
+}

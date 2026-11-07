@@ -1,0 +1,41 @@
+{
+  "mishra_2023": {
+    "doi": "10.1002/adem.202201027",
+    "title": "NdFeB Magnets with Well-Pronounced Anisotropic Magnetic Properties Made by Electric Current-Assisted Sintering",
+    "url": "https://advanced.onlinelibrary.wiley.com/doi/full/10.1002/adem.202201027",
+    "pdf_url": "https://d-nb.info/1269737651/34",
+    "publication_year": 2023,
+    "online_year": 2022,
+    "source_license": "CC BY-NC-ND; PDF first page",
+    "included_artifact": "Independently transcribed numerical facts and locators only; no article, figure, or prose copied",
+    "training_admission": "not_admitted",
+    "reference_density_g_cm3": 7.63,
+    "raw_replicates": "not_reported_in_extracted_curve",
+    "grain_quantification": "qualitative only; Fig5 text says700C and caption800C",
+    "warnings": ["Fig4a500C digitized79.8pct conflicts with Methods2.2 interval73-75pct; excluded from default fit", "No raw specimen-level repeatability or measurement SD in extracted curve", "Source composition text contains Nb where Nd may be intended; no silent chemistry correction"]
+  },
+  "keszler_2025": {
+    "doi": "10.1177/00325899251331431",
+    "title": "Field assisted sintering and spark plasma texturing of Nd-Fe-B magnets with anisotropic magnetic properties",
+    "url": "https://doi.org/10.1177/00325899251331431",
+    "pdf_url": "https://juser.fz-juelich.de/record/1052723/files/keszler-et-al-2025-field-assisted-sintering-and-spark-plasma-texturing-of-nd-fe-b-magnets-with-anisotropic-magnetic.pdf",
+    "included_artifact": "Independently transcribed numerical facts and locators only; no article or image copied",
+    "source_license": "Author repository public access; exact reuse terms require separate check",
+    "training_admission": "not_admitted",
+    "reference_density_g_cm3": 7.55,
+    "raw_replicates": "not_reported_for_extracted_anchors",
+    "warnings": ["45/48/50MPa inconsistent across caption, text, and Table3; no point pressure assigned", "725C density is a lower bound (>99pct), not an exact99pct measurement", "500C density is an interval", "Hot-deformation data excluded"]
+  },
+  "ikram_2019": {
+    "doi": "10.1016/j.jallcom.2018.09.322",
+    "title": "The sintering mechanism of fully dense and highly coercive Nd-Fe-B magnets from the recycled HDDR powders reprocessed by spark plasma sintering",
+    "url": "https://doi.org/10.1016/j.jallcom.2018.09.322",
+    "source_license": "CC BY 4.0; article first page",
+    "included_artifact": "Density facts transcribed from Table2 p1202; grain descriptors from p1200; no article or images copied",
+    "training_admission": "not_admitted",
+    "reference_density_g_cm3": 7.57,
+    "raw_replicates": "not_identified_by_table",
+    "grain_rows": [{"temperature_c":750,"mean_nm":330,"reported_plus_minus_nm":120},{"temperature_c":850,"mean_nm":750,"reported_plus_minus_nm":260}],
+    "warnings": ["Recycled HDDR branch only, never pooled with melt-spun or aligned HPMS", "Table2 before/after are paired histories, not independent samples", "Grain plus-minus is a distribution descriptor, not a calibrated prediction SD", "Main methods andTable2 ramp descriptions differ; table-specific ramp retained"]
+  }
+}

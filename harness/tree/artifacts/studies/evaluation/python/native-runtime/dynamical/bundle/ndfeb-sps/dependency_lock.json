@@ -1,0 +1,97 @@
+{
+  "dependencies": [
+    {
+      "path": "__init__.py",
+      "sha256": "f0548163d392d3c39ebde0ade3c89b701c5826fb607aa0a6bc4e3f1b71d5536d"
+    },
+    {
+      "path": "measurements.py",
+      "sha256": "c124c8e7a9623bb3853ec9f34bd6753622f5b37fec143e5c08926124c15ec376"
+    },
+    {
+      "path": "models/__init__.py",
+      "sha256": "e4796b36d33a7f3ae34144ef0f15661dbe6dcb12dfc3788f196004badb5516c4"
+    },
+    {
+      "path": "models/conditional_workflow.py",
+      "sha256": "498c2bbf241ed4b98e21bc4706e055c6b83a4ed2f2819ea749e02e24a20e5307"
+    },
+    {
+      "path": "models/coverage.py",
+      "sha256": "50a6ead64600a89a68f254a1e56842afb9c475c3ea85d632629698ac3becbb98"
+    },
+    {
+      "path": "models/fitted.py",
+      "sha256": "c2296707be0879dcb2ea2c9f80d1ec46438b64a1bbbf952d7a03bf78873000b9"
+    },
+    {
+      "path": "models/forecast.py",
+      "sha256": "dc3f1bb43f8d20878425a297e376193cf69498ba1da78ead68f6da5f3747ec5a"
+    },
+    {
+      "path": "models/magnetic_workflow.py",
+      "sha256": "7ce582ef0e9679c68bd425746ade8c7f40930e3dfa6fdf5acf21889dd16c873d"
+    },
+    {
+      "path": "models/campaign_world.py",
+      "sha256": "a47dcf74b53a2764c16aa9cf834e5ba74adefe91fdfe337f210658c1d031fdda"
+    },
+    {
+      "path": "models/microstructure.py",
+      "sha256": "9918b2bb9ca73c9987b4ae0b4e5b6c4e342a7c7fd66425d7c193fc25601973be"
+    },
+    {
+      "path": "models/simulation.py",
+      "sha256": "ad98a5cf7d357b3af7892ec854cc162c2e156276a241064ed644e0c111558063"
+    },
+    {
+      "path": "models/sources.py",
+      "sha256": "961b28a6b3dbbf4e103c98a69f23bc00bc6528a626b9d36f344cfc2eb92e1c1d"
+    },
+    {
+      "path": "models/workflow_response.py",
+      "sha256": "b1f1a6155ae7bccf3a7746882bd68c67a0521ee1b6625d2ccc1d4db89979a15f"
+    },
+    {
+      "path": "models/data/sources.json",
+      "sha256": "6a8700f501931b31e7faa04354baf18a3ac7e60aadfd8e86c4e9c21198b25f23"
+    },
+    {
+      "path": "models/data/wu2025.json",
+      "sha256": "52a8e29c711de3eea2fb243ee6853711925cddeb209b84f7538943a14f0d2250"
+    },
+    {
+      "path": "models/data/density.csv",
+      "sha256": "f859b68202486561d6757a1dfffa7e73ad7b7817ec979eb8736a2f27670f3357"
+    },
+    {
+      "path": "models/magnetic_loops.py",
+      "sha256": "48ebc477dfa2c077f8f6cc00569228a6008969b0a09fd2556b1cb02b7f0a7d07"
+    },
+    {
+      "path": "models/owner_world.py",
+      "sha256": "5fbb99d54b80a384dcdd82007db93b48f84641b4d0b66d59264510562307e468"
+    },
+    {
+      "path": "economy.py",
+      "sha256": "b70cf43af98865eb015113eafb5c6ccf6e2864b1bd45283bc7134a8d87064c0c"
+    },
+    {
+      "path": "models/evaluation_world.py",
+      "sha256": "c14d49a19dab186fc47123f0ef4210857a891fe6a0226e93c4fd722e7cf574dc"
+    }
+  ],
+  "evidence_class": "simulator",
+  "unchanged_upstream_contracts": {
+    "dynamical/campaign.py": "a04515df455ec052ba4f07cffc820e81f8b412c8aa5d63aad29c26ac0ab63bd4",
+    "dynamical/cli.py": "066a10e1a35374fc6bcdd44e204f5b2808bcbcf3acb260461535cba4d04ff2d1",
+    "dynamical/compiler.py": "39eb4facd7b9f7a2ddaccc62447a6b189c5b319f758a59d3b4c41f6801e03015",
+    "dynamical/composition.py": "a5ee238fa98db3483cc44a1b294b6f6b363cf7944da79cb88e75f6c9db351d82",
+    "dynamical/preflight.py": "5bb1897574acc1089c08944d6691923a88ade135ed417a3fea5130dc80a474a7",
+    "dynamical/replay.py": "c88e1563b51270bcb2422097e754b3f555edd478746194fcf2773162fb746696",
+    "dynamical/restore.py": "be2737db58636a139afbb17f5f9a1c646f4a22eaede674ae9dcb42cff05050c3",
+    "dynamical/samples.py": "7d1f81eddecb1db9a98c4970a9a0767ef2a072d0ef6760c7100475e50122cd4e",
+    "dynamical/schema.py": "96929070107af4c8d1963423f753b7fa696002d18be5e8e81712226b78176ab1",
+    "dynamical/sources.py": "707cc26e8483b212aab0090c6d52b0f50fe142147bd2f49a357b2b0b4fc365d0"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "name": "ndfeb-agent-runtime",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "license": "Apache-2.0",
+  "scripts": {
+    "test": "node --check vision_transport.mjs"
+  },
+  "dependencies": {
+    "@earendil-works/pi-ai": "1.4.0",
+    "@earendil-works/pi-coding-agent": "1.4.0"
+  },
+  "description": "Pi agent runtime for the SDL-2 harness"
+}

@@ -1,0 +1,29 @@
+cff-version: 1.2.0
+title: "SDL-2: Teaching AI to Explore the Physical World"
+message: "If you use SDL-2, its data or its harness, please cite it."
+type: software
+authors:
+  - family-names: Barnes
+    given-names: Jarrod
+    affiliation: Dynamical Systems
+repository-code: "https://github.com/Dynamical-Systems-Research/sdl2"
+url: "https://dynamicalsystems.ai/blog/sdl-2"
+license: Apache-2.0
+version: 1.0.0
+date-released: "2026-11-01"
+references:
+  - type: dataset
+    title: "SDL-2"
+    authors:
+      - name: Dynamical Systems
+    url: "https://huggingface.co/datasets/Dynamical-Systems/sdl2"
+    license: CC-BY-4.0
+preferred-citation:
+  type: article
+  title: "Teaching AI to Explore the Physical World"
+  authors:
+    - family-names: Barnes
+      given-names: Jarrod
+  journal: "Dynamical Systems"
+  year: 2026
+  url: "https://dynamicalsystems.ai/blog/sdl-2"
